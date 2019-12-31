@@ -21,7 +21,7 @@
                     <Button Command="{s:Action SelectPageCmd}" CommandParameter="Setting_UserInfo" Style="{StaticResource MaterialDesignRaisedButton}" Width="200" Height="240" materialDesign:ButtonAssist.CornerRadius="10"
                     Margin="40" BorderThickness="0">
                         <Button.Background>
-                            <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/bc_usermng.png"/>
+                            <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/BtnCard_UserInfo.png"/>
                         </Button.Background>
                         <TextBlock Text="用户信息" FontSize="24" Margin="0,200,0,0"/>
                     </Button>

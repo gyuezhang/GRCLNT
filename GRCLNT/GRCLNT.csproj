@@ -524,6 +524,9 @@
     <Resource Include="Resource\Image\BtnCard_EntWellStat.png" />
     <Resource Include="Resource\Image\BtnCard_UserInfo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Image\bc_fetchwaterid.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.6.0.5\build\Fody.targets" Condition="Exists('..\packages\Fody.6.0.5\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

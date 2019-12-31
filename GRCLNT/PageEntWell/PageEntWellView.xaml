@@ -44,7 +44,7 @@
                     <Button Command="{s:Action SelectPageCmd}" CommandParameter="EntWell_FetchWaterId" Style="{StaticResource MaterialDesignRaisedButton}" Width="200" Height="240" materialDesign:ButtonAssist.CornerRadius="10"
                     Margin="40" BorderThickness="0">
                         <Button.Background>
-                            <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/bc_usermng.png"/>
+                            <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/bc_fetchwaterid.png"/>
                         </Button.Background>
                         <TextBlock Text="取水许可" FontSize="24" Margin="0,200,0,0"/>
                     </Button>
