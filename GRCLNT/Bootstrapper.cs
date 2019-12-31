@@ -1,11 +1,11 @@
 ﻿using System;
 using Stylet;
 using StyletIoC;
-using GRCLNT.Pages;
+using GRCLNT;
 
 namespace GRCLNT
 {
-    public class Bootstrapper : Bootstrapper<ShellViewModel>
+    public class Bootstrapper : Bootstrapper<WndLoginViewModel>
     {
         protected override void ConfigureIoC(IStyletIoCBuilder builder)
         {
