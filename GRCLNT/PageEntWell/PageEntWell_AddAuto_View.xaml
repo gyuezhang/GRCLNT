@@ -9,6 +9,6 @@
              d:DataContext="{d:DesignInstance local:PageEntWellViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <TextBlock Text="PageEntWell_AddAuto_View Under Construction..." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
     </Grid>
 </UserControl>

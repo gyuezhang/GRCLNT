@@ -99,9 +99,114 @@ namespace GRCLNT
                     menuBtnIndexBd = 3;
                     mainVmBd = new PageWellViewModel(this);
                     break;
+                case E_Page.Well_AddMtdSel:
+                    menuBtnIndexBd = 3;
+                    mainVmBd = new PageWellViewModel(this);
+                    ((PageWellViewModel)mainVmBd).pageIndexBd = 1;
+                    break;
+                case E_Page.Well_AddManual:
+                    menuBtnIndexBd = 3;
+                    mainVmBd = new PageWellViewModel(this);
+                    ((PageWellViewModel)mainVmBd).pageIndexBd = 2;
+                    break;
+                case E_Page.Well_AddAuto:
+                    menuBtnIndexBd = 3;
+                    mainVmBd = new PageWellViewModel(this);
+                    ((PageWellViewModel)mainVmBd).pageIndexBd = 3;
+                    break;
+                case E_Page.Well_Search:
+                    menuBtnIndexBd = 3;
+                    mainVmBd = new PageWellViewModel(this);
+                    ((PageWellViewModel)mainVmBd).pageIndexBd = 4;
+                    break;
+                case E_Page.Well_Search_Loc:
+                    menuBtnIndexBd = 3;
+                    mainVmBd = new PageWellViewModel(this);
+                    ((PageWellViewModel)mainVmBd).pageIndexBd = 5;
+                    break;
+                case E_Page.Well_Search_Lst:
+                    menuBtnIndexBd = 3;
+                    mainVmBd = new PageWellViewModel(this);
+                    ((PageWellViewModel)mainVmBd).pageIndexBd = 6;
+                    break;
+                case E_Page.Well_Edit:
+                    menuBtnIndexBd = 3;
+                    mainVmBd = new PageWellViewModel(this);
+                    ((PageWellViewModel)mainVmBd).pageIndexBd = 7;
+                    break;
+                case E_Page.Well_State:
+                    menuBtnIndexBd = 3;
+                    mainVmBd = new PageWellViewModel(this);
+                    ((PageWellViewModel)mainVmBd).pageIndexBd = 8;
+                    break;
+                case E_Page.Well_Output:
+                    menuBtnIndexBd = 3;
+                    mainVmBd = new PageWellViewModel(this);
+                    ((PageWellViewModel)mainVmBd).pageIndexBd = 9;
+                    break;
+                case E_Page.Well_Setting:
+                    menuBtnIndexBd = 3;
+                    mainVmBd = new PageWellViewModel(this);
+                    ((PageWellViewModel)mainVmBd).pageIndexBd = 10;
+                    break;
                 case E_Page.EntWell:
                     menuBtnIndexBd = 5;
                     mainVmBd = new PageEntWellViewModel(this);
+                    break;
+                case E_Page.EntWell_AddMtdSel:
+                    menuBtnIndexBd = 5;
+                    mainVmBd = new PageEntWellViewModel(this);
+                    ((PageEntWellViewModel)mainVmBd).pageIndexBd = 1;
+                    break;
+                case E_Page.EntWell_AddManual:
+                    menuBtnIndexBd = 5;
+                    mainVmBd = new PageEntWellViewModel(this);
+                    ((PageEntWellViewModel)mainVmBd).pageIndexBd = 2;
+                    break;
+                case E_Page.EntWell_AddAuto:
+                    menuBtnIndexBd = 5;
+                    mainVmBd = new PageEntWellViewModel(this);
+                    ((PageEntWellViewModel)mainVmBd).pageIndexBd = 3;
+                    break;
+                case E_Page.EntWell_Search:
+                    menuBtnIndexBd = 5;
+                    mainVmBd = new PageEntWellViewModel(this);
+                    ((PageEntWellViewModel)mainVmBd).pageIndexBd = 4;
+                    break;
+                case E_Page.EntWell_Search_Loc:
+                    menuBtnIndexBd = 5;
+                    mainVmBd = new PageEntWellViewModel(this);
+                    ((PageEntWellViewModel)mainVmBd).pageIndexBd = 5;
+                    break;
+                case E_Page.EntWell_Search_Lst:
+                    menuBtnIndexBd = 5;
+                    mainVmBd = new PageEntWellViewModel(this);
+                    ((PageEntWellViewModel)mainVmBd).pageIndexBd = 6;
+                    break;
+                case E_Page.EntWell_Edit:
+                    menuBtnIndexBd = 5;
+                    mainVmBd = new PageEntWellViewModel(this);
+                    ((PageEntWellViewModel)mainVmBd).pageIndexBd = 7;
+                    break;
+                case E_Page.EntWell_State:
+                    menuBtnIndexBd = 5;
+                    mainVmBd = new PageEntWellViewModel(this);
+                    ((PageEntWellViewModel)mainVmBd).pageIndexBd = 8;
+                    break;
+                case E_Page.EntWell_Output:
+                    menuBtnIndexBd = 5;
+                    mainVmBd = new PageEntWellViewModel(this);
+                    ((PageEntWellViewModel)mainVmBd).pageIndexBd = 9;
+                    break;
+                case E_Page.EntWell_Setting:
+                    menuBtnIndexBd = 5;
+                    mainVmBd = new PageEntWellViewModel(this);
+                    ((PageEntWellViewModel)mainVmBd).pageIndexBd = 10;
+                    break;
+                case E_Page.EntWell_FetchWaterId:
+                    menuBtnIndexBd = 5;
+                    mainVmBd = new PageEntWellViewModel(this);
+                    ((PageEntWellViewModel)mainVmBd).pageIndexBd = 11;
                     break;
                 case E_Page.SediCtrl:
                     menuBtnIndexBd = 7;
@@ -127,6 +232,24 @@ namespace GRCLNT
                     menuBtnVisibilityBd = Visibility.Hidden;
                     settingBtnVisibilityBd = Visibility.Visible;
                     mainVmBd = new PageSettingViewModel(this);
+                    break;
+                case E_Page.Setting_UserInfo:
+                    menuBtnVisibilityBd = Visibility.Hidden;
+                    settingBtnVisibilityBd = Visibility.Visible;
+                    mainVmBd = new PageSettingViewModel(this);
+                    ((PageSettingViewModel)mainVmBd).pageIndexBd = 1;
+                    break;
+                case E_Page.Setting_EdtUserInfo:
+                    menuBtnVisibilityBd = Visibility.Hidden;
+                    settingBtnVisibilityBd = Visibility.Visible;
+                    mainVmBd = new PageSettingViewModel(this);
+                    ((PageSettingViewModel)mainVmBd).pageIndexBd = 2;
+                    break;
+                case E_Page.Setting_ResetPwd:
+                    menuBtnVisibilityBd = Visibility.Hidden;
+                    settingBtnVisibilityBd = Visibility.Visible;
+                    mainVmBd = new PageSettingViewModel(this);
+                    ((PageSettingViewModel)mainVmBd).pageIndexBd = 3;
                     break;
                 default:
                     break;
