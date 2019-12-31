@@ -11,11 +11,364 @@
         Title="宝坻区地下水资源信息管理系统" 
         Height="840" Width="1440" 
         MinHeight="840" MinWidth="1440"
-        MaxHeight="{Binding dbMaxHeight}" MaxWidth="{Binding dbMaxWidth}"
-        WindowState="{Binding CurWindowState, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-        StateChanged="{s:Action OnStateChanged}"
+        MaxHeight="{Binding maxHeightBd}" MaxWidth="{Binding maxWidthBd}"
+        WindowState="{Binding windowStateBd, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+        StateChanged="{s:Action stateChangeCmd}"
         WindowStartupLocation="CenterScreen" WindowStyle="None">
-    <Grid>
-        
+
+    <!--窗体边界-->
+    <WindowChrome.WindowChrome>
+        <WindowChrome ResizeBorderThickness="7" UseAeroCaptionButtons="True" CaptionHeight="68"/>
+    </WindowChrome.WindowChrome>
+
+    <Grid Margin="{Binding marginBd}">
+        <!--背景色-->
+        <Grid.Background>
+            <RadialGradientBrush>
+                <GradientStop Color="#FF2A90FF" Offset="0"/>
+                <GradientStop Color="#FF0066CC" Offset="1"/>
+            </RadialGradientBrush>
+        </Grid.Background>
+
+        <!--总纵向排版-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="68"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--标题栏-->
+        <Grid Grid.Row="0">
+            <!--标题栏横向排版-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!--标题logo-->
+            <Border Grid.Column="0" Background="#34000000">
+                <Image Source="/GRCLNT;component/Resource/Image/Logo.ico" Margin="11"/>
+            </Border>
+
+            <!--标题文字-->
+            <Grid Grid.Column="1" Background="#34000000">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="4*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="宝坻区地下水资源信息管理系统" FontSize="28" Margin="5,10,40,0"/>
+                <TextBlock Grid.Row="1" Text="Baodi District Groundwater Resources Infomation Management System" FontSize="12.4" Margin="8,3,0,0"/>
+            </Grid>
+
+            <!--渐变形状-->
+            <Grid Grid.Column="2">
+                <!--三角形-->
+                <Path Fill="#34000000">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure StartPoint="0,0" IsClosed="False">
+                                <LineSegment Point="0,0"/>
+                                <LineSegment Point="105,0"/>
+                                <LineSegment Point="0,68"/>
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+
+                <!--多边形1-->
+                <Path Fill="#24000000">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure StartPoint="-5,74" IsClosed="False">
+                                <LineSegment Point="105,0"/>
+                                <LineSegment Point="115,0"/>
+                                <LineSegment Point="30,68"/>
+                                <LineSegment Point="0,68"/>
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+
+                <!--多边形2-->
+                <Path Fill="#14000000">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure StartPoint="25,74" IsClosed="False">
+                                <LineSegment Point="115,0"/>
+                                <LineSegment Point="125,0"/>
+                                <LineSegment Point="60,68"/>
+                                <LineSegment Point="30,68"/>
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+
+                <!--三角形2-->
+                <Path Fill="#04000000">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure StartPoint="55,74" IsClosed="True">
+                                <LineSegment Point="125,0"/>
+                                <LineSegment Point="60,68"/>
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+            </Grid>
+
+            <!--占位-->
+            <Border Grid.Column="4"/>
+
+            <!--<Button  Width="42" Height="42" Grid.Column="5" Command="{s:Action OnOpenUsrInfo}" Margin="10,12,20,10" VerticalAlignment="Center" WindowChrome.IsHitTestVisibleInChrome="True"  Style="{StaticResource MaterialDesignIconButton}" Background="{DynamicResource MaterialDesignTextFieldBoxBackground}">
+            </Button>-->
+            <!--Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"-->
+            <materialDesign:PopupBox Width="42" Height="42" Grid.Column="5" Margin="10" Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                PlacementMode="BottomAndAlignCentres"
+                WindowChrome.IsHitTestVisibleInChrome="True"
+                ToolTipService.Placement="Right">
+                <materialDesign:PopupBox.ToggleContent>
+                    <TextBlock Text="{Binding avaLetterBd}" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" />
+                </materialDesign:PopupBox.ToggleContent>
+                <materialDesign:PopupBox.ToggleCheckedContent>
+                    <TextBlock Text="{Binding avaLetterBd}" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" >
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </materialDesign:PopupBox.ToggleCheckedContent>
+                <StackPanel>
+                    <Button Foreground="#D500" Command="{s:Action logOutCmd}" Margin="0,20,0,12" ToolTip="注销" ToolTipService.Placement="Left" ToolTipService.VerticalOffset="2">
+                        <materialDesign:PackIcon Kind="Logout" Width="24" Height="24" />
+                    </Button>
+                    <Button Foreground="#D500" Command="{s:Action QuitCmd}"  Margin="0,0,0,0" ToolTip="退出程序" ToolTipService.Placement="Left" ToolTipService.VerticalOffset="2">
+                        <materialDesign:PackIcon Kind="Close" Width="24" Height="24" />
+                    </Button>
+                </StackPanel>
+            </materialDesign:PopupBox>
+        </Grid>
+
+        <!--标题栏以下布局-->
+        <Grid Grid.Row="1">
+            <!--标题栏以下横向布局-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--菜单栏-->
+            <Grid Grid.Column="0" Background="#44000000" Width="72">
+                <!--菜单栏/布局-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
+                <!--菜单栏/左侧阴影-->
+                <Grid  Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" RenderTransformOrigin="1,0">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0,0" MappingMode="RelativeToBoundingBox" StartPoint="1,1">
+                                <GradientStop Color="#99000000" Offset="1"/>
+                                <GradientStop Color="#00000000"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                    <Border Grid.Row="1" Margin="0,0,0,0">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                                <GradientStop Color="#00000000" Offset="1"/>
+                                <GradientStop Color="#66000000"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                    <Border Grid.Row="2" RenderTransformOrigin="1,0">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0,1" MappingMode="RelativeToBoundingBox" StartPoint="1,0">
+                                <GradientStop Color="#99000000" Offset="1"/>
+                                <GradientStop Color="#00000000"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </Grid>
+                <!--菜单栏/中部-->
+                <Grid  Grid.Column="1">
+                    <!--菜单栏/中部/布局-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="2"/>
+                    </Grid.RowDefinitions>
+                    <!--菜单栏/中部/顶部阴影-->
+                    <Border Grid.Row="0">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,0.7" StartPoint="0.5,0.2">
+                                <GradientStop Color="#00000000" Offset="1"/>
+                                <GradientStop Color="#77000000"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                    <!--菜单栏/中部/中部菜单项-->
+                    <Grid  Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="64"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="64"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="64"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="64"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="64"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="64"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="64"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="64"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="64"/>
+                            <RowDefinition Height="5"/>
+                        </Grid.RowDefinitions>
+                        <Border Width="48" Height="48" Background="#FF003C78" CornerRadius="3,3,3,3" Grid.Row="{Binding iBdFocus}" Visibility="{Binding vMenuFocus}"/>
+                        <Button Grid.Row="1" Command="{s:Action OnChangePage}" CommandParameter="1" ToolTip="首页" ToolTipService.Placement="Right" ToolTipService.HorizontalOffset="30" ToolTipService.VerticalOffset="12"  Style="{StaticResource MaterialDesignToolForegroundButton}" Width="48" Height="48" Margin="2,0,0,0">
+                            <materialDesign:PackIcon Kind="Home" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        </Button>
+                        <Button Grid.Row="3" Command="{s:Action OnChangePage}" CommandParameter="2"   ToolTip="机井信息" ToolTipService.Placement="Right" ToolTipService.HorizontalOffset="30" ToolTipService.VerticalOffset="12"    Style="{StaticResource MaterialDesignToolForegroundButton}" Width="48" Height="48" Margin="2,0,0,0">
+                            <materialDesign:PackIcon Kind="WaterPump" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        </Button>
+                        <Button Grid.Row="5" Command="{s:Action OnChangePage}" CommandParameter="3"   ToolTip="企业井管理"  ToolTipService.Placement="Right" ToolTipService.HorizontalOffset="30" ToolTipService.VerticalOffset="12"   Style="{StaticResource MaterialDesignToolForegroundButton}" Width="48" Height="48" Margin="2,0,0,0">
+                            <materialDesign:PackIcon Kind="Factory" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        </Button>
+                        <Button Grid.Row="7" Command="{s:Action OnChangePage}" CommandParameter="4"   ToolTip="控沉工作" ToolTipService.Placement="Right" ToolTipService.HorizontalOffset="30" ToolTipService.VerticalOffset="12"    Style="{StaticResource MaterialDesignToolForegroundButton}" Width="48" Height="48" Margin="2,0,0,0">
+                            <materialDesign:PackIcon Kind="Layers" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        </Button>
+                        <Button Grid.Row="9" Command="{s:Action OnChangePage}" CommandParameter="5"  ToolTip="地下水动态" ToolTipService.Placement="Right" ToolTipService.HorizontalOffset="30" ToolTipService.VerticalOffset="12"   Style="{StaticResource MaterialDesignToolForegroundButton}" Width="48" Height="48" Margin="2,0,0,0">
+                            <materialDesign:PackIcon Kind="Water" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        </Button>
+                        <Button Grid.Row="11"  Command="{s:Action OnChangePage}" CommandParameter="6"  ToolTip="地下水工程" ToolTipService.Placement="Right" ToolTipService.HorizontalOffset="30" ToolTipService.VerticalOffset="12"   Style="{StaticResource MaterialDesignToolForegroundButton}" Width="48" Height="48" Margin="2,0,0,0">
+                            <materialDesign:PackIcon Kind="Worker" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        </Button>
+                        <Button Grid.Row="13"  Command="{s:Action OnChangePage}" CommandParameter="7"  ToolTip="水文地质" ToolTipService.Placement="Right" ToolTipService.HorizontalOffset="30" ToolTipService.VerticalOffset="12"   Style="{StaticResource MaterialDesignToolForegroundButton}" Width="48" Height="48" Margin="2,0,0,0">
+                            <materialDesign:PackIcon Kind="Map" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        </Button>
+                        <Button Grid.Row="15"  Command="{s:Action OnChangePage}" CommandParameter="8" ToolTip="法律法规" ToolTipService.Placement="Right" ToolTipService.HorizontalOffset="30" ToolTipService.VerticalOffset="12"   Style="{StaticResource MaterialDesignToolForegroundButton}" Width="48" Height="48" Margin="2,0,0,0">
+                            <materialDesign:PackIcon Kind="ScaleBalance" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        </Button>
+                        <Border Grid.Row="2" Margin="14,0,12,0" Background="#22FFFFFF" Height="1"/>
+                        <Border Grid.Row="4" Margin="14,0,12,0" Background="#22FFFFFF" Height="1"/>
+                        <Border Grid.Row="6" Margin="14,0,12,0" Background="#22FFFFFF" Height="1"/>
+                        <Border Grid.Row="8" Margin="14,0,12,0" Background="#22FFFFFF" Height="1"/>
+                        <Border Grid.Row="10" Margin="14,0,12,0" Background="#22FFFFFF" Height="1"/>
+                        <Border Grid.Row="12" Margin="14,0,12,0" Background="#22FFFFFF" Height="1"/>
+                        <Border Grid.Row="14" Margin="14,0,12,0" Background="#22FFFFFF" Height="1"/>
+
+                    </Grid>
+
+                    <Border Grid.Row="2" Margin="14,0,12,0" Background="#22FFFFFF" Height="1"/>
+
+                    <!--菜单栏/中部/底部按钮-->
+                    <Grid Grid.Row="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border  Width="48" Height="48" Background="#FF003C78" CornerRadius="3,3,3,3" Grid.Row="1" Visibility="{Binding vSettingFocus}"/>
+                        <Button  Grid.Row="1" ToolTip="设置"  Command="{s:Action OnChangePage}" CommandParameter="9"  ToolTipService.Placement="Right" ToolTipService.VerticalOffset="12" ToolTipService.HorizontalOffset="30"   Style="{StaticResource MaterialDesignToolForegroundButton}" Width="48" Height="48" Margin="2,0,0,0">
+                            <materialDesign:PackIcon Kind="Settings" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        </Button>
+                    </Grid>
+
+                    <!--菜单栏/中部/底部阴影-->
+                    <Border Grid.Row="4">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,0.7" StartPoint="0.5,0.2">
+                                <GradientStop Color="#77000000" Offset="1"/>
+                                <GradientStop Color="#00000000"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </Grid>
+                <!--菜单栏/右侧阴影-->
+                <Grid  Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" RenderTransformOrigin="1,0">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0,1" MappingMode="RelativeToBoundingBox" StartPoint="1,0">
+                                <GradientStop Color="#00000000" Offset="1"/>
+                                <GradientStop Color="#99000000"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                    <Border Width="5" Grid.Row="1" Margin="0,0,0,0">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.7,0.5" StartPoint="0.2,0.5">
+                                <GradientStop Color="#44000000" Offset="1"/>
+                                <GradientStop Color="#00000000"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                    <Border Grid.Row="2" RenderTransformOrigin="1,0">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0,0" MappingMode="RelativeToBoundingBox" StartPoint="1,1">
+                                <GradientStop Color="#00000000" Offset="1"/>
+                                <GradientStop Color="#99000000"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </Grid>
+
+            </Grid>
+
+            <!--主内容-->
+            <Grid Grid.Column="1" Background="#14000000" Panel.ZIndex="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+
+                <Border Grid.Row="0">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,0.7" StartPoint="0.5,0.2">
+                            <GradientStop Color="#00000000" Offset="1"/>
+                            <GradientStop Color="#44000000"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Grid Grid.Row="0" Grid.RowSpan="2">
+                    <!--<ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" >-->
+                    <ContentControl  s:View.Model="{Binding curPage}" />
+                    <!--</ScrollViewer>-->
+                    <Image Visibility="{Binding vImageDragVisible}" Width="24" Height="24" Margin="0,0,5,5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/GRCLNT;component/View/Resource/Image/resize-bottom-right.png"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="2" Width="400">
+                        <materialDesign:Snackbar  MessageQueue="{Binding mainMessageQueue}" ActionButtonStyle="{StaticResource ActionButtonStyleCust}" />
+                    </StackPanel>
+                    <ContentControl   s:View.Model="{Binding addrsBar}"  HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="32"/>
+                </Grid>
+            </Grid>
+
+        </Grid>
     </Grid>
+
 </Window>
