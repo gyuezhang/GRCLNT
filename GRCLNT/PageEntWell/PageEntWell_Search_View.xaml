@@ -14,14 +14,14 @@
             <Button Command="{s:Action SelectPageCmd}" CommandParameter="EntWell_Search_Loc" Style="{StaticResource MaterialDesignRaisedButton}" Width="200" Height="240" materialDesign:ButtonAssist.CornerRadius="10"
                     Margin="40" BorderThickness="0">
                 <Button.Background>
-                    <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/bc_usermng.png"/>
+                    <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/BtnCard_EntWellSearchLoc.png"/>
                 </Button.Background>
                 <TextBlock Text="位置查询" FontSize="24" Margin="0,200,0,0"/>
             </Button>
             <Button Command="{s:Action SelectPageCmd}" CommandParameter="EntWell_Search_Lst" Style="{StaticResource MaterialDesignRaisedButton}" Width="200" Height="240" materialDesign:ButtonAssist.CornerRadius="10"
                     Margin="40" BorderThickness="0">
                 <Button.Background>
-                    <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/bc_usermng.png"/>
+                    <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/BtnCard_EntWellSearchCond.png"/>
                 </Button.Background>
                 <TextBlock Text="列表查询" FontSize="24" Margin="0,200,0,0"/>
             </Button>
