@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Stylet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,12 @@ using System.Threading.Tasks;
 
 namespace GRCLNT
 {
-    public class PageSediCtrlViewModel
+    public class PageSediCtrlViewModel : Screen
     {
+        public PageSediCtrlViewModel(WndMainViewModel _wndMainVM)
+        {
+            wndMainVM = _wndMainVM;
+        }
+        private WndMainViewModel wndMainVM { get; set; }
     }
 }

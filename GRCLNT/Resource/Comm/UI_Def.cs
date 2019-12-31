@@ -2,7 +2,7 @@
 using MaterialDesignThemes.Wpf;
 using System.Windows;
 
-namespace GRBM
+namespace GRCLNT
 {
     public enum E_Page
     {
