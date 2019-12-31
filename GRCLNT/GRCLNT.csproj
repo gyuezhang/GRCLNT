@@ -198,6 +198,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="CtrlAddrsBar\CtrlAddrsBarView.xaml.cs">
+      <DependentUpon>CtrlAddrsBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CtrlAddrsBar\CtrlAddrsBarViewModel.cs" />
     <Compile Include="C_RT.cs" />
     <Compile Include="PageDashboard\PageDashboardView.xaml.cs">
       <DependentUpon>PageDashboardView.xaml</DependentUpon>
@@ -274,6 +278,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CtrlAddrsBar\CtrlAddrsBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageDashboard\PageDashboardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

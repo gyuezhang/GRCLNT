@@ -373,7 +373,7 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="2" Width="400">
                         <materialDesign:Snackbar  MessageQueue="{Binding messageQueueBd}" ActionButtonStyle="{StaticResource ActionButtonStyleCust}" />
                     </StackPanel>
-                    <ContentControl   s:View.Model="{Binding addrsBar}"  HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="32"/>
+                    <ContentControl   s:View.Model="{Binding addrsBarVmBd}"  HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="32"/>
                 </Grid>
             </Grid>
 

@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="GRCLNT.CtrlAddrsBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GRCLNT"
+             xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance local:CtrlAddrsBarViewModel}"       
+             d:DesignHeight="60" d:DesignWidth="4096" HorizontalAlignment="Stretch">
+    
+    <ItemsControl  ItemsSource="{Binding itemsBd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Border>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:Chip  Content="{Binding Cont}" Command="{s:Action chipCmd}" CommandParameter="{Binding StrPageId}" Foreground="White" Margin="0,0,10,0"  FontSize="18"  IconBackground="#66000000">
+                            <materialDesign:Chip.Icon>
+                                <materialDesign:PackIcon Kind="{Binding IconKind}" Foreground="#CCFFFFFF"  Height="28" Width="28"/>
+                            </materialDesign:Chip.Icon>
+                        </materialDesign:Chip>
+                        <materialDesign:PackIcon Kind="MenuRight" Visibility="{Binding VHasChild}" Foreground="White" VerticalAlignment="Center"  Margin="0,0,10,0" Height="32" Width="32" />
+                    </StackPanel>
+                </Border>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>

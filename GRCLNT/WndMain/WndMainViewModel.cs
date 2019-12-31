@@ -21,6 +21,10 @@ namespace GRCLNT
             //重置最大窗口尺寸（此处避免运行过程中任务栏显隐）
             maxHeightBd = SystemParameters.WorkArea.Height + 7;
             maxWidthBd = SystemParameters.WorkArea.Width + 7;
+
+
+            mainVmBd = new PageDashboardViewModel(this);
+            addrsBarVmBd = new CtrlAddrsBarViewModel(this);
         }
 
 
@@ -41,7 +45,7 @@ namespace GRCLNT
         public int menuBtnIndexBd { get; set; } = 1;
         public Visibility settingBtnVisibilityBd { get; set; } = Visibility.Hidden;
         public Screen mainVmBd { get; set; }
-        //public CtrlAddrsBarViewModel addrsBarVmBd { get; set; }
+        public CtrlAddrsBarViewModel addrsBarVmBd { get; set; }
         public SnackbarMessageQueue messageQueueBd { get; set; } = new SnackbarMessageQueue(TimeSpan.FromSeconds(1.2));
 
         #endregion Bindings
@@ -83,8 +87,8 @@ namespace GRCLNT
         {
             menuBtnVisibilityBd = Visibility.Visible;
             settingBtnVisibilityBd = Visibility.Hidden;
-            //addrsBarVmBd = new CtrlAddrsBarViewModel(this);
-            //addrsBarVmBd.Update(p);
+            addrsBarVmBd = new CtrlAddrsBarViewModel(this);
+            addrsBarVmBd.Update(p);
             switch (p)
             {
                 case E_Page.Dashboard:

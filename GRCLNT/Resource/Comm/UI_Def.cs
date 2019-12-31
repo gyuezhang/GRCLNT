@@ -37,8 +37,8 @@ namespace GRCLNT
         Law,
         Setting,
             Setting_UserInfo,
-            Setting_EdtUserInfo,
-            Setting_ResetPwd,
+                Setting_EdtUserInfo,
+                Setting_ResetPwd,
     }
 
     public class C_AddrsBarItem : PropertyChangedBase
