@@ -211,6 +211,33 @@
       <DependentUpon>PageEntWellView.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageEntWell\PageEntWellViewModel.cs" />
+    <Compile Include="PageEntWell\PageEntWell_AddAuto_View.xaml.cs">
+      <DependentUpon>PageEntWell_AddAuto_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageEntWell\PageEntWell_AddManual_View.xaml.cs">
+      <DependentUpon>PageEntWell_AddManual_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageEntWell\PageEntWell_AddMtdSel_View.xaml.cs">
+      <DependentUpon>PageEntWell_AddMtdSel_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageEntWell\PageEntWell_Output_View.xaml.cs">
+      <DependentUpon>PageEntWell_Output_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageEntWell\PageEntWell_SearchLoc_View.xaml.cs">
+      <DependentUpon>PageEntWell_SearchLoc_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageEntWell\PageEntWell_SearchLst_View.xaml.cs">
+      <DependentUpon>PageEntWell_SearchLst_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageEntWell\PageEntWell_Search_View.xaml.cs">
+      <DependentUpon>PageEntWell_Search_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageEntWell\PageEntWell_Setting_View.xaml.cs">
+      <DependentUpon>PageEntWell_Setting_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageEntWell\PageEntWell_State_View.xaml.cs">
+      <DependentUpon>PageEntWell_State_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageGwDyna\PageGwDynaView.xaml.cs">
       <DependentUpon>PageGwDynaView.xaml</DependentUpon>
     </Compile>
@@ -235,10 +262,46 @@
       <DependentUpon>PageSettingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageSetting\PageSettingViewModel.cs" />
+    <Compile Include="PageSetting\PageSetting_EdtUserInfo_View.xaml.cs">
+      <DependentUpon>PageSetting_EdtUserInfo_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageSetting\PageSetting_ResetPwd_View.xaml.cs">
+      <DependentUpon>PageSetting_ResetPwd_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageSetting\PageSetting_UserInfo_View.xaml.cs">
+      <DependentUpon>PageSetting_UserInfo_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageWell\PageWellView.xaml.cs">
       <DependentUpon>PageWellView.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageWell\PageWellViewModel.cs" />
+    <Compile Include="PageWell\PageWell_AddAuto_View.xaml.cs">
+      <DependentUpon>PageWell_AddAuto_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageWell\PageWell_AddManual_View.xaml.cs">
+      <DependentUpon>PageWell_AddManual_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageWell\PageWell_AddMtdSel_View.xaml.cs">
+      <DependentUpon>PageWell_AddMtdSel_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageWell\PageWell_Output_View.xaml.cs">
+      <DependentUpon>PageWell_Output_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageWell\PageWell_SearchLoc_View.xaml.cs">
+      <DependentUpon>PageWell_SearchLoc_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageWell\PageWell_SearchLst_View.xaml.cs">
+      <DependentUpon>PageWell_SearchLst_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageWell\PageWell_Search_View.xaml.cs">
+      <DependentUpon>PageWell_Search_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageWell\PageWell_Setting_View.xaml.cs">
+      <DependentUpon>PageWell_Setting_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageWell\PageWell_State_View.xaml.cs">
+      <DependentUpon>PageWell_State_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resource\Comm\UI_Def.cs" />
     <Compile Include="WndMain\WndMainView.xaml.cs">
       <DependentUpon>WndMainView.xaml</DependentUpon>
@@ -290,6 +353,42 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageEntWell\PageEntWell_AddAuto_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageEntWell\PageEntWell_AddManual_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageEntWell\PageEntWell_AddMtdSel_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageEntWell\PageEntWell_Output_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageEntWell\PageEntWell_SearchLoc_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageEntWell\PageEntWell_SearchLst_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageEntWell\PageEntWell_Search_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageEntWell\PageEntWell_Setting_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageEntWell\PageEntWell_State_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageGwDyna\PageGwDynaView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -314,7 +413,55 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageSetting\PageSetting_EdtUserInfo_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageSetting\PageSetting_ResetPwd_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageSetting\PageSetting_UserInfo_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageWell\PageWellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageWell\PageWell_AddAuto_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageWell\PageWell_AddManual_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageWell\PageWell_AddMtdSel_View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageWell\PageWell_Output_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageWell\PageWell_SearchLoc_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageWell\PageWell_SearchLst_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageWell\PageWell_Search_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageWell\PageWell_Setting_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageWell\PageWell_State_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
