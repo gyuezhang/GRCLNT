@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GRCLNT.PageSetting
+namespace GRCLNT
 {
     /// <summary>
     /// PageSetting_EdtUserInfo_View.xaml 的交互逻辑
