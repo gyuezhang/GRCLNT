@@ -198,6 +198,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="C_RT.cs" />
     <Compile Include="WndMain\WndMainView.xaml.cs">
       <DependentUpon>WndMainView.xaml</DependentUpon>
     </Compile>

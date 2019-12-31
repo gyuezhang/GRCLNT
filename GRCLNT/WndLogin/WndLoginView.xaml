@@ -93,7 +93,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <materialDesign:PackIcon Grid.Column="0" Kind="VpnKey" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" Width="20" Height="20" Margin="2,14,2,2"/>
-                        <PasswordBox   WindowChrome.IsHitTestVisibleInChrome="True"  Grid.Column="1" Foreground="White" Margin="10,0,0,0" materialDesign:HintAssist.Hint="密   码" PasswordChanged="{s:Action OnPwdChanged}"
+                        <PasswordBox   WindowChrome.IsHitTestVisibleInChrome="True"  Grid.Column="1" Foreground="White" Margin="10,0,0,0" materialDesign:HintAssist.Hint="密   码" PasswordChanged="{s:Action pwdChangedCmd}"
                              materialDesign:TextFieldAssist.UnderlineBrush="Green" local:PasswordHelper.Attach="True"  local:PasswordHelper.Password="{Binding curPwdBd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontSize="18"/>
                     </Grid>
 
