@@ -15,22 +15,43 @@ namespace GRCLNT
         public PageSettingViewModel(WndMainViewModel _wndMainVM)
         {
             wndMainVM = _wndMainVM;
+            edtTelBd = userBd.Tel;
+            edtEmailBd = userBd.Email;
         }
         private WndMainViewModel wndMainVM { get; set; }
 
         #region SocketHandler
 
-        private void GRSocketHandler_edtUser(RES_STATE state)
+        private void GRSocketHandler_edtUser(RES_STATE state, C_User user)
         {
             GRSocketHandler.edtUser -= GRSocketHandler_edtUser;
             switch (state)
             {
                 case RES_STATE.OK:
-                    wndMainVM.messageQueueBd.Enqueue("修改用户信息成功");
+                    C_RT.user = user;
+                    wndMainVM.messageQueueBd.Enqueue("修改用户信息成功"); 
+                    SelectPageCmd("Setting_UserInfo");
                     break;
                 case RES_STATE.FAILED:
-                    userBd = C_RT.user;
                     wndMainVM.messageQueueBd.Enqueue("修改用户信息失败");
+                    break;
+                default:
+                    break;
+            }
+            userBd = C_RT.user;
+        }
+
+        private void GRSocketHandler_resetPwd(RES_STATE state)
+        {
+            GRSocketHandler.resetPwd -= GRSocketHandler_resetPwd;
+            switch (state)
+            {
+                case RES_STATE.OK:
+                    wndMainVM.messageQueueBd.Enqueue("重置密码成功，请尽快重新登录");
+                    SelectPageCmd("Setting_UserInfo");
+                    break;                            
+                case RES_STATE.FAILED:                
+                    wndMainVM.messageQueueBd.Enqueue("重置密码失败");
                     break;
                 default:
                     break;
@@ -46,6 +67,10 @@ namespace GRCLNT
         public string edtTelBd { get; set; }
         public string edtEmailBd { get; set; }
 
+        public string oldPwd { get; set; }
+        public string newPwd { get; set; }
+        public string newPwd2 { get; set; }
+
         #endregion Bindings
 
         #region Actions
@@ -56,6 +81,12 @@ namespace GRCLNT
 
         public void btnEdtUserCmd()
         {
+            if (userBd.Tel == edtTelBd && userBd.Email == edtEmailBd)
+            {
+                SelectPageCmd("Setting_UserInfo");
+                return;
+            }
+
             GRSocketHandler.edtUser += GRSocketHandler_edtUser;
             userBd.Tel = edtTelBd;
             userBd.Email = edtEmailBd;
@@ -67,6 +98,32 @@ namespace GRCLNT
             SelectPageCmd("Setting_EdtUserInfo");
             edtTelBd = userBd.Tel;
             edtEmailBd = userBd.Email;
+        }
+
+        public void btnResetPwdCmd()
+        {
+            GRSocketHandler.resetPwd += GRSocketHandler_resetPwd;
+
+            if(oldPwd == null || oldPwd == "")
+            {
+                wndMainVM.messageQueueBd.Enqueue("旧密码为空");
+                return;
+            }
+
+
+            if (newPwd == null || newPwd == "")
+            {
+                wndMainVM.messageQueueBd.Enqueue("新密码为空");
+                return;
+            }
+
+            if (newPwd2 == null || newPwd2 == "" || newPwd != newPwd2)
+            {
+                wndMainVM.messageQueueBd.Enqueue("新密码不一致");
+                return;
+            }
+
+            GRSocketAPI.ResetPwd(C_Md5.GetHash(oldPwd), C_Md5.GetHash(newPwd));
         }
 
         #endregion Actions

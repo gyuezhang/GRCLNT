@@ -10,6 +10,40 @@
              d:DataContext="{d:DesignInstance local:PageSettingViewModel}"   
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="PageSetting_ResetPwd_View Under Construction..." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="380">
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="15" Text="重置密码" FontSize="28"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <materialDesign:PackIcon Grid.Column="0" Kind="KeyOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Width="28" Height="28" Margin="2,14,2,2" Foreground="White"/>
+                <PasswordBox  Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" local:PasswordHelper.Attach="True"  local:PasswordHelper.Password="{Binding oldPwd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" Foreground="White" FontSize="18" materialDesign:HintAssist.Hint="旧密码" HorizontalAlignment="Stretch" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <materialDesign:PackIcon Grid.Column="0" Kind="VpnKey" VerticalAlignment="Center" HorizontalAlignment="Center" Width="28" Height="28" Margin="2,14,2,2" Foreground="White"/>
+                <PasswordBox Grid.Column="1"  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" local:PasswordHelper.Attach="True"  local:PasswordHelper.Password="{Binding newPwd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   Margin="5" Foreground="White" FontSize="18" materialDesign:HintAssist.Hint="新密码" HorizontalAlignment="Stretch" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <materialDesign:PackIcon Grid.Column="0" Kind="VpnKey" VerticalAlignment="Center" HorizontalAlignment="Center" Width="28" Height="28" Margin="2,14,2,2" Foreground="White"/>
+                <PasswordBox  Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" local:PasswordHelper.Attach="True"  local:PasswordHelper.Password="{Binding newPwd2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   Margin="5" Foreground="White" FontSize="18" materialDesign:HintAssist.Hint="确认密码" HorizontalAlignment="Stretch" />
+            </Grid>
+            <Grid Margin="0,15,0,0" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="取消" Command="{s:Action SelectPageCmd}" CommandParameter="Setting_UserInfo" Grid.Column="0" Margin="5"/>
+                <Button Content="确认" Command="{s:Action btnResetPwdCmd}" Grid.Column="1" Margin="5"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 </UserControl>

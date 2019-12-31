@@ -35,7 +35,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <materialDesign:PackIcon Grid.Column="0" Kind="Telephone" VerticalAlignment="Center" HorizontalAlignment="Center" Width="28" Height="28" Margin="2,14,2,2" Foreground="White"/>
-                <TextBox  Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding edtTelBd}"  Margin="5" Foreground="White" FontSize="22" materialDesign:HintAssist.Hint="电话" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" />
+                <TextBox  Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding edtTelBd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" Foreground="White" FontSize="22" materialDesign:HintAssist.Hint="电话" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" />
             </Grid>
 
             <Grid>
@@ -44,7 +44,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <materialDesign:PackIcon Grid.Column="0" Kind="Email" VerticalAlignment="Center" HorizontalAlignment="Center" Width="28" Height="28" Margin="2,14,2,2" Foreground="White"/>
-                <TextBox  Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding edtEmailBd}"  Margin="5" Foreground="White" FontSize="22" materialDesign:HintAssist.Hint="邮箱" HorizontalAlignment="Stretch" />
+                <TextBox  Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding edtEmailBd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" Foreground="White" FontSize="22" materialDesign:HintAssist.Hint="邮箱" HorizontalAlignment="Stretch" />
             </Grid>
 
             <Grid Margin="0,15,0,0" HorizontalAlignment="Right">
