@@ -44,6 +44,12 @@ namespace GRCLNT
         public void LoginCmd()
         {
             CLNTCfg.Set(cfgBd);
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                var wndMainViewModel = new WndMainViewModel(_windowManager);
+                this._windowManager.ShowWindow(wndMainViewModel);
+                this.RequestClose();
+            }));
         }
 
         public void TestLinkCmd()

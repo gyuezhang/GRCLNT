@@ -198,6 +198,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="WndMain\WndMainView.xaml.cs">
+      <DependentUpon>WndMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WndMain\WndMainViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resource\Comm\PasswordHelper.cs" />
@@ -239,6 +243,10 @@
     <Page Include="WndLogin\WndLoginView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WndMain\WndMainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup />
