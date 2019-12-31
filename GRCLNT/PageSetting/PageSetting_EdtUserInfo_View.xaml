@@ -10,6 +10,51 @@
              d:DataContext="{d:DesignInstance local:PageSettingViewModel}"       
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="PageSetting_EdtUserInfo_View Under Construction..." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="380">
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="15" Text="修改用户信息" FontSize="28"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <materialDesign:PackIcon Grid.Column="0" Kind="AccountsGroupOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Width="28" Height="28" Margin="2,14,2,2" Foreground="White"/>
+                <TextBox Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  IsEnabled="False" Text="{Binding userBd.DeptName}"  Margin="5" Foreground="White" FontSize="22" materialDesign:HintAssist.Hint="部门" HorizontalAlignment="Stretch" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <materialDesign:PackIcon Grid.Column="0" Kind="User" VerticalAlignment="Center" HorizontalAlignment="Center" Width="28" Height="28" Margin="2,14,2,2" Foreground="White"/>
+                <TextBox Grid.Column="2"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  IsEnabled="False" Text="{Binding userBd.Name}"  Margin="5" Foreground="White" FontSize="22" materialDesign:HintAssist.Hint="姓名" HorizontalAlignment="Stretch" />
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <materialDesign:PackIcon Grid.Column="0" Kind="Telephone" VerticalAlignment="Center" HorizontalAlignment="Center" Width="28" Height="28" Margin="2,14,2,2" Foreground="White"/>
+                <TextBox  Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding edtTelBd}"  Margin="5" Foreground="White" FontSize="22" materialDesign:HintAssist.Hint="电话" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" />
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <materialDesign:PackIcon Grid.Column="0" Kind="Email" VerticalAlignment="Center" HorizontalAlignment="Center" Width="28" Height="28" Margin="2,14,2,2" Foreground="White"/>
+                <TextBox  Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding edtEmailBd}"  Margin="5" Foreground="White" FontSize="22" materialDesign:HintAssist.Hint="邮箱" HorizontalAlignment="Stretch" />
+            </Grid>
+
+            <Grid Margin="0,15,0,0" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="取消" Command="{s:Action SelectPageCmd}" CommandParameter="Setting_UserInfo" Grid.Column="0" Margin="5"/>
+                <Button Content="确认" Command="{s:Action btnEdtUserCmd}" Grid.Column="1" Margin="5"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 </UserControl>
