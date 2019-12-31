@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace GRCLNT
 {
-    class WndMainViewModel : Screen
+    public class WndMainViewModel : Screen
     {
         private IWindowManager _windowManager;
 
