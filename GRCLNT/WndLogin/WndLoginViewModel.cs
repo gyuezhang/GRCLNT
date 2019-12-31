@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using GRModel;
 using GRSocket;
 using GRUtil;
 using MaterialDesignThemes.Wpf;
@@ -14,6 +15,9 @@ namespace GRCLNT
         public WndLoginViewModel(IWindowManager windowManager)
         {
             _windowManager = windowManager;
+
+            cfgBd = CLNTCfg.Get();
+
         }
 
         #region SocketHandler
@@ -26,7 +30,7 @@ namespace GRCLNT
         public int pageIndexBd { get; set; } = 0;
         public string curPwdBd { get; set; }
         public WindowState windowStateBd { get; set; }
-
+        public C_Cfg cfgBd { get; set; }
         #endregion Bindings
 
         #region Actions
@@ -39,7 +43,7 @@ namespace GRCLNT
 
         public void LoginCmd()
         {
-        
+            CLNTCfg.Set(cfgBd);
         }
 
         public void TestLinkCmd()
