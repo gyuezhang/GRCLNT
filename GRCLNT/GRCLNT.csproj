@@ -44,6 +44,15 @@
     <Reference Include="ConcurrentCollections, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ConcurrentHashSet.1.0.2\lib\netstandard1.0\ConcurrentCollections.dll</HintPath>
     </Reference>
+    <Reference Include="GRModel">
+      <HintPath>3rdParty\GRModel.dll</HintPath>
+    </Reference>
+    <Reference Include="GRSocket">
+      <HintPath>3rdParty\GRSocket.dll</HintPath>
+    </Reference>
+    <Reference Include="GRUtil">
+      <HintPath>3rdParty\GRUtil.dll</HintPath>
+    </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
     </Reference>
@@ -188,6 +197,7 @@
     <Compile Include="Bootstrapper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Resource\Comm\PasswordHelper.cs" />
     <Compile Include="WndLogin\WndLoginView.xaml.cs">
       <DependentUpon>WndLoginView.xaml</DependentUpon>
     </Compile>
@@ -223,6 +233,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resource\Image\" />
+    <Folder Include="Resource\Style\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.6.0.5\build\Fody.targets" Condition="Exists('..\packages\Fody.6.0.5\build\Fody.targets')" />
