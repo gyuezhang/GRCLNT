@@ -145,7 +145,7 @@ namespace GRCLNT
                     itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_Setting));
                     break;
                 case E_Page.EntWell_FetchWaterId:
-                    itemsBd.Add(new C_AddrsBarItem(E_Page.Well));
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell));
                     itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_FetchWaterId));
                     break;
                 case E_Page.SediCtrl:
@@ -177,7 +177,7 @@ namespace GRCLNT
                     break;
                 case E_Page.Setting_ResetPwd:
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Setting));
-                    itemsBd.Add(new C_AddrsBarItem(E_Page.Well_AddMtdSel));
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.Setting_UserInfo));
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Setting_ResetPwd));
                     break;
                 default:

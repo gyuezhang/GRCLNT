@@ -220,6 +220,12 @@
     <Compile Include="PageEntWell\PageEntWell_AddMtdSel_View.xaml.cs">
       <DependentUpon>PageEntWell_AddMtdSel_View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageEntWell\PageEntWell_Edt_View.xaml.cs">
+      <DependentUpon>PageEntWell_Edt_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageEntWell\PageEntWell_FetchWaterId.xaml.cs">
+      <DependentUpon>PageEntWell_FetchWaterId.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageEntWell\PageEntWell_Output_View.xaml.cs">
       <DependentUpon>PageEntWell_Output_View.xaml</DependentUpon>
     </Compile>
@@ -283,6 +289,9 @@
     </Compile>
     <Compile Include="PageWell\PageWell_AddMtdSel_View.xaml.cs">
       <DependentUpon>PageWell_AddMtdSel_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageWell\PageWell_Edt_View.xaml.cs">
+      <DependentUpon>PageWell_Edt_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageWell\PageWell_Output_View.xaml.cs">
       <DependentUpon>PageWell_Output_View.xaml</DependentUpon>
@@ -365,6 +374,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageEntWell\PageEntWell_Edt_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageEntWell\PageEntWell_FetchWaterId.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageEntWell\PageEntWell_Output_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -441,6 +458,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="PageWell\PageWell_Edt_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageWell\PageWell_Output_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -478,7 +499,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resource\Image\bc_usermng.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\Image\bgleft.png" />
   </ItemGroup>

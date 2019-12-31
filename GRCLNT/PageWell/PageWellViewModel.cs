@@ -25,7 +25,10 @@ namespace GRCLNT
         #endregion Bindings
 
         #region Actions
-
+        public void SelectPageCmd(string cmdPara)
+        {
+            wndMainVM.SelectPage((E_Page)Enum.Parse(typeof(E_Page), cmdPara, true));
+        }
         #endregion Actions
     }
 }
