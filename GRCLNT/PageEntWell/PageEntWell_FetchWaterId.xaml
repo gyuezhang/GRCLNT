@@ -9,7 +9,7 @@
              xmlns:s="https://github.com/canton7/Stylet"
              d:DataContext="{d:DesignInstance local:PageEntWellViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="PageEntWell_FetchWaterId Under Construction..." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
+    <Grid Margin="5">
+        <WebBrowser Source="http://baidu.com" />
     </Grid>
 </UserControl>
