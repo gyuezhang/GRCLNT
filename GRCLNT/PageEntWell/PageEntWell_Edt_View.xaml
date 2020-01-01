@@ -4,12 +4,122 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:GRCLNT"
              mc:Ignorable="d" 
              xmlns:s="https://github.com/canton7/Stylet"
              d:DataContext="{d:DesignInstance local:PageEntWellViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="PageEntWell_Edt_View Under Construction..." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
+        <!--<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}" Foreground="White" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,20">机井信息编辑</TextBlock>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}" Foreground="White" VerticalAlignment="Center" Margin="0,0,20,0">基本信息 :</TextBlock>
+                --><!--街道乡镇--><!--
+                <ComboBox FontSize="18" materialDesign:HintAssist.Hint="街道乡镇" ItemsSource="{Binding Path=ezoning.allLevel4Nodes}" DisplayMemberPath="name" SelectedValuePath="."
+                 Margin="15 8 15 8" HorizontalAlignment="Left" SelectedItem="{Binding Path=ezoning.curlevel4Node,UpdateSourceTrigger=PropertyChanged}"/>
+                --><!--所属村--><!--
+                <ComboBox FontSize="18" materialDesign:HintAssist.Hint="所属村" ItemsSource="{Binding Path=ezoning.curlevel5Nodes}" DisplayMemberPath="name" SelectedValuePath="." 
+                 Margin="15 8 15 8" HorizontalAlignment="Left" SelectedItem="{Binding Path=ezoning.curlevel5Node,UpdateSourceTrigger=PropertyChanged}"/>
+
+                --><!--权属单位--><!--
+                <ComboBox FontSize="18" materialDesign:HintAssist.Hint="权属单位" SelectedItem="{Binding wellParas.CurUnitCat,UpdateSourceTrigger=PropertyChanged}"
+                 Margin="15 8 15 8" HorizontalAlignment="Left" ItemsSource="{Binding wellParas.UnitCat}" DisplayMemberPath="Value" />
+
+                --><!--位置--><!--
+                <ComboBox FontSize="18" materialDesign:HintAssist.Hint="位置" SelectedItem="{Binding wellParas.CurLoc,UpdateSourceTrigger=PropertyChanged}"
+                 Margin="15 8 15 8" HorizontalAlignment="Left" ItemsSource="{Binding wellParas.Loc}" DisplayMemberPath="Value" >
+                </ComboBox>
+                <TextBox Margin="15,8,15,8" FontSize="18" Text="{Binding editWell.Lng,UpdateSourceTrigger=PropertyChanged}" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  >
+                    <materialDesign:HintAssist.Hint>
+                        <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
+                            <materialDesign:PackIcon Kind="AlphabetECircleOutline" />
+                            <TextBlock>东经</TextBlock>
+                        </StackPanel>
+                    </materialDesign:HintAssist.Hint>
+                </TextBox>
+                <TextBox  Margin="15 8 15 8" FontSize="18" Foreground="White"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Text="{Binding editWell.Lat,UpdateSourceTrigger=PropertyChanged}">
+                    <materialDesign:HintAssist.Hint>
+                        <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
+                            <materialDesign:PackIcon Kind="AlphabetNCircleOutline" />
+                            <TextBlock>北纬</TextBlock>
+                        </StackPanel>
+                    </materialDesign:HintAssist.Hint>
+                </TextBox>
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <DatePicker   Margin="125,8,15,8" SelectedDate="{Binding Path=editWell.DigTime, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}"  materialDesign:HintAssist.Hint="成井时间" FontSize="18"  />
+                <TextBox Text="{Binding editWell.Usefor ,UpdateSourceTrigger=PropertyChanged}"  Margin="15 8 15 8" materialDesign:HintAssist.Hint="用途" FontSize="18" Foreground="White" MinWidth="100" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}" Foreground="White" VerticalAlignment="Center" Margin="0,0,20,0">井管信息 :</TextBlock>
+
+                <TextBox Margin="15 0 15 0"   materialDesign:HintAssist.Hint="井深（米）" FontSize="18" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding editWell.WellDepth,UpdateSourceTrigger=PropertyChanged}"/>
+                <ComboBox FontSize="18" materialDesign:HintAssist.Hint="管材" SelectedItem="{Binding wellParas.CurTubeMat,UpdateSourceTrigger=PropertyChanged}"
+                 Margin="15 0 15 0" HorizontalAlignment="Left"  ItemsSource="{Binding wellParas.TubeMat}" DisplayMemberPath="Value">
+                </ComboBox>
+                <TextBox Margin="15 0 15 0" Text="{Binding editWell.TubeIr,UpdateSourceTrigger=PropertyChanged}" FontSize="18" Foreground="White" materialDesign:HintAssist.Hint="井管内径（毫米）"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                <TextBox Margin="15 0 15 0" Text="{Binding editWell.StanWaterDepth,UpdateSourceTrigger=PropertyChanged}" FontSize="18" Foreground="White" materialDesign:HintAssist.Hint="止水深度（米）"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox  Margin="125 8 15 8" Text="{Binding editWell.SaltWaterFloorDepth,UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="咸水底板深度（米）"  FontSize="18" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                <TextBox   Margin="15 8 15 8" Text="{Binding editWell.FilterLocLow,UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="过滤器位置（米）低位"  FontSize="18" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                <TextBox  Margin="15 8 15 8"  Text="{Binding editWell.FilterLocHigh,UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="过滤器位置（米）高位"  FontSize="18" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                <TextBox  Margin="15 8 15 8"  Text="{Binding editWell.StillWaterLoc,UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="静水位（米）"  FontSize="18" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}" Foreground="White" VerticalAlignment="Center" Margin="0,0,20,0">水泵信息 :</TextBlock>
+
+                <ComboBox FontSize="18" materialDesign:HintAssist.Hint="水泵型号"  SelectedItem="{Binding wellParas.CurPumpModel,UpdateSourceTrigger=PropertyChanged}"
+                 Margin="15 8 15 8" HorizontalAlignment="Left"  ItemsSource="{Binding wellParas.PumpModel}" DisplayMemberPath="Value">
+                </ComboBox>
+                <TextBox  materialDesign:HintAssist.Hint="水泵动力（千瓦）" Text="{Binding editWell.PumpPower,UpdateSourceTrigger=PropertyChanged}" Margin="15 8 15 8" FontSize="18" Foreground="White"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}" Foreground="White" VerticalAlignment="Center" Margin="0,0,20,0">供给信息 :</TextBlock>
+
+                <TextBox  materialDesign:HintAssist.Hint="井控面积（亩）"  Text="{Binding editWell.CoverArea,UpdateSourceTrigger=PropertyChanged}" Margin="15 8 15 8" FontSize="18" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                <TextBox  materialDesign:HintAssist.Hint="供水人口（人）"  Text="{Binding editWell.SupPeopleNum,StringFormat=d,UpdateSourceTrigger=PropertyChanged}" Margin="15 8 15 8" FontSize="18" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}" Foreground="White" VerticalAlignment="Center" Margin="0,0,20,0">其他信息 :</TextBlock>
+
+                <CheckBox  IsThreeState="False" Margin="15 8 15 8" FontSize="18" Foreground="White" IsChecked="{Binding editWell.IsMfInstalled,UpdateSourceTrigger=PropertyChanged}" >是否安装计量设施</CheckBox>
+                <CheckBox  IsThreeState="False" Margin="15 8 15 8" FontSize="18" Foreground="White" IsChecked="{Binding editWell.IsWaterLevelOp,UpdateSourceTrigger=PropertyChanged}" >是否为水位观测点</CheckBox>
+                <TextBox Margin="0 0 15 10" Text="{Binding editWell.LinkWellNo,UpdateSourceTrigger=PropertyChanged}" FontSize="18" Foreground="White" materialDesign:HintAssist.Hint="连接机井眼数"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox  IsThreeState="False" IsChecked="{Binding editWell.IsSeepChnLinked,UpdateSourceTrigger=PropertyChanged}"  Margin="125 8 15 8" FontSize="18" Foreground="White"  >是否连接防渗渠道</CheckBox>
+
+                <TextBox  materialDesign:HintAssist.Hint="防渗渠道长度（千米）" Text="{Binding editWell.SeepChnLength,UpdateSourceTrigger=PropertyChanged}" Margin="15 0 15 8" FontSize="18" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+            </StackPanel>
+
+            <Grid  >
+                <TextBox Margin="100 8 0 0" Height="100" MaxWidth="730" Text="{Binding editWell.Remark,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" VerticalAlignment="Center"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap" Foreground="White"
+                            MinWidth="700" FontSize="18"
+                            materialDesign:HintAssist.Hint="备注"/>
+            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Margin="5,20,15,5" Height="32" Content="返回" Command="{s:Action OnEditWellCancel}" FontSize="18" Foreground="White" VerticalAlignment="Center" />
+
+                <Button Margin="5,20,15,5" Height="32" Content="确认修改" Command="{s:Action OnEditWellOK}" FontSize="18" Foreground="White" VerticalAlignment="Center" />
+
+            </StackPanel>
+
+        </StackPanel>-->
     </Grid>
+
 </UserControl>

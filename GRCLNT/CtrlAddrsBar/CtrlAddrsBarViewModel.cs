@@ -69,19 +69,19 @@ namespace GRCLNT
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Well));
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Well_Search));
                     break;
-                case E_Page.Well_Search_Loc:
-                    itemsBd.Add(new C_AddrsBarItem(E_Page.Well));
-                    itemsBd.Add(new C_AddrsBarItem(E_Page.Well_AddMtdSel));
-                    itemsBd.Add(new C_AddrsBarItem(E_Page.Well_Search_Loc));
-                    break;
+                //case E_Page.Well_Search_Loc:
+                //    itemsBd.Add(new C_AddrsBarItem(E_Page.Well));
+                //    itemsBd.Add(new C_AddrsBarItem(E_Page.Well_Search));
+                //    itemsBd.Add(new C_AddrsBarItem(E_Page.Well_Search_Loc));
+                //    break;
                 case E_Page.Well_Search_Lst:
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Well));
-                    itemsBd.Add(new C_AddrsBarItem(E_Page.Well_AddMtdSel));
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.Well_Search));
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Well_Search_Lst));
                     break;
                 case E_Page.Well_Edit:
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Well));
-                    itemsBd.Add(new C_AddrsBarItem(E_Page.Well_AddMtdSel));
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.Well_Search));
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Well_Edit));
                     break;
                 case E_Page.Well_State:
@@ -117,19 +117,19 @@ namespace GRCLNT
                     itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell));
                     itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_Search));
                     break;
-                case E_Page.EntWell_Search_Loc:
-                    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell));
-                    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_AddMtdSel));
-                    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_Search_Loc));
-                    break;
+                //case E_Page.EntWell_Search_Loc:
+                //    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell));
+                //    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_Search));
+                //    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_Search_Loc));
+                //    break;
                 case E_Page.EntWell_Search_Lst:
                     itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell));
-                    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_AddMtdSel));
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_Search));
                     itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_Search_Lst));
                     break;
                 case E_Page.EntWell_Edit:
                     itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell));
-                    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_AddMtdSel));
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_Search));
                     itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_Edit));
                     break;
                 case E_Page.EntWell_State:
@@ -183,7 +183,8 @@ namespace GRCLNT
                 default:
                     break;
             }
-            itemsBd[itemsBd.Count - 1].VHasChild = Visibility.Collapsed;
+            if(itemsBd.Count > 0)
+                itemsBd[itemsBd.Count - 1].VHasChild = Visibility.Collapsed;
         }
     }
 }
