@@ -19,10 +19,6 @@ namespace GRCLNT
         public PageEntWellViewModel(WndMainViewModel _wndMainVM)
         {
             wndMainVM = _wndMainVM;
-
-            GRSocketHandler.getEntWellParas += GRSocketHandler_getEntWellParas;
-            isWaitingForRefreshParas = true;
-            GRSocketAPI.GetEntWellParas();
         }
 
         private WndMainViewModel wndMainVM { get; set; }
@@ -95,7 +91,11 @@ namespace GRCLNT
         public string strPsTubeMatBd { get; set; }
         public string strPsPumpModelBd { get; set; }
         public string strPsUseForBd { get; set; }
-        public C_WellParas wpBd { get; set; } = new C_WellParas();
+        public C_WellParas wpBd { get; set; } = C_RT.ewp;
+
+        public C_BdAreaCode cbdAcBd = C_RT.ac;
+        public C_BdAreaCode ebdAcBd = C_RT.ac;
+
         #endregion Bindings
 
         #region Actions

@@ -16,11 +16,11 @@
             <StackPanel Orientation="Horizontal" >
                 <TextBlock  Foreground="White" VerticalAlignment="Center" Margin="0,0,20,0">基本信息 :</TextBlock>
                 <!--街道乡镇-->
-                <ComboBox FontSize="18" materialDesign:HintAssist.Hint="街道乡镇" ItemsSource="{Binding Path=czoning.allLevel4Nodes}" DisplayMemberPath="name" SelectedValuePath="."
-                 Margin="15 8 8 8" HorizontalAlignment="Left" SelectedItem="{Binding Path=czoning.curlevel4Node,UpdateSourceTrigger=PropertyChanged}"/>
+                <ComboBox FontSize="18" materialDesign:HintAssist.Hint="街道乡镇" ItemsSource="{Binding Path=cbdAcBd.AllL4AreaCodes}" DisplayMemberPath="name" SelectedValuePath="."
+                 Margin="15 8 8 8" HorizontalAlignment="Left" SelectedItem="{Binding Path=cbdAcBd.L4Index,UpdateSourceTrigger=PropertyChanged}"/>
                 <!--所属村-->
-                <ComboBox FontSize="18" materialDesign:HintAssist.Hint="所属村" ItemsSource="{Binding Path=czoning.curlevel5Nodes}" DisplayMemberPath="name" SelectedValuePath="." 
-                Margin="15 8 15 8" HorizontalAlignment="Left" SelectedItem="{Binding Path=czoning.curlevel5Node,UpdateSourceTrigger=PropertyChanged}"/>
+                <ComboBox FontSize="18" materialDesign:HintAssist.Hint="所属村" ItemsSource="{Binding Path=cbdAcBd.CurL5AreaCodes}" DisplayMemberPath="name" SelectedValuePath="." 
+                Margin="15 8 15 8" HorizontalAlignment="Left" SelectedItem="{Binding Path=cbdAcBd.L5Index,UpdateSourceTrigger=PropertyChanged}"/>
 
                 <!--权属单位-->
                 <ComboBox FontSize="18" materialDesign:HintAssist.Hint="权属单位" SelectedItem="{Binding wellParas.CurUnitCat,UpdateSourceTrigger=PropertyChanged}"

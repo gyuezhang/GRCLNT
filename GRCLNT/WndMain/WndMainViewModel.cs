@@ -1,4 +1,7 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using GRModel;
+using GRSocket;
+using GRUtil;
+using MaterialDesignThemes.Wpf;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -25,10 +28,64 @@ namespace GRCLNT
 
             mainVmBd = new PageDashboardViewModel(this);
             addrsBarVmBd = new CtrlAddrsBarViewModel(this);
+
+            GRSocketHandler.getAreaCodes += GRSocketHandler_getAreaCodes;
+            GRSocketAPI.GetAreaCodes();
+            GRSocketHandler.getWellParas += GRSocketHandler_getWellParas;
+            GRSocketAPI.GetWellParas();
+            GRSocketHandler.getEntWellParas += GRSocketHandler_getEntWellParas;
+            GRSocketAPI.GetEntWellParas();
         }
 
-
         #region SocketHandler
+
+        private void GRSocketHandler_getAreaCodes(RES_STATE state, List<C_AreaCode> acs)
+        {
+            GRSocketHandler.getAreaCodes -= GRSocketHandler_getAreaCodes;
+            switch (state)
+            {
+                case RES_STATE.OK:
+                    C_RT.ac = new C_BdAreaCode(acs);
+                    break;
+                case RES_STATE.FAILED:
+                    messageQueueBd.Enqueue("获取区划信息失败");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void GRSocketHandler_getWellParas(RES_STATE state, C_WellParas wps)
+        {
+            GRSocketHandler.getWellParas -= GRSocketHandler_getWellParas;
+            switch (state)
+            {
+                case RES_STATE.OK:
+                    C_RT.wp = wps;
+                    break;
+                case RES_STATE.FAILED:
+                    messageQueueBd.Enqueue("获取机井参数失败");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void GRSocketHandler_getEntWellParas(RES_STATE state, C_WellParas wps)
+        {
+            GRSocketHandler.getEntWellParas -= GRSocketHandler_getEntWellParas;
+            switch (state)
+            {
+                case RES_STATE.OK:
+                    C_RT.ewp = wps;
+                    break;
+                case RES_STATE.FAILED:
+                    messageQueueBd.Enqueue("获取企业井参数失败");
+                    break;
+                default:
+                    break;
+            }
+        }
 
         #endregion SocketHandler
 
