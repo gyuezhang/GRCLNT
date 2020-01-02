@@ -112,7 +112,7 @@ namespace GRCLNT
         public void psLocDelCmd()
         {
             GRSocketHandler.delWellPara += GRSocketHandler_delWellPara;
-            GRSocketAPI.DelWellPara(new C_WellPara(E_WellParaType.Loc, strPsLocBd));
+            GRSocketAPI.DelWellPara(wpBd.LocIndex);
         }
 
         public bool CanpsUnitCatAddCmd => (strPsUnitCatBd != null && !isWaitingForRefreshParas);
@@ -125,7 +125,7 @@ namespace GRCLNT
         public void psUnitCatDelCmd()
         {
             GRSocketHandler.delWellPara += GRSocketHandler_delWellPara;
-            GRSocketAPI.DelWellPara(new C_WellPara(E_WellParaType.UnitCat, strPsUnitCatBd));
+            GRSocketAPI.DelWellPara(wpBd.UnitCatIndex);
         }
 
         public bool CanpsTubeMatAddCmd => (strPsTubeMatBd != null && !isWaitingForRefreshParas);
@@ -138,7 +138,7 @@ namespace GRCLNT
         public void psTubeMatDelCmd()
         {
             GRSocketHandler.delWellPara += GRSocketHandler_delWellPara;
-            GRSocketAPI.DelWellPara(new C_WellPara(E_WellParaType.TubeMat, strPsTubeMatBd));
+            GRSocketAPI.DelWellPara(wpBd.TubeMatIndex);
         }
 
         public bool CanpsPumpModelAddCmd => (strPsPumpModelBd != null && !isWaitingForRefreshParas);
@@ -151,7 +151,7 @@ namespace GRCLNT
         public void psPumpModelDelCmd()
         {
             GRSocketHandler.delWellPara += GRSocketHandler_delWellPara;
-            GRSocketAPI.DelWellPara(new C_WellPara(E_WellParaType.PumpModel, strPsPumpModelBd));
+            GRSocketAPI.DelWellPara(wpBd.PumpModelIndex);
         }
 
         public bool CanpsUseForAddCmd => (strPsUseForBd != null && !isWaitingForRefreshParas);
@@ -164,7 +164,7 @@ namespace GRCLNT
         public void psUseForDelCmd()
         {
             GRSocketHandler.delWellPara += GRSocketHandler_delWellPara;
-            GRSocketAPI.DelWellPara(new C_WellPara(E_WellParaType.UseFor, strPsUseForBd));
+            GRSocketAPI.DelWellPara(wpBd.UseForIndex);
         }
         #endregion Actions
 
