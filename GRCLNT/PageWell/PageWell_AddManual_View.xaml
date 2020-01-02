@@ -50,7 +50,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <DatePicker   Margin="125,8,15,8" SelectedDate="{Binding Path=createWell.DigTime, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}"  materialDesign:HintAssist.Hint="成井时间" FontSize="18"  />
+                <DatePicker   Margin="90,8,15,8" SelectedDate="{Binding Path=createWell.DigTime, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}"  materialDesign:HintAssist.Hint="成井时间" FontSize="18"  />
 
                 <!--用途-->
                 <ComboBox FontSize="18" materialDesign:HintAssist.Hint="用途" SelectedItem="{Binding wpBd.UseForIndex,UpdateSourceTrigger=PropertyChanged}"
@@ -71,7 +71,7 @@
 
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBox  Margin="125 8 15 8" Text="{Binding cwBd.SaltWaterFloorDepth,StringFormat={}{0:N1},UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="咸水底板深度（米）"  FontSize="18" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                <TextBox  Margin="90 8 15 8" Text="{Binding cwBd.SaltWaterFloorDepth,StringFormat={}{0:N1},UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="咸水底板深度（米）"  FontSize="18" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 <TextBox   Margin="15 8 15 8" Text="{Binding cwBd.FilterLocLow,StringFormat={}{0:N1},UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="过滤器位置（米）低位"  FontSize="18" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 <TextBox  Margin="15 8 15 8"  Text="{Binding cwBd.FilterLocHigh,StringFormat={}{0:N1},UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="过滤器位置（米）高位"  FontSize="18" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 <TextBox  Margin="15 8 15 8"  Text="{Binding cwBd.StillWaterLoc,StringFormat={}{0:N1},UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="静水位（米）"  FontSize="18" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
@@ -103,21 +103,19 @@
                 <TextBox Margin="0 0 15 10" Text="{Binding cwBd.LinkWellNo,UpdateSourceTrigger=PropertyChanged}" FontSize="18" Foreground="White" materialDesign:HintAssist.Hint="连接机井眼数"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <CheckBox  IsThreeState="False" IsChecked="{Binding cwBd.IsSeepChnLinked,UpdateSourceTrigger=PropertyChanged}"  Margin="125 8 15 8" FontSize="18" Foreground="White"  >是否连接防渗渠道</CheckBox>
+                <CheckBox  IsThreeState="False" IsChecked="{Binding cwBd.IsSeepChnLinked,UpdateSourceTrigger=PropertyChanged}"  Margin="90 8 15 8" FontSize="18" Foreground="White"  >是否连接防渗渠道</CheckBox>
 
                 <TextBox  materialDesign:HintAssist.Hint="防渗渠道长度（千米）" IsEnabled="{Binding cwBd.IsSeepChnLinked}" Text="{Binding createWell.SeepChnLength,StringFormat={}{0:N3},UpdateSourceTrigger=PropertyChanged}" Margin="15 0 15 8" FontSize="18" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
 
             </StackPanel>
 
-            <Grid  >
-                <TextBox Margin="100 8 0 0" Height="100" MaxWidth="730" Text="{Binding cwBd.Remark,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" VerticalAlignment="Center"
-                            AcceptsReturn="True"
-                            TextWrapping="Wrap" Foreground="White"
-                            MinWidth="700" FontSize="18"
-                            materialDesign:HintAssist.Hint="备注"/>
-            </Grid>
+            <TextBox Margin="90 8 0 0" Height="100" MaxWidth="1230" Text="{Binding cwBd.Remark,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" VerticalAlignment="Center"
+                        AcceptsReturn="True"
+                        TextWrapping="Wrap" Foreground="White"
+                        MinWidth="700" FontSize="18"
+                        materialDesign:HintAssist.Hint="备注"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Margin="5,20,15,5" Height="32" Content="完成添加" Command="{s:Action createWellCmd}" FontSize="18" Foreground="White" VerticalAlignment="Center" />
+            <Button Margin="5,20,5,5" Height="32" Content="完成添加" Command="{s:Action createWellCmd}" FontSize="18" Foreground="White" VerticalAlignment="Center" />
 
             </StackPanel>
 
