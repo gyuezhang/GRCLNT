@@ -45,7 +45,7 @@ namespace GRCLNT
             switch (state)
             {
                 case RES_STATE.OK:
-                    C_RT.ac = new C_BdAreaCode(acs);
+                    C_RT.acs = acs;
                     break;
                 case RES_STATE.FAILED:
                     messageQueueBd.Enqueue("获取区划信息失败");

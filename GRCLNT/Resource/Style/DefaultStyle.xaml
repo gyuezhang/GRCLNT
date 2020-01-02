@@ -11,4 +11,27 @@
         <Setter Property="TextBlock.FontSize" Value="16" />
     </Style>
     
+    <!--Calendar-->
+    <Style x:Key="cbCust" TargetType="{x:Type CalendarButton}" BasedOn="{StaticResource MaterialDesignCalendarButton}">
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+    <Style x:Key="CalendarStyleCust" TargetType="{x:Type Calendar}" BasedOn="{StaticResource MaterialDesignDatePickerCalendarPortrait}">
+        <Setter Property="Background" Value="#FF035BB3" />
+        <Setter Property="CalendarButtonStyle" Value="{StaticResource cbCust}" />
+    </Style>
+
+    <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
+        <Setter Property="CalendarStyle" Value="{StaticResource CalendarStyleCust}"/>
+        <Setter Property="TextBlock.Foreground" Value="White"/>
+    </Style>
+
+    <!--Combo-->
+    <Style  x:Key="cbItemStyleCust"  TargetType="{x:Type ComboBoxItem}" BasedOn="{StaticResource MaterialDesignComboBoxItemStyle}">
+        <Setter Property="Background" Value="#FF035BB3"/>
+    </Style>
+
+    <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}">
+        <Setter Property="ItemContainerStyle" Value="{StaticResource cbItemStyleCust}"/>
+    </Style>
 </ResourceDictionary>

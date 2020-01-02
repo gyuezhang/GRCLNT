@@ -90,8 +90,8 @@ namespace GRCLNT
         public string strPsUseForBd { get; set; }
         public C_WellParas wpBd { get; set; } = new C_WellParas();
 
-        public C_BdAreaCode cbdAcBd = C_RT.ac;
-        public C_BdAreaCode ebdAcBd = C_RT.ac;
+        public C_BdAreaCode cbdAcBd = new C_BdAreaCode(C_RT.acs);
+        public C_BdAreaCode ebdAcBd = new C_BdAreaCode(C_RT.acs);
 
         #endregion Bindings
 
