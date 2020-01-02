@@ -78,6 +78,22 @@ namespace GRCLNT
             isWaitingForRefreshParas = false;
         }
 
+        private void GRSocketHandler_addWell(RES_STATE state)
+        {
+            GRSocketHandler.addWell -= GRSocketHandler_addWell;
+            switch (state)
+            {
+                case RES_STATE.OK:
+                    wndMainVM.messageQueueBd.Enqueue("添加机井信息成功成功");
+                    break;
+                case RES_STATE.FAILED:
+                    wndMainVM.messageQueueBd.Enqueue("添加机井信息成功失败");
+                    break;
+                default:
+                    break;
+            }
+        }
+
         #endregion SocketHandler
 
         #region Bindings
@@ -184,6 +200,7 @@ namespace GRCLNT
             cwBd.Usefor = wpBd.UseForIndex.Value;
             if (CheckCreateWell(cwBd))
             {
+                GRSocketHandler.addWell += GRSocketHandler_addWell;
                 wells.Add(cwBd);
                 GRSocketAPI.AddWell(wells);
             }
