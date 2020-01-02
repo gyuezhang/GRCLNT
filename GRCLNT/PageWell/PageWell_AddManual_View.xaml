@@ -16,14 +16,14 @@
             <StackPanel Orientation="Horizontal" >
                 <TextBlock  Foreground="White" VerticalAlignment="Center" Margin="0,0,20,0">基本信息 :</TextBlock>
                 <!--街道乡镇-->
-                <ComboBox FontSize="18" materialDesign:HintAssist.Hint="街道乡镇" ItemsSource="{Binding Path=cbdAcBd.AllL4AreaCodes}" DisplayMemberPath="Name" SelectedValuePath="."
-                 Margin="15 8 8 8" HorizontalAlignment="Left" SelectedItem="{Binding Path=cbdAcBd.L4Index,UpdateSourceTrigger=PropertyChanged}"/>
+                <ComboBox FontSize="18" materialDesign:HintAssist.Hint="街道乡镇" ItemsSource="{Binding Path=cbdAcBd.AllL4AreaCodes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="."
+                 Margin="15 8 8 8" HorizontalAlignment="Left" SelectedItem="{Binding Path=cbdAcBd.L4Index,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <!--所属村-->
-                <ComboBox FontSize="18" materialDesign:HintAssist.Hint="所属村" ItemsSource="{Binding Path=cbdAcBd.CurL5AreaCodes}" DisplayMemberPath="Name" SelectedValuePath="." 
-                Margin="15 8 15 8" HorizontalAlignment="Left" SelectedItem="{Binding Path=cbdAcBd.L5Index,UpdateSourceTrigger=PropertyChanged}"/>
+                <ComboBox FontSize="18" materialDesign:HintAssist.Hint="所属村" ItemsSource="{Binding Path=cbdAcBd.CurL5AreaCodes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="." 
+                Margin="15 8 15 8" HorizontalAlignment="Left" SelectedItem="{Binding Path=cbdAcBd.L5Index,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
 
                 <!--权属单位-->
-                <ComboBox FontSize="18" materialDesign:HintAssist.Hint="权属单位" SelectedItem="{Binding wpBd.UnitCatIndex,UpdateSourceTrigger=PropertyChanged}"
+                <ComboBox FontSize="18" materialDesign:HintAssist.Hint="权属单位" SelectedItem="{Binding wpBd.UnitCatIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                  Margin="15 8 15 8" HorizontalAlignment="Left" ItemsSource="{Binding wpBd.UnitCat}" DisplayMemberPath="Value" >
                 </ComboBox>
                 <!--位置-->

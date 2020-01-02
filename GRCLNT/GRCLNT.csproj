@@ -47,8 +47,9 @@
     <Reference Include="ConcurrentCollections, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ConcurrentHashSet.1.0.2\lib\netstandard1.0\ConcurrentCollections.dll</HintPath>
     </Reference>
-    <Reference Include="GRModel">
-      <HintPath>3rdParty\GRModel.dll</HintPath>
+    <Reference Include="GRModel, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\GRModel\bin\Debug\GRModel.dll</HintPath>
     </Reference>
     <Reference Include="GRSocket">
       <HintPath>3rdParty\GRSocket.dll</HintPath>

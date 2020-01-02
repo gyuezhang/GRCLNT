@@ -16,6 +16,7 @@ namespace GRCLNT
         {
             wndMainVM = _wndMainVM;
             wpBd = C_RT.wp;
+            cbdAcBd = new C_BdAreaCode(C_RT.acs);
         }
         private WndMainViewModel wndMainVM { get; set; }
 
@@ -90,8 +91,8 @@ namespace GRCLNT
         public string strPsUseForBd { get; set; }
         public C_WellParas wpBd { get; set; } = new C_WellParas();
 
-        public C_BdAreaCode cbdAcBd = new C_BdAreaCode(C_RT.acs);
-        public C_BdAreaCode ebdAcBd = new C_BdAreaCode(C_RT.acs);
+        public C_BdAreaCode cbdAcBd { get; set; } = new C_BdAreaCode();
+        public C_BdAreaCode ebdAcBd { get; set; } = new C_BdAreaCode();
 
         #endregion Bindings
 
@@ -166,6 +167,13 @@ namespace GRCLNT
         {
             GRSocketHandler.delWellPara += GRSocketHandler_delWellPara;
             GRSocketAPI.DelWellPara(wpBd.UseForIndex);
+        }
+
+
+        //manual add
+        public void OnCreateWell()
+        {
+           
         }
         #endregion Actions
 
