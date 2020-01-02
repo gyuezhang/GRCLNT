@@ -51,11 +51,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\GRModel\bin\Debug\GRModel.dll</HintPath>
     </Reference>
-    <Reference Include="GRSocket">
-      <HintPath>3rdParty\GRSocket.dll</HintPath>
+    <Reference Include="GRSocket, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\GRSocket\bin\Debug\GRSocket.dll</HintPath>
     </Reference>
-    <Reference Include="GRUtil">
-      <HintPath>3rdParty\GRUtil.dll</HintPath>
+    <Reference Include="GRUtil, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\GRUtil\bin\Debug\GRUtil.dll</HintPath>
     </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>

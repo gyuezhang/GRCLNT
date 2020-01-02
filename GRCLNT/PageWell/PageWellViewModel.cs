@@ -93,6 +93,8 @@ namespace GRCLNT
 
         public C_BdAreaCode cbdAcBd { get; set; } = new C_BdAreaCode();
         public C_BdAreaCode ebdAcBd { get; set; } = new C_BdAreaCode();
+        public C_Well cwBd { get; set; } = new C_Well();
+        public C_Well ewBd { get; set; } = new C_Well();
 
         #endregion Bindings
 
@@ -169,15 +171,153 @@ namespace GRCLNT
             GRSocketAPI.DelWellPara(wpBd.UseForIndex);
         }
 
-
         //manual add
-        public void OnCreateWell()
+        public void createWellCmd()
         {
-           
+            List<C_Well> wells = new List<C_Well>();
+            cwBd.TsOrSt = cbdAcBd.L4Index.Name;
+            cwBd.Village = cbdAcBd.L5Index.Name;
+            cwBd.Loc = wpBd.LocIndex.Value;
+            cwBd.TubeMat = wpBd.TubeMatIndex.Value;
+            cwBd.UnitCat = wpBd.UnitCatIndex.Value;
+            cwBd.PumpMode = wpBd.PumpModelIndex.Value;
+            cwBd.Usefor = wpBd.UseForIndex.Value;
+            if (CheckCreateWell(cwBd))
+            {
+                wells.Add(cwBd);
+                GRSocketAPI.AddWell(wells);
+            }
         }
+
         #endregion Actions
 
         public bool isWaitingForRefreshParas { get; set; } = false;
+        public bool CheckCreateWell(C_Well w)
+        {
+            if (w.TsOrSt == "")
+            {
+                wndMainVM.messageQueueBd.Enqueue("请选择街道乡镇");
+                return false;
+            }
+            if (w.Village == "")
+            {
+                wndMainVM.messageQueueBd.Enqueue("请选择所属村");
+                return false;
+            }
+            if (w.UnitCat == "" || w.UnitCat == null)
+            {
+                if (wpBd.UnitCat.Count == 0)
+                {
+                    wndMainVM.messageQueueBd.Enqueue("请先在参数设置中添加权属单位");
+                    return false;
+                }
+                wndMainVM.messageQueueBd.Enqueue("请选择权属单位");
+                return false;
+            }
+            if (w.Loc == "" || w.Loc == null)
+            {
+                if (wpBd.Loc.Count == 0)
+                {
+                    wndMainVM.messageQueueBd.Enqueue("请先在参数设置中添加位置");
+                    return false;
+                }
+                wndMainVM.messageQueueBd.Enqueue("请选择位置");
+                return false;
+            }
+            if (w.TubeMat == "" || w.TubeMat == null)
+            {
+                if (wpBd.TubeMat.Count == 0)
+                {
+                    wndMainVM.messageQueueBd.Enqueue("请先在参数设置中添加管材");
+                    return false;
+                }
+                wndMainVM.messageQueueBd.Enqueue("请选择管材");
+                return false;
+            }
+            if (w.UnitCat == "" || w.UnitCat == null)
+            {
+                if (wpBd.UnitCat.Count == 0)
+                {
+                    wndMainVM.messageQueueBd.Enqueue("请先在参数设置中添加水泵型号");
+                    return false;
+                }
+                wndMainVM.messageQueueBd.Enqueue("请选择水泵型号");
+                return false;
+            }
+            if (w.Lng == null || w.Lng == "")
+            {
+                wndMainVM.messageQueueBd.Enqueue("经度不能为空");
+                return false;
+            }
 
+            switch (C_Str.IsLng(w.Lng))
+            {
+                case -1:
+                    wndMainVM.messageQueueBd.Enqueue("经度格式错误，请确认单位");
+                    return false;
+                case 0:
+                    return false;
+                case 1:
+                    break;
+                case 2:
+                    wndMainVM.messageQueueBd.Enqueue("经度精度不足");
+                    return false;
+                case 3:
+                    wndMainVM.messageQueueBd.Enqueue("经度超出宝坻区范围");
+                    return false;
+                default:
+                    break;
+            }
+
+
+            if (w.Lat == null || w.Lat == "")
+            {
+                wndMainVM.messageQueueBd.Enqueue("纬度不能为空");
+                return false;
+            }
+            switch (C_Str.IsLat(w.Lat))
+            {
+                case -1:
+                    wndMainVM.messageQueueBd.Enqueue("纬度格式错误，请确认单位");
+                    return false;
+                case 0:
+                    return false;
+                case 1:
+                    break;
+                case 2:
+                    wndMainVM.messageQueueBd.Enqueue("纬度精度不足");
+                    return false;
+                case 3:
+                    wndMainVM.messageQueueBd.Enqueue("纬度超出宝坻区范围");
+                    return false;
+                default:
+                    break;
+            }
+            if (w.DigTime.Year < 1950 || w.DigTime > DateTime.Now)
+            {
+                wndMainVM.messageQueueBd.Enqueue("请选择正确时间");
+                return false;
+            }
+
+
+            if (w.WellDepth.ToString() == "" || w.WellDepth == 0)
+            {
+                wndMainVM.messageQueueBd.Enqueue("井深格式错误或为空");
+                return false;
+            }
+
+            if (w.TubeIr.ToString() == "" || w.TubeIr == 0)
+            {
+                wndMainVM.messageQueueBd.Enqueue("井管内径格式错误或为空");
+                return false;
+            }
+
+            if (w.PumpPower.ToString() == "" || w.PumpPower == 0)
+            {
+                wndMainVM.messageQueueBd.Enqueue("水泵动力格式错误或为空");
+                return false;
+            }
+            return true;
+        }
     }
 }
