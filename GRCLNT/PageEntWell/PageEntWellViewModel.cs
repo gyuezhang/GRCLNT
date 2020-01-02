@@ -31,6 +31,7 @@ namespace GRCLNT
             switch (state)
             {
                 case RES_STATE.OK:
+                    C_RT.ewp = new C_WellParas(wps.All);
                     wpBd = new C_WellParas(wps.All);
                     break;
                 case RES_STATE.FAILED:

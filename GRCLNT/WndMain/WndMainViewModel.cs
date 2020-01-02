@@ -61,7 +61,7 @@ namespace GRCLNT
             switch (state)
             {
                 case RES_STATE.OK:
-                    C_RT.wp = wps;
+                    C_RT.wp = new C_WellParas(wps.All);
                     break;
                 case RES_STATE.FAILED:
                     messageQueueBd.Enqueue("获取机井参数失败");
@@ -77,7 +77,7 @@ namespace GRCLNT
             switch (state)
             {
                 case RES_STATE.OK:
-                    C_RT.ewp = wps;
+                    C_RT.ewp = new C_WellParas(wps.All);
                     break;
                 case RES_STATE.FAILED:
                     messageQueueBd.Enqueue("获取企业井参数失败");
