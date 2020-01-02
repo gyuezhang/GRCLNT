@@ -10,6 +10,6 @@
              d:DataContext="{d:DesignInstance local:PageEntWellViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="5">
-        <WebBrowser Source="http://baidu.com" />
+        <WebBrowser Source="http://qsxk.mwr.gov.cn/wtlicnece/basepage/security/login.jsp" Navigating="WebBrowser_Navigating"/>
     </Grid>
 </UserControl>
