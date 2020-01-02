@@ -13,7 +13,7 @@ namespace GRCLNT
     public class WndLoginViewModel : Screen
     {
         private IWindowManager _windowManager;
-        private static int iPwdChangeCnt { get; set; } = 0;
+        private static int iPwdChangeCnt { get; set; }
         private static bool bFirstLogin { get; set; } = true;
         private DispatcherTimer TimerLoginSuccess = new DispatcherTimer();
 
@@ -21,6 +21,7 @@ namespace GRCLNT
         {
             _windowManager = windowManager;
 
+            iPwdChangeCnt = 0;
             cfgBd = CLNTCfg.Get();
 
             if (cfgBd.RecordPwd)
