@@ -10,6 +10,159 @@
              d:DataContext="{d:DesignInstance local:PageEntWellViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="PageEntWell_Setting_View Under Construction..." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Foreground="White" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,80,0,20">机井参数设置</TextBlock>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <materialDesign:ColorZone VerticalAlignment="Stretch"  Grid.Column="0" Grid.Row="0" MinWidth="300" Margin="20" Mode="Standard" Padding="8 4 8 4" Background="#11000000" CornerRadius="2" Panel.ZIndex="1"  materialDesign:ShadowAssist.ShadowDepth="Depth1" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" Foreground="White" Text="{Binding strPsLocBd,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,0" FontSize="14" materialDesign:HintAssist.Hint="位置"/>
+                            <Button  BorderThickness="0" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Background="#11000000"  Margin="10" Command="{s:Action psLocAddCmd}">
+                                <materialDesign:PackIcon Kind="Plus" Foreground="Green" Width="24" Height="24"/>
+                            </Button>
+                            <Button  BorderThickness="0" Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Background="#11000000"  Margin="10" Command="{s:Action psLocDelCmd}">
+                                <materialDesign:PackIcon Kind="Remove" Foreground="Red" Width="24" Height="24"/>
+                            </Button>
+                        </Grid>
+                        <ScrollViewer x:Name="svLoc" Grid.Row="1" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" Margin="0,0,0,32">
+                            <ListView x:Name="lstLoc" ItemsSource="{Binding wpBd.Loc}" DisplayMemberPath="Value" SizeChanged="ListViewLoc_SizeChanged" SelectedItem="{Binding wpBd.LocIndex}"/>
+                        </ScrollViewer>
+                    </Grid>
+
+                </materialDesign:ColorZone>
+                <materialDesign:ColorZone  Grid.Column="0" Grid.Row="1" MinWidth="300" Margin="20" Mode="Standard" Padding="8 4 8 4" Background="#11000000" CornerRadius="2" Panel.ZIndex="1"  materialDesign:ShadowAssist.ShadowDepth="Depth1" VerticalAlignment="Stretch">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" Foreground="White" Text="{Binding strPsUnitCatBd,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,0" FontSize="14" materialDesign:HintAssist.Hint="权属单位"/>
+                            <Button  BorderThickness="0" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Background="#11000000"  Margin="10" Command="{s:Action psUnitCatAddCmd}">
+                                <materialDesign:PackIcon Kind="Plus" Foreground="Green" Width="24" Height="24"/>
+                            </Button>
+                            <Button  BorderThickness="0" Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Background="#11000000"  Margin="10" Command="{s:Action psUnitCatDelCmd}">
+                                <materialDesign:PackIcon Kind="Remove" Foreground="Red" Width="24" Height="24"/>
+                            </Button>
+                        </Grid>
+                        <ScrollViewer  x:Name="svUnitCat"  Grid.Row="1" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" Margin="0,0,0,32">
+                            <ListView  x:Name="lstUnitCat" ItemsSource="{Binding wpBd.UnitCat}" DisplayMemberPath="Value"  SizeChanged="ListViewUnitCat_SizeChanged" SelectedItem="{Binding wpBd.UnitCatIndex}"/>
+                        </ScrollViewer>
+                    </Grid>
+
+                </materialDesign:ColorZone>
+
+                <materialDesign:ColorZone  Grid.Column="1" Grid.Row="0" MinWidth="300" Margin="20" Mode="Standard" Padding="8 4 8 4" Background="#11000000" CornerRadius="2" Panel.ZIndex="1"  materialDesign:ShadowAssist.ShadowDepth="Depth1" VerticalAlignment="Stretch">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" Foreground="White" Text="{Binding strPsTubeMatBd,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,0" FontSize="14" materialDesign:HintAssist.Hint="管材"/>
+                            <Button  BorderThickness="0" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Background="#11000000"  Margin="10" Command="{s:Action psTubeMatAddCmd}">
+                                <materialDesign:PackIcon Kind="Plus" Foreground="Green" Width="24" Height="24"/>
+                            </Button>
+                            <Button  BorderThickness="0" Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Background="#11000000"  Margin="10" Command="{s:Action psTubeMatDelCmd}">
+                                <materialDesign:PackIcon Kind="Remove" Foreground="Red" Width="24" Height="24"/>
+                            </Button>
+                        </Grid>
+                        <ScrollViewer  x:Name="svTubeMat"  Grid.Row="1" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" Margin="0,0,0,32">
+                            <ListView  x:Name="lstTubeMat" ItemsSource="{Binding wpBd.TubeMat}" DisplayMemberPath="Value" SizeChanged="ListViewTubeMat_SizeChanged"  SelectedItem="{Binding wpBd.TubeMatIndex}"/>
+                        </ScrollViewer>
+                    </Grid>
+
+                </materialDesign:ColorZone>
+                <materialDesign:ColorZone Grid.Column="1" Grid.Row="1" MinWidth="300" Margin="20" Mode="Standard" Padding="8 4 8 4" Background="#11000000" CornerRadius="2" Panel.ZIndex="1"  materialDesign:ShadowAssist.ShadowDepth="Depth1" VerticalAlignment="Stretch">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" Foreground="White" Text="{Binding strPsPumpModelBd,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,0" FontSize="14" materialDesign:HintAssist.Hint="水泵型号"/>
+                            <Button  BorderThickness="0" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Background="#11000000"  Margin="10" Command="{s:Action psPumpModelAddCmd}">
+                                <materialDesign:PackIcon Kind="Plus" Foreground="Green" Width="24" Height="24"/>
+                            </Button>
+                            <Button  BorderThickness="0" Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Background="#11000000"  Margin="10" Command="{s:Action psPumpModelDelCmd}">
+                                <materialDesign:PackIcon Kind="Remove" Foreground="Red" Width="24" Height="24"/>
+                            </Button>
+                        </Grid>
+                        <ScrollViewer  x:Name="svPumpModel"  Grid.Row="1" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" Margin="0,0,0,32">
+                            <ListView  x:Name="lstPumpModel" ItemsSource="{Binding wpBd.PumpModel}" DisplayMemberPath="Value"  SizeChanged="ListViewPumpModel_SizeChanged" SelectedItem="{Binding wpBd.PumpModelIndex}"/>
+                        </ScrollViewer>
+                    </Grid>
+
+                </materialDesign:ColorZone>
+
+                <materialDesign:ColorZone Grid.Column="2" Grid.Row="0" MinWidth="300" Margin="20" Mode="Standard" Padding="8 4 8 4" Background="#11000000" CornerRadius="2" Panel.ZIndex="1"  materialDesign:ShadowAssist.ShadowDepth="Depth1" VerticalAlignment="Stretch">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" Foreground="White" Text="{Binding strPsUseForBd,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,0" FontSize="14" materialDesign:HintAssist.Hint="用途"/>
+                            <Button  BorderThickness="0" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Background="#11000000"  Margin="10" Command="{s:Action psUseForAddCmd}">
+                                <materialDesign:PackIcon Kind="Plus" Foreground="Green" Width="24" Height="24"/>
+                            </Button>
+                            <Button  BorderThickness="0" Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Background="#11000000"  Margin="10" Command="{s:Action psUseForDelCmd}">
+                                <materialDesign:PackIcon Kind="Remove" Foreground="Red" Width="24" Height="24"/>
+                            </Button>
+                        </Grid>
+                        <ScrollViewer  x:Name="svUseFor"  Grid.Row="1" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" Margin="0,0,0,32">
+                            <ListView  x:Name="lstUseFor" ItemsSource="{Binding wpBd.UseFor}" DisplayMemberPath="Value"  SizeChanged="ListViewUseFor_SizeChanged" SelectedItem="{Binding wpBd.UseForIndex}"/>
+                        </ScrollViewer>
+                    </Grid>
+
+                </materialDesign:ColorZone>
+
+            </Grid>
+            <TextBlock  Grid.Row="2" Margin="5,8,17,45" Text="※ 区划信息为全局参数，只有管理员能够修改" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#ffBBBBBB"/>
+
+        </Grid>
     </Grid>
 </UserControl>
