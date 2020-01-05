@@ -84,10 +84,44 @@ namespace GRCLNT
             switch (state)
             {
                 case RES_STATE.OK:
-                    wndMainVM.messageQueueBd.Enqueue("添加机井信息成功成功");
+                    wndMainVM.messageQueueBd.Enqueue("添加机井信息成功");
                     break;
                 case RES_STATE.FAILED:
-                    wndMainVM.messageQueueBd.Enqueue("添加机井信息成功失败");
+                    wndMainVM.messageQueueBd.Enqueue("添加机井信息失败");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void GRSocketHandler_getWells(RES_STATE state, List<C_Well> wells)
+        {
+            GRSocketHandler.getWells -= GRSocketHandler_getWells;
+            switch (state)
+            {
+                case RES_STATE.OK:
+                    curWellsBd = wells;
+                    wndMainVM.messageQueueBd.Enqueue("获取机井信息成功");
+                    break;
+                case RES_STATE.FAILED:
+                    wndMainVM.messageQueueBd.Enqueue("获取机井信息失败");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void GRSocketHandler_delWell(RES_STATE state)
+        {
+            GRSocketHandler.delWell -= GRSocketHandler_delWell;
+            switch (state)
+            {
+                case RES_STATE.OK:
+                    refreshCmd(strSearchKeywordBd);
+                    wndMainVM.messageQueueBd.Enqueue("删除机井信息成功");
+                    break;                            
+                case RES_STATE.FAILED:                
+                    wndMainVM.messageQueueBd.Enqueue("删除机井信息失败");
                     break;
                 default:
                     break;
@@ -111,6 +145,12 @@ namespace GRCLNT
         public C_BdAreaCode ebdAcBd { get; set; } = new C_BdAreaCode();
         public C_Well cwBd { get; set; } = new C_Well();
         public C_Well ewBd { get; set; } = new C_Well();
+
+        //search
+        public string strSearchResBd { get; set; }
+        public string strSearchKeywordBd { get; set; }
+        public List<C_Well> curWellsBd { get; set; } = new List<C_Well>();
+        public C_Well curWellIndexBd { get; set; } = new C_Well();
 
         #endregion Bindings
 
@@ -204,6 +244,26 @@ namespace GRCLNT
                 wells.Add(cwBd);
                 GRSocketAPI.AddWell(wells);
             }
+        }
+
+        //search
+        public void refreshCmd(string keywords)
+        {
+            GRSocketHandler.getWells += GRSocketHandler_getWells;
+            GRSocketAPI.GetWells(keywords);
+        }
+
+        public bool CanedtWellCmd => (curWellIndexBd != null);
+        public void edtWellCmd()
+        {
+
+        }
+
+        public bool CandelWellCmd => (curWellIndexBd != null);
+        public void delWellCmd()
+        {
+            GRSocketHandler.delWell += GRSocketHandler_delWell;
+            GRSocketAPI.DelWell(curWellIndexBd.Id);
         }
 
         #endregion Actions
