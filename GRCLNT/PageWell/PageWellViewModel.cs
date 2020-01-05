@@ -144,7 +144,7 @@ namespace GRCLNT
         public C_BdAreaCode cbdAcBd { get; set; } = new C_BdAreaCode();
         public C_BdAreaCode ebdAcBd { get; set; } = new C_BdAreaCode();
         public C_Well cwBd { get; set; } = new C_Well();
-        public C_Well ewBd { get; set; } = new C_Well();
+        public static C_Well ewBd { get; set; } = new C_Well();
 
         //search
         public string strSearchResBd { get; set; }
@@ -256,7 +256,8 @@ namespace GRCLNT
         public bool CanedtWellCmd => (curWellIndexBd != null);
         public void edtWellCmd()
         {
-
+            ewBd = curWellIndexBd;
+            wndMainVM.SelectPage(E_Page.Well_Edit);
         }
 
         public bool CandelWellCmd => (curWellIndexBd != null);
