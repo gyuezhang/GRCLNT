@@ -7,6 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BruTile.Predefined;
+using Mapsui.Layers;
+using Mapsui.UI.Wpf;
+using Mapsui.Geometries;
+using Mapsui.Projection;
+using Mapsui.Providers;
+using Mapsui.Styles;
+using System.Reflection;
 
 namespace GRCLNT
 {
@@ -18,6 +26,7 @@ namespace GRCLNT
             wpBd = C_RT.wp;
             cbdAcBd = new C_BdAreaCode(C_RT.acs);
             ebdAcBd = new C_BdAreaCode(C_RT.acs);
+            InitMap();
         }
         private WndMainViewModel wndMainVM { get; set; }
 
@@ -102,6 +111,7 @@ namespace GRCLNT
             {
                 case RES_STATE.OK:
                     curWellsBd = wells;
+                    InitMap();
                     wndMainVM.messageQueueBd.Enqueue("获取机井信息成功");
                     break;
                 case RES_STATE.FAILED:
@@ -135,7 +145,7 @@ namespace GRCLNT
             switch (state)
             {
                 case RES_STATE.OK:
-                    refreshCmd(strSearchKeywordBd);
+                    wndMainVM.SelectPage(E_Page.Well_Search_Lst);
                     wndMainVM.messageQueueBd.Enqueue("编辑机井信息成功");
                     break;                            
                 case RES_STATE.FAILED:                
@@ -169,6 +179,9 @@ namespace GRCLNT
         public string strSearchKeywordBd { get; set; }
         public List<C_Well> curWellsBd { get; set; } = new List<C_Well>();
         public C_Well curWellIndexBd { get; set; } = new C_Well();
+
+        //loc
+        public MapControl mapBd { get; set; } = new MapControl();
 
         #endregion Bindings
 
@@ -431,5 +444,56 @@ namespace GRCLNT
             }
             return true;
         }
+
+        //loc
+        public void InitMap()
+        {
+            mapBd.Map.Layers.Clear();
+            mapBd.Map.Layers.Add(new TileLayer(KnownTileSources.Create()));
+            mapBd.Map.Layers.Add(CreateWellLayer());
+
+            var centerOfBD = new Mapsui.Geometries.Point(117.309716, 39.717173);
+            var sphericalMercatorCoordinate = SphericalMercator.FromLonLat(centerOfBD.X, centerOfBD.Y);
+            mapBd.Map.Home = n => n.NavigateTo(sphericalMercatorCoordinate, mapBd.Map.Resolutions[12]);
+
+        }
+        private MemoryLayer CreateWellLayer()
+        {
+            MemoryLayer ml = new MemoryLayer();
+            ml.Name = "Point";
+            ml.IsMapInfoLayer = true;
+            MemoryProvider mp = new MemoryProvider(GetCitiesFromEmbeddedResource());
+            ml.DataSource = mp;
+            ml.Style = CreateBitmapStyle();
+            return ml;
+        }
+        private SymbolStyle CreateBitmapStyle()
+        {
+            var path = @"GRCLNT.Resource.Image.loc.png";
+            var bitmapId = GetBitmapIdForEmbeddedResource(path);
+            var bitmapHeight = 64; // To set the offset correct we need to know the bitmap height
+            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.20, SymbolOffset = new Offset(0, bitmapHeight * 0.5) };
+        }
+        private static int GetBitmapIdForEmbeddedResource(string imagePath)
+        {
+            var assembly = typeof(PageWellViewModel).GetTypeInfo().Assembly;
+            var image = assembly.GetManifestResourceStream(imagePath);
+            return BitmapRegistry.Instance.Register(image);
+        }
+        private IEnumerable<IFeature> GetCitiesFromEmbeddedResource()
+        {
+
+            return curWellsBd.Select(c =>
+            {
+                var feature = new Feature();
+                if (c.Lng != "" && c.Lat != "")
+                {
+                    var point = SphericalMercator.FromLonLat(double.Parse(c.Lng), double.Parse(c.Lat));
+                    feature.Geometry = point;
+                }
+                return feature;
+            });
+        }
+
     }
 }
