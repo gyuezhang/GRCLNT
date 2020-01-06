@@ -50,7 +50,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <DatePicker   Margin="90,8,15,8" SelectedDate="{Binding Path=createWell.DigTime, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}"  materialDesign:HintAssist.Hint="成井时间" FontSize="18"  />
+                <DatePicker   Margin="90,8,15,8" SelectedDate="{Binding Path=cwBd.DigTime, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}"  materialDesign:HintAssist.Hint="成井时间" FontSize="18"  />
 
                 <!--用途-->
                 <ComboBox FontSize="18" materialDesign:HintAssist.Hint="用途" SelectedItem="{Binding wpBd.UseForIndex,UpdateSourceTrigger=PropertyChanged}"
@@ -105,7 +105,7 @@
             <StackPanel Orientation="Horizontal">
                 <CheckBox  IsThreeState="False" IsChecked="{Binding cwBd.IsSeepChnLinked,UpdateSourceTrigger=PropertyChanged}"  Margin="90 8 15 8" FontSize="18" Foreground="White"  >是否连接防渗渠道</CheckBox>
 
-                <TextBox  materialDesign:HintAssist.Hint="防渗渠道长度（千米）" IsEnabled="{Binding cwBd.IsSeepChnLinked}" Text="{Binding createWell.SeepChnLength,StringFormat={}{0:N3},UpdateSourceTrigger=PropertyChanged}" Margin="15 0 15 8" FontSize="18" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                <TextBox  materialDesign:HintAssist.Hint="防渗渠道长度（千米）" IsEnabled="{Binding cwBd.IsSeepChnLinked}" Text="{Binding cwBd.SeepChnLength,StringFormat={}{0:N3},UpdateSourceTrigger=PropertyChanged}" Margin="15 0 15 8" FontSize="18" Foreground="White" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
 
             </StackPanel>
 

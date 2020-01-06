@@ -17,6 +17,7 @@ namespace GRCLNT
             wndMainVM = _wndMainVM;
             wpBd = C_RT.wp;
             cbdAcBd = new C_BdAreaCode(C_RT.acs);
+            ebdAcBd = new C_BdAreaCode(C_RT.acs);
         }
         private WndMainViewModel wndMainVM { get; set; }
 
@@ -122,6 +123,23 @@ namespace GRCLNT
                     break;                            
                 case RES_STATE.FAILED:                
                     wndMainVM.messageQueueBd.Enqueue("删除机井信息失败");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void GRSocketHandler_edtWell(RES_STATE state)
+        {
+            GRSocketHandler.edtWell -= GRSocketHandler_edtWell;
+            switch (state)
+            {
+                case RES_STATE.OK:
+                    refreshCmd(strSearchKeywordBd);
+                    wndMainVM.messageQueueBd.Enqueue("编辑机井信息成功");
+                    break;                            
+                case RES_STATE.FAILED:                
+                    wndMainVM.messageQueueBd.Enqueue("编辑机井信息失败");
                     break;
                 default:
                     break;
@@ -265,6 +283,22 @@ namespace GRCLNT
         {
             GRSocketHandler.delWell += GRSocketHandler_delWell;
             GRSocketAPI.DelWell(curWellIndexBd.Id);
+        }
+
+        public void saveEdtWellCmd()
+        {
+            ewBd.TsOrSt = ebdAcBd.L4Index.Name;
+            ewBd.Village = ebdAcBd.L5Index.Name;
+            ewBd.Loc = wpBd.LocIndex.Value;
+            ewBd.TubeMat = wpBd.TubeMatIndex.Value;
+            ewBd.UnitCat = wpBd.UnitCatIndex.Value;
+            ewBd.PumpMode = wpBd.PumpModelIndex.Value;
+            ewBd.Usefor = wpBd.UseForIndex.Value;
+            if (CheckCreateWell(ewBd))
+            {
+                GRSocketHandler.edtWell += GRSocketHandler_edtWell;
+                GRSocketAPI.EdtWell(ewBd);
+            }
         }
 
         #endregion Actions
