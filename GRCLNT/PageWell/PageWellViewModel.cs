@@ -18,6 +18,7 @@ using System.Reflection;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Threading;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace GRCLNT
 {
@@ -243,6 +244,8 @@ namespace GRCLNT
         public Visibility vInputingBd { get; set; } = Visibility.Collapsed;
         public string txtReadAutoInputingBd { get; set; } = "";
 
+        //output
+        public string outputDirectoryBd { get; set; }
         #endregion Bindings
 
         #region Actions
@@ -407,6 +410,35 @@ namespace GRCLNT
         public void openTemplateCmd()
         {
             C_ExcelOper.OpenInputTemplete();
+        }
+
+        //output
+        public void selectOutPutDirCmd()
+        {
+            var dlg = new CommonOpenFileDialog();
+            dlg.Title = "My Title";
+            dlg.IsFolderPicker = true;
+            // dlg.InitialDirectory = currentDirectory;
+
+            dlg.AddToMostRecentlyUsedList = false;
+            dlg.AllowNonFileSystemItems = false;
+            // dlg.DefaultDirectory = currentDirectory;
+            dlg.EnsureFileExists = true;
+            dlg.EnsurePathExists = true;
+            dlg.EnsureReadOnly = false;
+            dlg.EnsureValidNames = true;
+            dlg.Multiselect = false;
+            dlg.ShowPlacesList = true;
+
+            if (dlg.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                outputDirectoryBd = dlg.FileName;
+            }
+        }
+
+        public void StartOutPutCmd()
+        {
+
         }
 
         #endregion Actions
