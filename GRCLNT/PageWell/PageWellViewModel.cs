@@ -15,6 +15,8 @@ using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using System.Reflection;
+using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace GRCLNT
 {
@@ -26,7 +28,6 @@ namespace GRCLNT
             wpBd = C_RT.wp;
             cbdAcBd = new C_BdAreaCode(C_RT.acs);
             ebdAcBd = new C_BdAreaCode(C_RT.acs);
-            InitMap();
         }
         private WndMainViewModel wndMainVM { get; set; }
 
@@ -183,6 +184,14 @@ namespace GRCLNT
         //loc
         public MapControl mapBd { get; set; } = new MapControl();
 
+        //auto add
+        public string inputFilePathBd { get; set; }
+        public ObservableCollection<string> autoAddLogBd { get; set; } = new ObservableCollection<string>();
+        public int vInputProgBarBd { get; set; } = 0;
+        public Visibility vErrLogBd { get; set; } = Visibility.Collapsed; 
+        public Visibility vInputingBd { get; set; } = Visibility.Collapsed;
+        public string txtReadAutoInputingBd { get; set; } = "";
+
         #endregion Bindings
 
         #region Actions
@@ -312,6 +321,39 @@ namespace GRCLNT
                 GRSocketHandler.edtWell += GRSocketHandler_edtWell;
                 GRSocketAPI.EdtWell(ewBd);
             }
+        }
+
+        //autoadd
+        public bool CaninputOpenDlgCmd => !IsReadingFromExcel;
+        public void inputOpenDlgCmd()
+        {
+            Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
+            ofd.DefaultExt = ".xlsx";
+            ofd.Filter = "Excel文件|*.xlsx;*.xls";
+            if (ofd.ShowDialog() == true)
+            {
+                inputFilePathBd = ofd.FileName;
+            }
+        }
+
+        public void loadWellFromExcelCmd()
+        {
+            IsReadingFromExcel = true;
+            vInputingBd = Visibility.Visible;
+            iErrCount = 0;
+            autoAddLogBd = new ObservableCollection<string>();
+            vErrLogBd = Visibility.Collapsed;
+            //ExcelOper.ReadWellsFromFile(inputFilePath);
+        }
+
+        public void loadWellToSvrCmd()
+        {
+
+        }
+
+        public void openTemplateCmd()
+        {
+            C_ExcelOper.OpenInputTemplete();
         }
 
         #endregion Actions
@@ -482,7 +524,6 @@ namespace GRCLNT
         }
         private IEnumerable<IFeature> GetCitiesFromEmbeddedResource()
         {
-
             return curWellsBd.Select(c =>
             {
                 var feature = new Feature();
@@ -494,6 +535,8 @@ namespace GRCLNT
                 return feature;
             });
         }
+        public bool IsReadingFromExcel { get; set; } = false;
+        public int iErrCount = 0;
 
     }
 }
