@@ -202,6 +202,7 @@ namespace GRCLNT
                     menuBtnIndexBd = 3;
                     mainVmBd = new PageWellViewModel(this);
                     ((PageWellViewModel)mainVmBd).pageIndexBd = 9;
+                    ((PageWellViewModel)mainVmBd).refreshCmd("");
                     break;
                 case E_Page.Well_Setting:
                     menuBtnIndexBd = 3;

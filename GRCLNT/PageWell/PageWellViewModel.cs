@@ -245,7 +245,7 @@ namespace GRCLNT
         public string txtReadAutoInputingBd { get; set; } = "";
 
         //output
-        public string outputDirectoryBd { get; set; }
+        public C_Output opBd { get; set; } = new C_Output();
         #endregion Bindings
 
         #region Actions
@@ -432,13 +432,13 @@ namespace GRCLNT
 
             if (dlg.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                outputDirectoryBd = dlg.FileName;
+                opBd.OpPath = dlg.FileName;
             }
         }
 
         public void StartOutPutCmd()
         {
-
+            C_ExcelOper.OutputWell(opBd, curWellsBd);
         }
 
         #endregion Actions
