@@ -17,6 +17,7 @@ using Mapsui.Styles;
 using System.Reflection;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace GRCLNT
 {
@@ -154,6 +155,56 @@ namespace GRCLNT
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void C_ExcelOper_readWell(bool state, int curIndex, int totalCount, List<C_Well> wells, string errMsg)
+        {
+            if (state)
+            {
+                DispatchService.Invoke(() =>
+                {
+                    UpdateErrLog(totalCount, curIndex, iErrCount, "success");
+                });
+
+
+                if (errMsg == "Finished")
+                {
+                    if (iErrCount == 0)
+                    {
+                        DispatchService.Invoke(() =>
+                        {
+                            autoAddLogBd.Add("共" + totalCount.ToString() + "条读取完毕，点击开始上传");
+                        });
+                    }
+                    else
+                    {
+                        DispatchService.Invoke(() =>
+                        {
+                            autoAddLogBd.Add("共" + totalCount.ToString() + "条读取完毕，请修改不适配项");
+                        });
+
+                    }
+                    IsReadingFromExcel = false;
+                    autoLoadWells = wells;
+                    return;
+                }
+            }
+            else
+            {
+                if (errMsg == "FileNeedToBeClosed")
+                {
+                    wndMainVM.messageQueueBd.Enqueue("请先关闭文档后重试。");
+                    IsReadingFromExcel = false;
+                    return;
+                }
+
+                iErrCount++;
+                DispatchService.Invoke(() =>
+                {
+                    UpdateErrLog(totalCount, curIndex, iErrCount, errMsg);
+                });
+
             }
         }
 
@@ -343,12 +394,14 @@ namespace GRCLNT
             iErrCount = 0;
             autoAddLogBd = new ObservableCollection<string>();
             vErrLogBd = Visibility.Collapsed;
-            //ExcelOper.ReadWellsFromFile(inputFilePath);
+            C_ExcelOper.readWell += C_ExcelOper_readWell;
+            C_ExcelOper.ReadWellsFromFile(inputFilePathBd);
         }
 
         public void loadWellToSvrCmd()
         {
-
+            GRSocketHandler.addWell += GRSocketHandler_addWell;
+            GRSocketAPI.AddWell(autoLoadWells);
         }
 
         public void openTemplateCmd()
@@ -537,6 +590,34 @@ namespace GRCLNT
         }
         public bool IsReadingFromExcel { get; set; } = false;
         public int iErrCount = 0;
+        private void UpdateErrLog(int a, int c, int ce, string em)
+        {
+            vErrLogBd = Visibility.Visible;
+            txtReadAutoInputingBd = "正在读取" + c.ToString() + "/" + a.ToString() + "(失败" + iErrCount.ToString() + "条）";
 
+            vInputProgBarBd = Convert.ToInt32((float)c / (float)a * 100.0);
+
+            if (autoAddLogBd.Count < 5000 && em != "" && em != "success")
+                autoAddLogBd.Add("第" + c.ToString() + "条读取失败，错误信息：" + em);
+
+        }
+        public List<C_Well> autoLoadWells { get; set; } = new List<C_Well>();
     }
+
+    public static class DispatchService
+    {
+        public static void Invoke(Action action)
+        {
+            Dispatcher dispatchObject = Application.Current.Dispatcher;
+            if (dispatchObject == null || dispatchObject.CheckAccess())
+            {
+                action();
+            }
+            else
+            {
+                dispatchObject.Invoke(action);
+            }
+        }
+    }
+
 }
