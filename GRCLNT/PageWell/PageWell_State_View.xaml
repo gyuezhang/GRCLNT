@@ -54,33 +54,11 @@
             <StackPanel Orientation="Horizontal">
                 <lvc:CartesianChart  Margin="10" MinHeight="300" MinWidth="600">
                     <lvc:CartesianChart.Series>
-                        <lvc:LineSeries Fill="#30ffffff" Values="{Binding curWellsBd} "></lvc:LineSeries>
+                        <lvc:LineSeries Fill="#30ffffff" Values="{Binding tsWellCntBd}"></lvc:LineSeries>
                     </lvc:CartesianChart.Series>
-                    <lvc:CartesianChart.AxisY>
-                        <lvc:Axis ShowLabels="True"></lvc:Axis>
-                    </lvc:CartesianChart.AxisY>
-                </lvc:CartesianChart>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <lvc:CartesianChart  Margin="10" MinHeight="300" MinWidth="600">
-                    <lvc:CartesianChart.Series>
-                        <lvc:LineSeries Fill="#30ffffff" Values="{Binding curWellsBd}"></lvc:LineSeries>
-                    </lvc:CartesianChart.Series>
-                    <lvc:CartesianChart.AxisY>
-                        <lvc:Axis ShowLabels="True"></lvc:Axis>
-                    </lvc:CartesianChart.AxisY>
-                </lvc:CartesianChart>
-
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-
-                <lvc:CartesianChart  Margin="10" MinHeight="300" MinWidth="600">
-                    <lvc:CartesianChart.Series>
-                        <lvc:LineSeries Fill="#30ffffff" Values="{Binding curWellsBd}"></lvc:LineSeries>
-                    </lvc:CartesianChart.Series>
-                    <lvc:CartesianChart.AxisY>
-                        <lvc:Axis ShowLabels="True"></lvc:Axis>
-                    </lvc:CartesianChart.AxisY>
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis ShowLabels="True" Labels="{Binding tsWellCntLabelBd}"></lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
                 </lvc:CartesianChart>
             </StackPanel>
         </StackPanel>

@@ -19,6 +19,8 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Threading;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using LiveCharts;
+using LiveCharts.Defaults;
 
 namespace GRCLNT
 {
@@ -114,6 +116,7 @@ namespace GRCLNT
             {
                 case RES_STATE.OK:
                     curWellsBd = wells;
+                    GetStateDataByWells();
                     InitMap();
                     wndMainVM.messageQueueBd.Enqueue("获取机井信息成功");
                     break;
@@ -232,7 +235,6 @@ namespace GRCLNT
         public string strSearchKeywordBd { get; set; }
         public List<C_Well> curWellsBd { get; set; } = new List<C_Well>();
         public C_Well curWellIndexBd { get; set; } = new C_Well();
-
         //loc
         public MapControl mapBd { get; set; } = new MapControl();
 
@@ -246,6 +248,10 @@ namespace GRCLNT
 
         //output
         public C_Output opBd { get; set; } = new C_Output();
+
+        //state
+        public List<string> tsWellCntLabelBd { get; set; } = new List<string>();
+        public ChartValues<ObservableValue> tsWellCntBd { get; set; } = new ChartValues<ObservableValue>();
         #endregion Bindings
 
         #region Actions
@@ -634,6 +640,21 @@ namespace GRCLNT
 
         }
         public List<C_Well> autoLoadWells { get; set; } = new List<C_Well>();
+
+        public void GetStateDataByWells()
+        {
+            var tsOrStState = from w in curWellsBd
+                               orderby w.TsOrSt
+                               group w by w.TsOrSt into TsOrStGroup
+                               select new { lb = TsOrStGroup.Key ,cnt = TsOrStGroup .Count()};
+            tsWellCntLabelBd.Clear();
+            tsWellCntBd.Clear();
+            foreach (var t in tsOrStState)
+            {
+                tsWellCntLabelBd.Add(t.lb);
+                tsWellCntBd.Add(new ObservableValue(t.cnt));
+            }
+        }
     }
 
     public static class DispatchService
