@@ -4,12 +4,86 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:local="clr-namespace:GRCLNT"
              mc:Ignorable="d" 
              xmlns:s="https://github.com/canton7/Stylet"
              d:DataContext="{d:DesignInstance local:PageWellViewModel}" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="PageWell_State_View Under Construction..." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
-    </Grid>
+    
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" >
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style>
+        <Style TargetType="lvc:ColumnSeries">
+            <Setter Property="DataLabels" Value="True"></Setter>
+            <Setter Property="FontSize" Value="13"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="LabelsPosition" Value="Top"></Setter>
+        </Style>
+        <Style TargetType="lvc:LineSeries">
+            <Setter Property="FontSize" Value="13"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="Fill" Value="Transparent"></Setter>
+            <Setter Property="Stroke" Value="#99ffffff"></Setter>
+            <Setter Property="StrokeThickness" Value="4"></Setter>
+            <Setter Property="PointGeometry" Value="{x:Null}"></Setter>
+        </Style>
+        <Style TargetType="lvc:PieSeries">
+            <Setter Property="StrokeThickness" Value="0"></Setter>
+        </Style>
+        <Style TargetType="lvc:Axis">
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="ShowLabels" Value="False"></Setter>
+            <Setter Property="Separator">
+                <Setter.Value>
+                    <lvc:Separator IsEnabled="False"></lvc:Separator>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="lvc:AngularGauge">
+            <Setter Property="NeedleFill" Value="#FF8F00"></Setter>
+            <Setter Property="SectionsInnerRadius" Value=".5"></Setter>
+        </Style>
+        <Style TargetType="lvc:Gauge">
+            <Setter Property="GaugeBackground" Value="#30ffffff"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <ScrollViewer HorizontalAlignment="Stretch" x:Name="sv"  PreviewMouseWheel="sv_PreviewMouseWheel" Margin="20,100,10,20"  VerticalScrollBarVisibility="Auto"  Background="Transparent" >
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <lvc:CartesianChart  Margin="10" MinHeight="300" MinWidth="600">
+                    <lvc:CartesianChart.Series>
+                        <lvc:LineSeries Fill="#30ffffff" Values="{Binding curWellsBd} "></lvc:LineSeries>
+                    </lvc:CartesianChart.Series>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis ShowLabels="True"></lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <lvc:CartesianChart  Margin="10" MinHeight="300" MinWidth="600">
+                    <lvc:CartesianChart.Series>
+                        <lvc:LineSeries Fill="#30ffffff" Values="{Binding curWellsBd}"></lvc:LineSeries>
+                    </lvc:CartesianChart.Series>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis ShowLabels="True"></lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+
+                <lvc:CartesianChart  Margin="10" MinHeight="300" MinWidth="600">
+                    <lvc:CartesianChart.Series>
+                        <lvc:LineSeries Fill="#30ffffff" Values="{Binding curWellsBd}"></lvc:LineSeries>
+                    </lvc:CartesianChart.Series>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis ShowLabels="True"></lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>
+    
