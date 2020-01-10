@@ -21,6 +21,7 @@ using System.Windows.Threading;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using LiveCharts;
 using LiveCharts.Defaults;
+using LiveCharts.Wpf;
 
 namespace GRCLNT
 {
@@ -236,7 +237,7 @@ namespace GRCLNT
         public List<C_Well> curWellsBd { get; set; } = new List<C_Well>();
         public C_Well curWellIndexBd { get; set; } = new C_Well();
         //loc
-        public MapControl mapBd { get; set; } = new MapControl();
+        public MapControl mapBd { get; set; } = null;
 
         //auto add
         public string inputFilePathBd { get; set; }
@@ -252,6 +253,8 @@ namespace GRCLNT
         //state
         public List<string> tsWellCntLabelBd { get; set; } = new List<string>();
         public ChartValues<ObservableValue> tsWellCntBd { get; set; } = new ChartValues<ObservableValue>();
+        public SeriesCollection useForSeriesBd { get; set; } = new SeriesCollection(); 
+        public SeriesCollection tubeMatSeriesBd { get; set; } = new SeriesCollection();
         #endregion Bindings
 
         #region Actions
@@ -581,15 +584,21 @@ namespace GRCLNT
         //loc
         public void InitMap()
         {
-            mapBd.Map.Layers.Clear();
-            mapBd.Map.Layers.Add(new TileLayer(KnownTileSources.Create()));
-            mapBd.Map.Layers.Add(CreateWellLayer());
+            if (pageIndexBd != 5)
+                return;
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            { 
+                mapBd = new MapControl();
+                mapBd.Map.Layers.Clear();
+                mapBd.Map.Layers.Add(new TileLayer(KnownTileSources.Create()));
+                mapBd.Map.Layers.Add(CreateWellLayer());
 
-            var centerOfBD = new Mapsui.Geometries.Point(117.309716, 39.717173);
-            var sphericalMercatorCoordinate = SphericalMercator.FromLonLat(centerOfBD.X, centerOfBD.Y);
-            mapBd.Map.Home = n => n.NavigateTo(sphericalMercatorCoordinate, mapBd.Map.Resolutions[12]);
-
+                var centerOfBD = new Mapsui.Geometries.Point(117.309716, 39.717173);
+                var sphericalMercatorCoordinate = SphericalMercator.FromLonLat(centerOfBD.X, centerOfBD.Y);
+                mapBd.Map.Home = n => n.NavigateTo(sphericalMercatorCoordinate, mapBd.Map.Resolutions[12]);
+            }));
         }
+
         private MemoryLayer CreateWellLayer()
         {
             MemoryLayer ml = new MemoryLayer();
@@ -643,6 +652,7 @@ namespace GRCLNT
 
         public void GetStateDataByWells()
         {
+            //tsorst
             var tsOrStState = from w in curWellsBd
                                orderby w.TsOrSt
                                group w by w.TsOrSt into TsOrStGroup
@@ -653,6 +663,46 @@ namespace GRCLNT
             {
                 tsWellCntLabelBd.Add(t.lb);
                 tsWellCntBd.Add(new ObservableValue(t.cnt));
+            }
+
+            //useForWellCntBd
+            var useForState = from w in curWellsBd
+                              orderby w.Usefor
+                              group w by w.Usefor into UseforGroup
+                              select new { lb = UseforGroup.Key, cnt = UseforGroup.Count() };
+            useForSeriesBd.Clear();
+            foreach (var t in useForState)
+            {
+                App.Current.Dispatcher.Invoke((Action)(() =>
+                {
+                    List<int> c = new List<int>();
+                    c.Add(t.cnt);
+                    PieSeries p = new PieSeries();
+                    p.Title = t.lb;
+                    p.Values = new ChartValues<int>(c);
+                    p.DataLabels = true;
+                    useForSeriesBd.Add(p);
+                }));
+            }
+            
+            //tubemat
+            tubeMatSeriesBd.Clear();
+            var tubeMatState = from w in curWellsBd
+                              orderby w.TubeMat
+                              group w by w.TubeMat into TubeMatGroup
+                               select new { lb = TubeMatGroup.Key, cnt = TubeMatGroup.Count() };
+            foreach (var t in tubeMatState)
+            {
+                App.Current.Dispatcher.Invoke((Action)(() =>
+                {
+                    List<int> c = new List<int>();
+                    c.Add(t.cnt);
+                    PieSeries p = new PieSeries();
+                    p.Title = t.lb;
+                    p.Values = new ChartValues<int>(c);
+                    p.DataLabels = true;
+                    tubeMatSeriesBd.Add(p);
+                }));
             }
         }
     }

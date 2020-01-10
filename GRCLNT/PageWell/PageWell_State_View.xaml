@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              xmlns:s="https://github.com/canton7/Stylet"
              d:DataContext="{d:DesignInstance local:PageWellViewModel}" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="1200" d:DesignWidth="1400">
     
     <UserControl.Resources>
         <Style TargetType="TextBlock" >
@@ -51,8 +51,8 @@
     </UserControl.Resources>
     <ScrollViewer HorizontalAlignment="Stretch" x:Name="sv"  PreviewMouseWheel="sv_PreviewMouseWheel" Margin="20,100,10,20"  VerticalScrollBarVisibility="Auto"  Background="Transparent" >
         <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
-                <lvc:CartesianChart  Margin="10" MinHeight="300" MinWidth="600">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch"> 
+                <lvc:CartesianChart  Margin="10" MinHeight="300" MinWidth="1200" HorizontalAlignment="Stretch">
                     <lvc:CartesianChart.Series>
                         <lvc:LineSeries Fill="#30ffffff" Values="{Binding tsWellCntBd}"></lvc:LineSeries>
                     </lvc:CartesianChart.Series>
@@ -60,6 +60,20 @@
                         <lvc:Axis ShowLabels="True" Labels="{Binding tsWellCntLabelBd}"></lvc:Axis>
                     </lvc:CartesianChart.AxisX>
                 </lvc:CartesianChart>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,60" Width="1100" Height="400" >
+                <lvc:PieChart Margin="60,10,10,10" HorizontalAlignment="Left" HorizontalContentAlignment="Left" LegendLocation="Right" InnerRadius="60" Height="360" Width="420" DataTooltip="{x:Null}" Hoverable="True" Series="{Binding useForSeriesBd}">
+                    <lvc:PieChart.ChartLegend>
+                        <lvc:DefaultLegend Foreground="White" ></lvc:DefaultLegend>
+                    </lvc:PieChart.ChartLegend>
+                </lvc:PieChart>
+
+                <lvc:PieChart Margin="60,10,10,10" HorizontalAlignment="Center" HorizontalContentAlignment="Left" LegendLocation="Right" InnerRadius="60" Height="360" Width="420" DataTooltip="{x:Null}" Hoverable="True" Series="{Binding tubeMatSeriesBd}">
+                    <lvc:PieChart.ChartLegend>
+                        <lvc:DefaultLegend Foreground="White" ></lvc:DefaultLegend>
+                    </lvc:PieChart.ChartLegend>
+                </lvc:PieChart>
+                
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
