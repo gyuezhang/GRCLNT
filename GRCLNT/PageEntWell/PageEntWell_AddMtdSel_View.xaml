@@ -14,14 +14,14 @@
             <Button Command="{s:Action SelectPageCmd}" CommandParameter="EntWell_AddManual" Style="{StaticResource MaterialDesignRaisedButton}" Width="200" Height="240" materialDesign:ButtonAssist.CornerRadius="10"
                     Margin="40" BorderThickness="0">
                 <Button.Background>
-                    <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/BtnCard_EntWellAddHand.png"/>
+                    <ImageBrush ImageSource="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/BtnCard_EntWellAddHand.png"/>
                 </Button.Background>
                 <TextBlock Text="手动录入" FontSize="24" Margin="0,200,0,0"/>
             </Button>
             <Button Command="{s:Action SelectPageCmd}" CommandParameter="EntWell_AddAuto" Style="{StaticResource MaterialDesignRaisedButton}" Width="200" Height="240" materialDesign:ButtonAssist.CornerRadius="10"
                     Margin="40" BorderThickness="0">
                 <Button.Background>
-                    <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/BtnCard_EntWellAddAuto.png"/>
+                    <ImageBrush ImageSource="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/BtnCard_EntWellAddAuto.png"/>
                 </Button.Background>
                 <TextBlock Text="自动导入" FontSize="24" Margin="0,200,0,0"/>
             </Button>
