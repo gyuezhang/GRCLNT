@@ -8,7 +8,7 @@
     <ProjectGuid>{B11C66E1-C1A5-437C-B03C-E4496297762C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>GRCLNT</RootNamespace>
-    <AssemblyName>GRCLNT</AssemblyName>
+    <AssemblyName>宝坻区地下水资源信息管理系统 - 客户端</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -23,7 +23,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\GRPackage\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -32,7 +32,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\GRPackage\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -47,17 +47,17 @@
     <Reference Include="ConcurrentCollections, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ConcurrentHashSet.1.0.2\lib\netstandard1.0\ConcurrentCollections.dll</HintPath>
     </Reference>
-    <Reference Include="GRModel, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GRModel, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\GRModel\bin\Debug\GRModel.dll</HintPath>
+      <HintPath>..\..\GRPackage\Debug\GRModel.dll</HintPath>
     </Reference>
-    <Reference Include="GRSocket, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GRSocket, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\GRSocket\bin\Debug\GRSocket.dll</HintPath>
+      <HintPath>..\..\GRPackage\Debug\GRSocket.dll</HintPath>
     </Reference>
-    <Reference Include="GRUtil, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GRUtil, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\GRUtil\bin\Debug\GRUtil.dll</HintPath>
+      <HintPath>..\..\GRPackage\Debug\GRUtil.dll</HintPath>
     </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>

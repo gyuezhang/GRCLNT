@@ -39,15 +39,15 @@ namespace GRCLNT
 
         #region SocketHandler
 
-        private void GRSocketHandler_getAreaCodes(RES_STATE state, List<C_AreaCode> acs)
+        private void GRSocketHandler_getAreaCodes(E_ResState state, List<C_AreaCode> acs)
         {
             GRSocketHandler.getAreaCodes -= GRSocketHandler_getAreaCodes;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     C_RT.acs = acs;
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     messageQueueBd.Enqueue("获取区划信息失败");
                     break;
                 default:
@@ -55,15 +55,15 @@ namespace GRCLNT
             }
         }
 
-        private void GRSocketHandler_getWellParas(RES_STATE state, C_WellParas wps)
+        private void GRSocketHandler_getWellParas(E_ResState state, C_WellParas wps)
         {
             GRSocketHandler.getWellParas -= GRSocketHandler_getWellParas;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     C_RT.wp = new C_WellParas(wps.All);
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     messageQueueBd.Enqueue("获取机井参数失败");
                     break;
                 default:
@@ -71,15 +71,15 @@ namespace GRCLNT
             }
         }
 
-        private void GRSocketHandler_getEntWellParas(RES_STATE state, C_WellParas wps)
+        private void GRSocketHandler_getEntWellParas(E_ResState state, C_WellParas wps)
         {
             GRSocketHandler.getEntWellParas -= GRSocketHandler_getEntWellParas;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     C_RT.ewp = new C_WellParas(wps.All);
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     messageQueueBd.Enqueue("获取企业井参数失败");
                     break;
                 default:

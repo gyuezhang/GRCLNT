@@ -25,16 +25,16 @@ namespace GRCLNT
 
         #region SocketHandler
 
-        private void GRSocketHandler_getEntWellParas(RES_STATE state, C_WellParas wps)
+        private void GRSocketHandler_getEntWellParas(E_ResState state, C_WellParas wps)
         {
             GRSocketHandler.getEntWellParas -= GRSocketHandler_getEntWellParas;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     C_RT.ewp = new C_WellParas(wps.All);
                     wpBd = new C_WellParas(wps.All);
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     wndMainVM.messageQueueBd.Enqueue("获取企业井参数失败");
                     break;
                 default:
@@ -43,18 +43,18 @@ namespace GRCLNT
             isWaitingForRefreshParas = false;
         }
 
-        private void GRSocketHandler_addEntWellPara(RES_STATE state)
+        private void GRSocketHandler_addEntWellPara(E_ResState state)
         {
             GRSocketHandler.addEntWellPara -= GRSocketHandler_addEntWellPara;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     wndMainVM.messageQueueBd.Enqueue("添加企业井参数成功");
                     GRSocketHandler.getEntWellParas += GRSocketHandler_getEntWellParas;
                     isWaitingForRefreshParas = true;
                     GRSocketAPI.GetEntWellParas();
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     wndMainVM.messageQueueBd.Enqueue("添加企业井参数失败");
                     break;
                 default:
@@ -62,18 +62,18 @@ namespace GRCLNT
             }
         }
 
-        private void GRSocketHandler_delEntWellPara(RES_STATE state)
+        private void GRSocketHandler_delEntWellPara(E_ResState state)
         {
             GRSocketHandler.delEntWellPara -= GRSocketHandler_delEntWellPara; ;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     wndMainVM.messageQueueBd.Enqueue("删除企业井参数成功");
                     GRSocketHandler.getEntWellParas += GRSocketHandler_getEntWellParas;
                     isWaitingForRefreshParas = true;
                     GRSocketAPI.GetEntWellParas();
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     wndMainVM.messageQueueBd.Enqueue("删除企业井参数失败");
                     break;
                 default:

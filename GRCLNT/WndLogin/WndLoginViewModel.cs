@@ -22,7 +22,7 @@ namespace GRCLNT
             _windowManager = windowManager;
 
             iPwdChangeCnt = 0;
-            cfgBd = CLNTCfg.Get();
+            cfgBd = C_ClntCfg.Get();
 
             if (cfgBd.RecordPwd)
                 curPwdBd = "11111111";
@@ -58,29 +58,29 @@ namespace GRCLNT
 
         #region SocketHandler
 
-        private void GRSocketHandler_ConnState(RES_STATE state)
+        private void GRSocketHandler_ConnState(E_ResState state)
         {
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     messageQueueBd.Enqueue("已成功连接到服务器");
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     break;
                 default:
                     break;
             }
         }
 
-        private void GRSocketHandler_login(RES_STATE state, C_User user)
+        private void GRSocketHandler_login(E_ResState state, C_User user)
         {
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     C_RT.user = user;
                     LoginSuccess();
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     messageQueueBd = new SnackbarMessageQueue(TimeSpan.FromSeconds(0.6));
                     messageQueueBd.Enqueue("用户名或密码错误");
                     break;
@@ -185,7 +185,7 @@ namespace GRCLNT
                 if (iPwdChangeCnt > 1)
                     cfgBd.Pwd = curPwdBd;
 
-                CLNTCfg.Set(cfgBd);
+                C_ClntCfg.Set(cfgBd);
                 messageQueueBd.Enqueue("登录成功");
                 bFirstLogin = false;
                 TimerLoginSuccess.Interval = new TimeSpan(0, 0, 0, 3);

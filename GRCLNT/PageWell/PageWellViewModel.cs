@@ -38,18 +38,18 @@ namespace GRCLNT
 
         #region SocketHandler
 
-        private void GRSocketHandler_addWellPara(RES_STATE state)
+        private void GRSocketHandler_addWellPara(E_ResState state)
         {
             GRSocketHandler.addWellPara -= GRSocketHandler_addWellPara;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     wndMainVM.messageQueueBd.Enqueue("添加机井参数成功");
                     GRSocketHandler.getWellParas += GRSocketHandler_getWellParas;
                     isWaitingForRefreshParas = true;
                     GRSocketAPI.GetWellParas();
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     wndMainVM.messageQueueBd.Enqueue("添加机井参数失败");
                     break;
                 default:
@@ -57,18 +57,18 @@ namespace GRCLNT
             }
         }
 
-        private void GRSocketHandler_delWellPara(RES_STATE state)
+        private void GRSocketHandler_delWellPara(E_ResState state)
         {
             GRSocketHandler.delWellPara -= GRSocketHandler_delWellPara;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     wndMainVM.messageQueueBd.Enqueue("删除机井参数成功");
                     GRSocketHandler.getWellParas += GRSocketHandler_getWellParas;
                     isWaitingForRefreshParas = true;
                     GRSocketAPI.GetWellParas();
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     wndMainVM.messageQueueBd.Enqueue("删除机井参数失败");
                     break;
                 default:
@@ -76,16 +76,16 @@ namespace GRCLNT
             }
         }
 
-        private void GRSocketHandler_getWellParas(RES_STATE state, C_WellParas wps)
+        private void GRSocketHandler_getWellParas(E_ResState state, C_WellParas wps)
         {
             GRSocketHandler.getWellParas -= GRSocketHandler_getWellParas;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     C_RT.wp = new C_WellParas(wps.All);
                     wpBd = new C_WellParas(wps.All);
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     wndMainVM.messageQueueBd.Enqueue("获取机井参数失败");
                     break;
                 default:
@@ -94,15 +94,15 @@ namespace GRCLNT
             isWaitingForRefreshParas = false;
         }
 
-        private void GRSocketHandler_addWell(RES_STATE state)
+        private void GRSocketHandler_addWell(E_ResState state)
         {
             GRSocketHandler.addWell -= GRSocketHandler_addWell;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     wndMainVM.messageQueueBd.Enqueue("添加机井信息成功");
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     wndMainVM.messageQueueBd.Enqueue("添加机井信息失败");
                     break;
                 default:
@@ -110,18 +110,18 @@ namespace GRCLNT
             }
         }
 
-        private void GRSocketHandler_getWells(RES_STATE state, List<C_Well> wells)
+        private void GRSocketHandler_getWells(E_ResState state, List<C_Well> wells)
         {
             GRSocketHandler.getWells -= GRSocketHandler_getWells;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     curWellsBd = wells;
                     GetStateDataByWells();
                     InitMap();
                     wndMainVM.messageQueueBd.Enqueue("获取机井信息成功");
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     wndMainVM.messageQueueBd.Enqueue("获取机井信息失败");
                     break;
                 default:
@@ -129,16 +129,16 @@ namespace GRCLNT
             }
         }
 
-        private void GRSocketHandler_delWell(RES_STATE state)
+        private void GRSocketHandler_delWell(E_ResState state)
         {
             GRSocketHandler.delWell -= GRSocketHandler_delWell;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     refreshCmd(strSearchKeywordBd);
                     wndMainVM.messageQueueBd.Enqueue("删除机井信息成功");
                     break;                            
-                case RES_STATE.FAILED:                
+                case E_ResState.FAILED:                
                     wndMainVM.messageQueueBd.Enqueue("删除机井信息失败");
                     break;
                 default:
@@ -146,16 +146,16 @@ namespace GRCLNT
             }
         }
 
-        private void GRSocketHandler_edtWell(RES_STATE state)
+        private void GRSocketHandler_edtWell(E_ResState state)
         {
             GRSocketHandler.edtWell -= GRSocketHandler_edtWell;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     wndMainVM.SelectPage(E_Page.Well_Search_Lst);
                     wndMainVM.messageQueueBd.Enqueue("编辑机井信息成功");
                     break;                            
-                case RES_STATE.FAILED:                
+                case E_ResState.FAILED:                
                     wndMainVM.messageQueueBd.Enqueue("编辑机井信息失败");
                     break;
                 default:
@@ -248,7 +248,7 @@ namespace GRCLNT
         public string txtReadAutoInputingBd { get; set; } = "";
 
         //output
-        public C_Output opBd { get; set; } = new C_Output();
+        public C_WellOutput opBd { get; set; } = new C_WellOutput();
 
         //state
         public List<string> tsWellCntLabelBd { get; set; } = new List<string>();
