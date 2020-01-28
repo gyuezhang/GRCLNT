@@ -238,11 +238,13 @@ namespace GRCLNT
                     menuBtnIndexBd = 5;
                     mainVmBd = new PageEntWellViewModel(this);
                     ((PageEntWellViewModel)mainVmBd).pageIndexBd = 5;
+                    ((PageEntWellViewModel)mainVmBd).refreshCmd("");
                     break;
                 case E_Page.EntWell_Search_Lst:
                     menuBtnIndexBd = 5;
                     mainVmBd = new PageEntWellViewModel(this);
                     ((PageEntWellViewModel)mainVmBd).pageIndexBd = 6;
+                    ((PageEntWellViewModel)mainVmBd).refreshCmd("");
                     break;
                 case E_Page.EntWell_Edit:
                     menuBtnIndexBd = 5;

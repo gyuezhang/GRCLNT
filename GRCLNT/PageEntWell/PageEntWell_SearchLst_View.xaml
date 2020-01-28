@@ -9,7 +9,72 @@
              xmlns:s="https://github.com/canton7/Stylet"
              d:DataContext="{d:DesignInstance local:PageEntWellViewModel}" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="PageEntWell_SearchLst_View Under Construction..." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="0,86,60,0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <!--<Button Content="refresh" Command="{s:Action RefreshWells}" CommandParameter=""/>-->
+            <TextBlock Text="{Binding strSearchResBd}" FontSize="18" Margin="32,0" Grid.Column="0" VerticalAlignment="Center"/>
+            <materialDesign:ColorZone Grid.Column="3" Mode="Standard" Padding="8 4 8 4" Background="#11000000" CornerRadius="2" Panel.ZIndex="1" Margin="16 0 0 0" materialDesign:ShadowAssist.ShadowDepth="Depth1" VerticalAlignment="Center">
+                <Grid Width="320">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" Foreground="White" Text="{Binding strSearchKeywordBd,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,0" FontSize="18" materialDesign:HintAssist.Hint="搜索">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{s:Action refreshCmd}" CommandParameter="{Binding strSearchKeywordBd}" Key="Enter" />
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <Button Foreground="White" Grid.Column="1" Margin="0,0,0,0" Command="{s:Action refreshCmd}" CommandParameter="{Binding strSearchKeywordBd}" Background="Transparent" BorderThickness="0">
+                        <materialDesign:PackIcon Kind="Magnify" Width="24" Height="24"/>
+                    </Button>
+                </Grid>
+            </materialDesign:ColorZone>
+            <Button  BorderThickness="0" Grid.Column="1" Style="{StaticResource MaterialDesignRaisedButton}" Background="#11000000"  Margin="30,10,10,10" Command="{s:Action edtWellCmd}">
+                <materialDesign:PackIcon Kind="Edit" Foreground="White" Width="24" Height="24"/>
+            </Button>
+
+            <Button  BorderThickness="0" Grid.Column="2" Style="{StaticResource MaterialDesignRaisedButton}" Background="#11000000"  Margin="10" Command="{s:Action delWellCmd}">
+                <materialDesign:PackIcon Kind="Delete" Foreground="White" Width="24" Height="24"/>
+            </Button>
+
+        </Grid>
+        <DataGrid  Margin="32,20,60,32"  Grid.Row="1" ItemsSource="{Binding curWellsBd}" HorizontalAlignment="Center"  VerticalAlignment="Top" AutoGenerateColumns="False"  Background="Transparent"
+                    materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" CanUserAddRows="False" SelectedItem="{Binding curWellIndexBd,UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="所属乡镇（街道）" Binding="{Binding TsOrSt}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="所属企业" Binding="{Binding EntName}"  IsReadOnly="True"/>
+                <DataGridTextColumn Header="位置" Binding="{Binding Loc}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="东经" Binding="{Binding Lng}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="北纬" Binding="{Binding Lat}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="权属单位" Binding="{Binding UnitCat}"  IsReadOnly="True"/>
+                <DataGridTextColumn Header="用途" Binding="{Binding Usefor}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="成井时间" Binding="{Binding DigTime, StringFormat=d}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="是否正常缴费" Binding="{Binding IsPaid}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="取水证号" Binding="{Binding FetchWaterId}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="井深（m）" Binding="{Binding WellDepth}"  IsReadOnly="True"/>
+                <DataGridTextColumn Header="管材" Binding="{Binding TubeMat}" IsReadOnly="True" />
+                <DataGridTextColumn Header="井管内径（mm）" Binding="{Binding TubeIr}"  IsReadOnly="True"/>
+                <DataGridTextColumn Header="止水深度（m）" Binding="{Binding StanWaterDepth}"  IsReadOnly="True"/>
+                <DataGridTextColumn Header="咸水底板深度（m）" Binding="{Binding SaltWaterFloorDepth}" IsReadOnly="True" />
+                <DataGridTextColumn Header="过滤器位置低（m）" Binding="{Binding FilterLocLow}"  IsReadOnly="True"/>
+                <DataGridTextColumn Header="过滤器位置高（m）" Binding="{Binding FilterLocHigh}"  IsReadOnly="True"/>
+                <DataGridTextColumn Header="静水位（m）" Binding="{Binding StillWaterLoc}"  IsReadOnly="True"/>
+                <DataGridTextColumn Header="水泵型号" Binding="{Binding PumpMode}"  IsReadOnly="True"/>
+                <DataGridTextColumn Header="水泵动力（kw）" Binding="{Binding PumpPower}"  IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="是否水位观测点" Binding="{Binding IsWaterLevelOp}"  IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="是否安装计量设施" Binding="{Binding IsMfInstalled}"  IsReadOnly="True"/>
+                <DataGridTextColumn Header="备注" Binding="{Binding Remark}"  IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
