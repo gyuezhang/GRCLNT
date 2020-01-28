@@ -30,7 +30,7 @@ namespace GRCLNT
         public PageEntWellViewModel(WndMainViewModel _wndMainVM)
         {
             wndMainVM = _wndMainVM;
-            wpBd = C_RT.wp;
+            wpBd = C_RT.ewp;
             cbdAcBd = new C_BdAreaCode(C_RT.acs);
             ebdAcBd = new C_BdAreaCode(C_RT.acs);
         }
@@ -95,12 +95,85 @@ namespace GRCLNT
             }
         }
 
+        private void GRSocketHandler_addEntWell(E_ResState state)
+        {
+            GRSocketHandler.addEntWell -= GRSocketHandler_addEntWell;
+            switch (state)
+            {
+                case E_ResState.OK:
+                    wndMainVM.messageQueueBd.Enqueue("添加企业井信息成功");
+                    break;
+                case E_ResState.FAILED:
+                    wndMainVM.messageQueueBd.Enqueue("添加企业井信息失败");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void GRSocketHandler_getEntWells(E_ResState state, List<C_EntWell> entWells)
+        {
+            GRSocketHandler.getEntWells -= GRSocketHandler_getEntWells;
+            switch (state)
+            {
+                case E_ResState.OK:
+                    curWellsBd = entWells;
+                    GetStateDataByWells();
+                    InitMap();
+                    wndMainVM.messageQueueBd.Enqueue("获取企业井信息成功");
+                    break;
+                case E_ResState.FAILED:
+                    wndMainVM.messageQueueBd.Enqueue("获取企业井信息失败");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void GRSocketHandler_delEntWell(E_ResState state)
+        {
+            GRSocketHandler.delEntWell -= GRSocketHandler_delEntWell;
+            switch (state)
+            {
+                case E_ResState.OK:
+                    refreshCmd(strSearchKeywordBd);
+                    wndMainVM.messageQueueBd.Enqueue("删除企业井信息成功");
+                    break;                            
+                case E_ResState.FAILED:                
+                    wndMainVM.messageQueueBd.Enqueue("删除企业井信息失败");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+        private void GRSocketHandler_edtEntWell(E_ResState state)
+        {
+            GRSocketHandler.edtEntWell -= GRSocketHandler_edtEntWell;
+            switch (state)
+            {
+                case E_ResState.OK:
+                    wndMainVM.SelectPage(E_Page.EntWell_Search_Lst);
+                    wndMainVM.messageQueueBd.Enqueue("编辑企业井信息成功");
+                    break;                            
+                case E_ResState.FAILED:                
+                    wndMainVM.messageQueueBd.Enqueue("编辑企业井信息失败");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+
+
         #endregion SocketHandler
 
         #region Bindings
         public int pageIndexBd { get; set; } = 0;
 
-        //parasetting
+        //parasettin
         public string strPsLocBd { get; set; }
         public string strPsUnitCatBd { get; set; }
         public string strPsTubeMatBd { get; set; }
@@ -218,9 +291,8 @@ namespace GRCLNT
         //manual add
         public void createWellCmd()
         {
-            List<C_Well> wells = new List<C_Well>();
+            List<C_EntWell> wells = new List<C_EntWell>();
             cwBd.TsOrSt = cbdAcBd.L4Index.Name;
-            cwBd.Village = cbdAcBd.L5Index.Name;
             cwBd.Loc = wpBd.LocIndex.Value;
             cwBd.TubeMat = wpBd.TubeMatIndex.Value;
             cwBd.UnitCat = wpBd.UnitCatIndex.Value;
@@ -228,37 +300,34 @@ namespace GRCLNT
             cwBd.Usefor = wpBd.UseForIndex.Value;
             if (CheckCreateWell(cwBd))
             {
-                GRSocketHandler.addWell += GRSocketHandler_addWell;
+                GRSocketHandler.addEntWell += GRSocketHandler_addEntWell;
                 wells.Add(cwBd);
-                GRSocketAPI.AddWell(wells);
+                GRSocketAPI.AddEntWells(wells);
             }
         }
 
         //search
         public void refreshCmd(string keywords)
         {
-            GRSocketHandler.getWells += GRSocketHandler_getWells;
-            GRSocketAPI.GetWells(keywords);
+            GRSocketHandler.getEntWells += GRSocketHandler_getEntWells;
+            GRSocketAPI.GetEntWells(keywords);
         }
-
         public bool CanedtWellCmd => (curWellIndexBd != null);
         public void edtWellCmd()
         {
             ewBd = curWellIndexBd;
-            wndMainVM.SelectPage(E_Page.Well_Edit);
+            wndMainVM.SelectPage(E_Page.EntWell_Edit);
         }
 
         public bool CandelWellCmd => (curWellIndexBd != null);
         public void delWellCmd()
         {
-            GRSocketHandler.delWell += GRSocketHandler_delWell;
-            GRSocketAPI.DelWell(curWellIndexBd.Id);
+            GRSocketHandler.delEntWell += GRSocketHandler_delEntWell;
+            GRSocketAPI.DelEntWell(curWellIndexBd.Id);
         }
-
         public void saveEdtWellCmd()
         {
             ewBd.TsOrSt = ebdAcBd.L4Index.Name;
-            ewBd.Village = ebdAcBd.L5Index.Name;
             ewBd.Loc = wpBd.LocIndex.Value;
             ewBd.TubeMat = wpBd.TubeMatIndex.Value;
             ewBd.UnitCat = wpBd.UnitCatIndex.Value;
@@ -266,11 +335,10 @@ namespace GRCLNT
             ewBd.Usefor = wpBd.UseForIndex.Value;
             if (CheckCreateWell(ewBd))
             {
-                GRSocketHandler.edtWell += GRSocketHandler_edtWell;
-                GRSocketAPI.EdtWell(ewBd);
+                GRSocketHandler.edtEntWell += GRSocketHandler_edtEntWell;
+                GRSocketAPI.EdtEntWell(ewBd);
             }
         }
-
         //autoadd
         public bool CaninputOpenDlgCmd => !IsReadingFromExcel;
         public void inputOpenDlgCmd()
@@ -291,14 +359,14 @@ namespace GRCLNT
             iErrCount = 0;
             autoAddLogBd = new ObservableCollection<string>();
             vErrLogBd = Visibility.Collapsed;
-            C_ExcelOper.readWell += C_ExcelOper_readWell;
-            C_ExcelOper.ReadWellsFromFile(inputFilePathBd);
+           // C_ExcelOper.readWell += C_ExcelOper_readWell;
+           // C_ExcelOper.ReadWellsFromFile(inputFilePathBd);
         }
 
         public void loadWellToSvrCmd()
         {
-            GRSocketHandler.addWell += GRSocketHandler_addWell;
-            GRSocketAPI.AddWell(autoLoadWells);
+           // GRSocketHandler.addWell += GRSocketHandler_addWell;
+           // GRSocketAPI.AddWell(autoLoadWells);
         }
 
         public void openTemplateCmd()
@@ -332,12 +400,264 @@ namespace GRCLNT
 
         public void StartOutPutCmd()
         {
-            C_ExcelOper.OutputWell(opBd, curWellsBd);
+            //C_ExcelOper.OutputWell(opBd, curWellsBd);
         }
 
 
         #endregion Actions
         public bool isWaitingForRefreshParas { get; set; } = false;
+        public bool CheckCreateWell(C_EntWell w)
+        {
+            if (w.TsOrSt == "")
+            {
+                wndMainVM.messageQueueBd.Enqueue("请选择街道乡镇");
+                return false;
+            }
+            if (w.EntName == "")
+            {
+                wndMainVM.messageQueueBd.Enqueue("请输入所属企业");
+                return false;
+            }
+            if (w.UnitCat == "" || w.UnitCat == null)
+            {
+                if (wpBd.UnitCat.Count == 0)
+                {
+                    wndMainVM.messageQueueBd.Enqueue("请先在参数设置中添加权属单位");
+                    return false;
+                }
+                wndMainVM.messageQueueBd.Enqueue("请选择权属单位");
+                return false;
+            }
+            if (w.Loc == "" || w.Loc == null)
+            {
+                if (wpBd.Loc.Count == 0)
+                {
+                    wndMainVM.messageQueueBd.Enqueue("请先在参数设置中添加位置");
+                    return false;
+                }
+                wndMainVM.messageQueueBd.Enqueue("请选择位置");
+                return false;
+            }
+            if (w.TubeMat == "" || w.TubeMat == null)
+            {
+                if (wpBd.TubeMat.Count == 0)
+                {
+                    wndMainVM.messageQueueBd.Enqueue("请先在参数设置中添加管材");
+                    return false;
+                }
+                wndMainVM.messageQueueBd.Enqueue("请选择管材");
+                return false;
+            }
+            if (w.UnitCat == "" || w.UnitCat == null)
+            {
+                if (wpBd.UnitCat.Count == 0)
+                {
+                    wndMainVM.messageQueueBd.Enqueue("请先在参数设置中添加水泵型号");
+                    return false;
+                }
+                wndMainVM.messageQueueBd.Enqueue("请选择水泵型号");
+                return false;
+            }
+            if (w.Lng == null || w.Lng == "")
+            {
+                wndMainVM.messageQueueBd.Enqueue("经度不能为空");
+                return false;
+            }
+
+            switch (C_Str.IsLng(w.Lng))
+            {
+                case -1:
+                    wndMainVM.messageQueueBd.Enqueue("经度格式错误，请确认单位");
+                    return false;
+                case 0:
+                    return false;
+                case 1:
+                    break;
+                case 2:
+                    wndMainVM.messageQueueBd.Enqueue("经度精度不足");
+                    return false;
+                case 3:
+                    wndMainVM.messageQueueBd.Enqueue("经度超出宝坻区范围");
+                    return false;
+                default:
+                    break;
+            }
+
+
+            if (w.Lat == null || w.Lat == "")
+            {
+                wndMainVM.messageQueueBd.Enqueue("纬度不能为空");
+                return false;
+            }
+            switch (C_Str.IsLat(w.Lat))
+            {
+                case -1:
+                    wndMainVM.messageQueueBd.Enqueue("纬度格式错误，请确认单位");
+                    return false;
+                case 0:
+                    return false;
+                case 1:
+                    break;
+                case 2:
+                    wndMainVM.messageQueueBd.Enqueue("纬度精度不足");
+                    return false;
+                case 3:
+                    wndMainVM.messageQueueBd.Enqueue("纬度超出宝坻区范围");
+                    return false;
+                default:
+                    break;
+            }
+            if (w.DigTime.Year < 1950 || w.DigTime > DateTime.Now)
+            {
+                wndMainVM.messageQueueBd.Enqueue("请选择正确时间");
+                return false;
+            }
+
+
+            if (w.WellDepth.ToString() == "" || w.WellDepth == 0)
+            {
+                wndMainVM.messageQueueBd.Enqueue("井深格式错误或为空");
+                return false;
+            }
+
+            if (w.TubeIr.ToString() == "" || w.TubeIr == 0)
+            {
+                wndMainVM.messageQueueBd.Enqueue("井管内径格式错误或为空");
+                return false;
+            }
+
+            if (w.PumpPower.ToString() == "" || w.PumpPower == 0)
+            {
+                wndMainVM.messageQueueBd.Enqueue("水泵动力格式错误或为空");
+                return false;
+            }
+            return true;
+        }
+
+        //loc
+        public void InitMap()
+        {
+            if (pageIndexBd != 5)
+                return;
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            { 
+                mapBd = new MapControl();
+                mapBd.Map.Layers.Clear();
+                mapBd.Map.Layers.Add(new TileLayer(KnownTileSources.Create()));
+                mapBd.Map.Layers.Add(CreateWellLayer());
+
+                var centerOfBD = new Mapsui.Geometries.Point(117.309716, 39.717173);
+                var sphericalMercatorCoordinate = SphericalMercator.FromLonLat(centerOfBD.X, centerOfBD.Y);
+                mapBd.Map.Home = n => n.NavigateTo(sphericalMercatorCoordinate, mapBd.Map.Resolutions[12]);
+            }));
+        }
+
+        private MemoryLayer CreateWellLayer()
+        {
+            MemoryLayer ml = new MemoryLayer();
+            ml.Name = "Point";
+            ml.IsMapInfoLayer = true;
+            MemoryProvider mp = new MemoryProvider(GetCitiesFromEmbeddedResource());
+            ml.DataSource = mp;
+            ml.Style = CreateBitmapStyle();
+            return ml;
+        }
+        private SymbolStyle CreateBitmapStyle()
+        {
+            var path = @"GRCLNT.Resource.Image.loc.png";
+            var bitmapId = GetBitmapIdForEmbeddedResource(path);
+            var bitmapHeight = 64; // To set the offset correct we need to know the bitmap height
+            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.20, SymbolOffset = new Offset(0, bitmapHeight * 0.5) };
+        }
+        private static int GetBitmapIdForEmbeddedResource(string imagePath)
+        {
+            var assembly = typeof(PageWellViewModel).GetTypeInfo().Assembly;
+            var image = assembly.GetManifestResourceStream(imagePath);
+            return BitmapRegistry.Instance.Register(image);
+        }
+        private IEnumerable<IFeature> GetCitiesFromEmbeddedResource()
+        {
+            return curWellsBd.Select(c =>
+            {
+                var feature = new Feature();
+                if (c.Lng != "" && c.Lat != "")
+                {
+                    var point = SphericalMercator.FromLonLat(double.Parse(c.Lng), double.Parse(c.Lat));
+                    feature.Geometry = point;
+                }
+                return feature;
+            });
+        }
+        public bool IsReadingFromExcel { get; set; } = false;
+        public int iErrCount = 0;
+        private void UpdateErrLog(int a, int c, int ce, string em)
+        {
+            vErrLogBd = Visibility.Visible;
+            txtReadAutoInputingBd = "正在读取" + c.ToString() + "/" + a.ToString() + "(失败" + iErrCount.ToString() + "条）";
+
+            vInputProgBarBd = Convert.ToInt32((float)c / (float)a * 100.0);
+
+            if (autoAddLogBd.Count < 5000 && em != "" && em != "success")
+                autoAddLogBd.Add("第" + c.ToString() + "条读取失败，错误信息：" + em);
+
+        }
+        public List<C_EntWell> autoLoadWells { get; set; } = new List<C_EntWell>();
+
+        public void GetStateDataByWells()
+        {
+            //tsorst
+            var tsOrStState = from w in curWellsBd
+                               orderby w.TsOrSt
+                               group w by w.TsOrSt into TsOrStGroup
+                               select new { lb = TsOrStGroup.Key ,cnt = TsOrStGroup .Count()};
+            tsWellCntLabelBd.Clear();
+            tsWellCntBd.Clear();
+            foreach (var t in tsOrStState)
+            {
+                tsWellCntLabelBd.Add(t.lb);
+                tsWellCntBd.Add(new ObservableValue(t.cnt));
+            }
+
+            //useForWellCntBd
+            var useForState = from w in curWellsBd
+                              orderby w.Usefor
+                              group w by w.Usefor into UseforGroup
+                              select new { lb = UseforGroup.Key, cnt = UseforGroup.Count() };
+            useForSeriesBd.Clear();
+            foreach (var t in useForState)
+            {
+                App.Current.Dispatcher.Invoke((Action)(() =>
+                {
+                    List<int> c = new List<int>();
+                    c.Add(t.cnt);
+                    PieSeries p = new PieSeries();
+                    p.Title = t.lb;
+                    p.Values = new ChartValues<int>(c);
+                    p.DataLabels = true;
+                    useForSeriesBd.Add(p);
+                }));
+            }
+            
+            //tubemat
+            tubeMatSeriesBd.Clear();
+            var tubeMatState = from w in curWellsBd
+                              orderby w.TubeMat
+                              group w by w.TubeMat into TubeMatGroup
+                               select new { lb = TubeMatGroup.Key, cnt = TubeMatGroup.Count() };
+            foreach (var t in tubeMatState)
+            {
+                App.Current.Dispatcher.Invoke((Action)(() =>
+                {
+                    List<int> c = new List<int>();
+                    c.Add(t.cnt);
+                    PieSeries p = new PieSeries();
+                    p.Title = t.lb;
+                    p.Values = new ChartValues<int>(c);
+                    p.DataLabels = true;
+                    tubeMatSeriesBd.Add(p);
+                }));
+            }
+        }
 
     }
 }
