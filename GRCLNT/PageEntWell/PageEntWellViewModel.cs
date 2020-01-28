@@ -181,8 +181,8 @@ namespace GRCLNT
         public string strPsUseForBd { get; set; }
         public C_WellParas wpBd { get; set; } = C_RT.ewp;
 
-        public C_BdAreaCode cbdAcBd = new C_BdAreaCode(C_RT.acs);
-        public C_BdAreaCode ebdAcBd = new C_BdAreaCode(C_RT.acs);
+        public C_BdAreaCode cbdAcBd = new C_BdAreaCode();
+        public C_BdAreaCode ebdAcBd = new C_BdAreaCode();
         public C_EntWell cwBd { get; set; } = new C_EntWell();
         public static C_EntWell ewBd { get; set; } = new C_EntWell();
 
