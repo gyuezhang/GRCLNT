@@ -406,8 +406,8 @@ namespace GRCLNT
             iErrCount = 0;
             autoAddLogBd = new ObservableCollection<string>();
             vErrLogBd = Visibility.Collapsed;
-            C_ExcelOper.readWell += C_ExcelOper_readWell;
-            C_ExcelOper.ReadWellsFromFile(inputFilePathBd);
+            C_WellOfcOper.readWell += C_ExcelOper_readWell;
+            C_WellOfcOper.ReadWellsFromFile(inputFilePathBd);
         }
 
         public void loadWellToSvrCmd()
@@ -418,7 +418,7 @@ namespace GRCLNT
 
         public void openTemplateCmd()
         {
-            C_ExcelOper.OpenInputTemplete();
+            C_WellOfcOper.OpenInputTemplete();
         }
 
         //output
@@ -447,7 +447,7 @@ namespace GRCLNT
 
         public void StartOutPutCmd()
         {
-            C_ExcelOper.OutputWell(opBd, curWellsBd);
+            C_WellOfcOper.OutputWell(opBd, curWellsBd);
         }
 
         #endregion Actions

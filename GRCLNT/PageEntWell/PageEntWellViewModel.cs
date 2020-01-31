@@ -166,6 +166,12 @@ namespace GRCLNT
         }
 
 
+        private void C_EntWellOfcOper_readWell(bool state, int curIndex, int totalCount, List<C_Well> C_Wells, string errMsg)
+        {
+            throw new NotImplementedException();
+        }
+
+
 
 
         #endregion SocketHandler
@@ -181,8 +187,8 @@ namespace GRCLNT
         public string strPsUseForBd { get; set; }
         public C_WellParas wpBd { get; set; } = C_RT.ewp;
 
-        public C_BdAreaCode cbdAcBd = new C_BdAreaCode();
-        public C_BdAreaCode ebdAcBd = new C_BdAreaCode();
+        public C_BdAreaCode cbdAcBd { get; set; } = new C_BdAreaCode();
+        public C_BdAreaCode ebdAcBd { get; set; } = new C_BdAreaCode();
         public C_EntWell cwBd { get; set; } = new C_EntWell();
         public static C_EntWell ewBd { get; set; } = new C_EntWell();
 
@@ -359,10 +365,9 @@ namespace GRCLNT
             iErrCount = 0;
             autoAddLogBd = new ObservableCollection<string>();
             vErrLogBd = Visibility.Collapsed;
-           // C_ExcelOper.readWell += C_ExcelOper_readWell;
-           // C_ExcelOper.ReadWellsFromFile(inputFilePathBd);
+            C_EntWellOfcOper.readWell += C_EntWellOfcOper_readWell;
+            C_EntWellOfcOper.ReadWellsFromFile(inputFilePathBd);
         }
-
         public void loadWellToSvrCmd()
         {
            // GRSocketHandler.addWell += GRSocketHandler_addWell;
@@ -371,7 +376,7 @@ namespace GRCLNT
 
         public void openTemplateCmd()
         {
-            C_ExcelOper.OpenInputTemplete();
+            C_EntWellOfcOper.OpenInputTemplete();
         }
 
         //output
@@ -400,7 +405,7 @@ namespace GRCLNT
 
         public void StartOutPutCmd()
         {
-            //C_ExcelOper.OutputWell(opBd, curWellsBd);
+            C_EntWellOfcOper.OutputWell(opBd, curWellsBd);
         }
 
 
