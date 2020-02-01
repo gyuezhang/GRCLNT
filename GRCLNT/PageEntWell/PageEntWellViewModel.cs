@@ -117,7 +117,7 @@ namespace GRCLNT
             {
                 case E_ResState.OK:
                     curWellsBd = entWells;
-                   // GetStateDataByWells();
+                    GetStateDataByWells();
                     InitMap();
                     wndMainVM.messageQueueBd.Enqueue("获取企业井信息成功");
                     break;
@@ -154,7 +154,6 @@ namespace GRCLNT
             {
                 case E_ResState.OK:
                     wndMainVM.SelectPage(E_Page.EntWell_Search_Lst);
-                    GetStateDataByWells();
                     wndMainVM.messageQueueBd.Enqueue("编辑企业井信息成功");
                     break;                            
                 case E_ResState.FAILED:                
