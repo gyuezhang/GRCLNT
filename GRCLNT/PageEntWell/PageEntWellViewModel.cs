@@ -110,7 +110,6 @@ namespace GRCLNT
                     break;
             }
         }
-
         private void GRSocketHandler_getEntWells(E_ResState state, List<C_EntWell> entWells)
         {
             GRSocketHandler.getEntWells -= GRSocketHandler_getEntWells;
@@ -166,9 +165,54 @@ namespace GRCLNT
         }
 
 
-        private void C_EntWellOfcOper_readWell(bool state, int curIndex, int totalCount, List<C_Well> C_Wells, string errMsg)
+        private void C_EntWellOfcOper_readWell(bool state, int curIndex, int totalCount, List<C_EntWell> wells, string errMsg)
         {
-            throw new NotImplementedException();
+            if (state)
+            {
+                DispatchService.Invoke(() =>
+                {
+                    UpdateErrLog(totalCount, curIndex, iErrCount, "success");
+                });
+
+
+                if (errMsg == "Finished")
+                {
+                    if (iErrCount == 0)
+                    {
+                        DispatchService.Invoke(() =>
+                        {
+                            autoAddLogBd.Add("共" + totalCount.ToString() + "条读取完毕，点击开始上传");
+                        });
+                    }
+                    else
+                    {
+                        DispatchService.Invoke(() =>
+                        {
+                            autoAddLogBd.Add("共" + totalCount.ToString() + "条读取完毕，请修改不适配项");
+                        });
+
+                    }
+                    IsReadingFromExcel = false;
+                    autoLoadWells = wells;
+                    return;
+                }
+            }
+            else
+            {
+                if (errMsg == "FileNeedToBeClosed")
+                {
+                    wndMainVM.messageQueueBd.Enqueue("请先关闭文档后重试。");
+                    IsReadingFromExcel = false;
+                    return;
+                }
+
+                iErrCount++;
+                DispatchService.Invoke(() =>
+                {
+                    UpdateErrLog(totalCount, curIndex, iErrCount, errMsg);
+                });
+
+            }
         }
 
 
@@ -370,8 +414,8 @@ namespace GRCLNT
         }
         public void loadWellToSvrCmd()
         {
-           // GRSocketHandler.addWell += GRSocketHandler_addWell;
-           // GRSocketAPI.AddWell(autoLoadWells);
+            GRSocketHandler.addEntWell += GRSocketHandler_addEntWell;
+            GRSocketAPI.AddEntWells(autoLoadWells);
         }
 
         public void openTemplateCmd()
