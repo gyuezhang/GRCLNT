@@ -117,7 +117,7 @@ namespace GRCLNT
             {
                 case E_ResState.OK:
                     curWellsBd = entWells;
-                    GetStateDataByWells();
+                   // GetStateDataByWells();
                     InitMap();
                     wndMainVM.messageQueueBd.Enqueue("获取企业井信息成功");
                     break;
