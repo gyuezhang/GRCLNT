@@ -154,6 +154,7 @@ namespace GRCLNT
             {
                 case E_ResState.OK:
                     wndMainVM.SelectPage(E_Page.EntWell_Search_Lst);
+                    GetStateDataByWells();
                     wndMainVM.messageQueueBd.Enqueue("编辑企业井信息成功");
                     break;                            
                 case E_ResState.FAILED:                
@@ -654,6 +655,9 @@ namespace GRCLNT
 
         public void GetStateDataByWells()
         {
+            if (pageIndexBd != 8)
+                return;
+
             //tsorst
             var tsOrStState = from w in curWellsBd
                                orderby w.TsOrSt

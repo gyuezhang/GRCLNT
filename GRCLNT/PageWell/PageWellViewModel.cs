@@ -224,7 +224,7 @@ namespace GRCLNT
         public string strPsTubeMatBd { get; set; }
         public string strPsPumpModelBd { get; set; }
         public string strPsUseForBd { get; set; }
-        public C_WellParas wpBd { get; set; } = new C_WellParas();
+        public static C_WellParas wpBd { get; set; } = new C_WellParas();
 
         public C_BdAreaCode cbdAcBd { get; set; } = new C_BdAreaCode();
         public C_BdAreaCode ebdAcBd { get; set; } = new C_BdAreaCode();
@@ -652,6 +652,9 @@ namespace GRCLNT
 
         public void GetStateDataByWells()
         {
+            if (pageIndexBd != 8)
+                return;
+
             //tsorst
             var tsOrStState = from w in curWellsBd
                                orderby w.TsOrSt
@@ -704,6 +707,16 @@ namespace GRCLNT
                     tubeMatSeriesBd.Add(p);
                 }));
             }
+        }
+
+        public void UpdateEdtParas()
+        {
+            wpBd.LocIndex = new C_WellPara(E_WellParaType.Loc, ewBd.Loc);
+            wpBd.UnitCatIndex = new C_WellPara(E_WellParaType.UnitCat, ewBd.UnitCat);
+            wpBd.TubeMatIndex = new C_WellPara(E_WellParaType.TubeMat, ewBd.TubeMat);
+            wpBd.UseForIndex = new C_WellPara(E_WellParaType.UseFor, ewBd.Usefor);
+            wpBd.PumpModelIndex = new C_WellPara(E_WellParaType.PumpModel, ewBd.PumpMode);
+
         }
     }
 

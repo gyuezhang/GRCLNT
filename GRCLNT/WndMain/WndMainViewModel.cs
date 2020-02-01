@@ -192,6 +192,7 @@ namespace GRCLNT
                     menuBtnIndexBd = 3;
                     mainVmBd = new PageWellViewModel(this);
                     ((PageWellViewModel)mainVmBd).pageIndexBd = 7;
+                    ((PageWellViewModel)mainVmBd).UpdateEdtParas();
                     break;
                 case E_Page.Well_State:
                     menuBtnIndexBd = 3;
