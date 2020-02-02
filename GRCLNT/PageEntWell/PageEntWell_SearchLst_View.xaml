@@ -13,6 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Margin="0,86,60,0" Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -76,5 +77,6 @@
                 <DataGridTextColumn Header="备注" Binding="{Binding Remark}"  IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-    </Grid>
+        <ContentControl Grid.Row="2" s:View.Model="{Binding pageBarVmBd}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="32,10,60,65" Height="60"/>
+ </Grid>
 </UserControl>

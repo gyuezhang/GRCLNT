@@ -30,6 +30,7 @@ namespace GRCLNT
         public PageEntWellViewModel(WndMainViewModel _wndMainVM)
         {
             wndMainVM = _wndMainVM;
+            pageBarVmBd = new CtrlEntWellPageBarViewModel(wndMainVM);
             wpBd = C_RT.ewp;
             cbdAcBd = new C_BdAreaCode(C_RT.acs);
             ebdAcBd = new C_BdAreaCode(C_RT.acs);
@@ -119,6 +120,7 @@ namespace GRCLNT
                     curWellsBd = entWells;
                     GetStateDataByWells();
                     InitMap();
+                    pageBarVmBd.Init(entWells);
                     wndMainVM.messageQueueBd.Enqueue("获取企业井信息成功");
                     break;
                 case E_ResState.FAILED:
@@ -241,6 +243,8 @@ namespace GRCLNT
         public string strSearchKeywordBd { get; set; }
         public List<C_EntWell> curWellsBd { get; set; } = new List<C_EntWell>();
         public C_EntWell curWellIndexBd { get; set; } = new C_EntWell();
+        public CtrlEntWellPageBarViewModel pageBarVmBd { get; set; }
+
         //loc
         public MapControl mapBd { get; set; } = null;
 

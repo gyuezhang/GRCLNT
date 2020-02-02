@@ -30,6 +30,7 @@ namespace GRCLNT
         public PageWellViewModel(WndMainViewModel _wndMainVM)
         {
             wndMainVM = _wndMainVM;
+            pageBarVmBd = new CtrlWellPageBarViewModel(wndMainVM);
             wpBd = C_RT.wp;
             cbdAcBd = new C_BdAreaCode(C_RT.acs);
             ebdAcBd = new C_BdAreaCode(C_RT.acs);
@@ -119,6 +120,7 @@ namespace GRCLNT
                     curWellsBd = wells;
                     GetStateDataByWells();
                     InitMap();
+                    pageBarVmBd.Init(wells);
                     wndMainVM.messageQueueBd.Enqueue("获取机井信息成功");
                     break;
                 case E_ResState.FAILED:
@@ -236,6 +238,8 @@ namespace GRCLNT
         public string strSearchKeywordBd { get; set; }
         public List<C_Well> curWellsBd { get; set; } = new List<C_Well>();
         public C_Well curWellIndexBd { get; set; } = new C_Well();
+
+        public CtrlWellPageBarViewModel pageBarVmBd { get; set; }
         //loc
         public MapControl mapBd { get; set; } = null;
 
