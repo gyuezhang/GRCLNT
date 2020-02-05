@@ -19,6 +19,7 @@ namespace GRCLNT
         public WndMainViewModel(IWindowManager windowManager)
         {
             _windowManager = windowManager;
+            addrsBarVmBd = new CtrlAddrsBarViewModel(this);
             SelectPage(E_Page.Dashboard);
 
             //重置最大窗口尺寸（此处避免运行过程中任务栏显隐）
@@ -26,8 +27,6 @@ namespace GRCLNT
             maxWidthBd = SystemParameters.WorkArea.Width + 7;
 
 
-            mainVmBd = new PageDashboardViewModel(this);
-            addrsBarVmBd = new CtrlAddrsBarViewModel(this);
 
             GRSocketHandler.getAreaCodes += GRSocketHandler_getAreaCodes;
             GRSocketAPI.GetAreaCodes();
@@ -101,7 +100,7 @@ namespace GRCLNT
         public Visibility menuBtnVisibilityBd { get; set; } = Visibility.Visible;
         public int menuBtnIndexBd { get; set; } = 1;
         public Visibility settingBtnVisibilityBd { get; set; } = Visibility.Hidden;
-        public Screen mainVmBd { get; set; }
+        public Screen mainVmBd { get; set; } = new Screen();
         public CtrlAddrsBarViewModel addrsBarVmBd { get; set; }
         public SnackbarMessageQueue messageQueueBd { get; set; } = new SnackbarMessageQueue(TimeSpan.FromSeconds(1.2));
 
