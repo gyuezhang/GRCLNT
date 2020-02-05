@@ -398,6 +398,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resource\Shp\Baodi District_AL6.shp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

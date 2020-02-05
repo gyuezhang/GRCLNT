@@ -11,5 +11,22 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <ContentControl Content="{Binding mapBd}"/>
+        <materialDesign:ColorZone Grid.Column="3" Mode="Standard" Padding="8 4 8 4" Background="#44000000" CornerRadius="2" Panel.ZIndex="1" Margin="0 18 30 0" materialDesign:ShadowAssist.ShadowDepth="Depth1" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Grid Width="320">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Foreground="White" Text="{Binding strSearchKeywordBd,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,0" FontSize="18" materialDesign:HintAssist.Hint="搜索">
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{s:Action refreshCmd}" CommandParameter="{Binding strSearchKeywordBd}" Key="Enter" />
+                    </TextBox.InputBindings>
+                </TextBox>
+                <Button Foreground="White" Grid.Column="1" Margin="0,0,0,0" Command="{s:Action refreshCmd}" CommandParameter="{Binding strSearchKeywordBd}" Background="Transparent" BorderThickness="0">
+                    <materialDesign:PackIcon Kind="Magnify" Width="24" Height="24"/>
+                </Button>
+            </Grid>
+        </materialDesign:ColorZone>
+
     </Grid>
 </UserControl>

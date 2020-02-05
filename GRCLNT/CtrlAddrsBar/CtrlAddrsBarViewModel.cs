@@ -69,11 +69,11 @@ namespace GRCLNT
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Well));
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Well_Search));
                     break;
-                //case E_Page.Well_Search_Loc:
-                //    itemsBd.Add(new C_AddrsBarItem(E_Page.Well));
-                //    itemsBd.Add(new C_AddrsBarItem(E_Page.Well_Search));
-                //    itemsBd.Add(new C_AddrsBarItem(E_Page.Well_Search_Loc));
-                //    break;
+                case E_Page.Well_Search_Loc:
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.Well));
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.Well_Search));
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.Well_Search_Loc));
+                    break;
                 case E_Page.Well_Search_Lst:
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Well));
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Well_Search));
@@ -117,11 +117,11 @@ namespace GRCLNT
                     itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell));
                     itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_Search));
                     break;
-                //case E_Page.EntWell_Search_Loc:
-                //    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell));
-                //    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_Search));
-                //    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_Search_Loc));
-                //    break;
+                case E_Page.EntWell_Search_Loc:
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell));
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_Search));
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_Search_Loc));
+                    break;
                 case E_Page.EntWell_Search_Lst:
                     itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell));
                     itemsBd.Add(new C_AddrsBarItem(E_Page.EntWell_Search));
