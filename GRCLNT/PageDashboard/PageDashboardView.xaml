@@ -15,7 +15,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <materialDesign:Card  Grid.Column="0" Background="#4403a9f4" Margin="34,15,40,34" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  Padding="0"  HorizontalAlignment="Stretch">
+        <materialDesign:Card  Grid.Column="0" Background="#22000000" Margin="34,15,40,34" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  Padding="0"  HorizontalAlignment="Stretch">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition        Height="Auto" />
