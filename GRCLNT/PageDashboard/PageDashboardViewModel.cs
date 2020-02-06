@@ -30,7 +30,7 @@ namespace GRCLNT
             switch (state)
             {
                 case E_ResState.OK:
-                    logsBd = logs.Take(18).ToList();
+                    logsBd = logs.Take(20).ToList();
                     wndMainVM.messageQueueBd.Enqueue("获取日志信息成功");
                     break;                            
                 case E_ResState.FAILED:                
