@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace GRCLNT
 {
-    public class PageDashboardViewModel : Screen
+    public class PageHomePageViewModel : Screen
     {
-        public PageDashboardViewModel(WndMainViewModel _wndMainVM)
+        public PageHomePageViewModel(WndMainViewModel _wndMainVM)
         {
             wndMainVM = _wndMainVM;
 
@@ -44,11 +44,16 @@ namespace GRCLNT
         #endregion SocketHandler
 
         #region Bindings
-
+        public int pageIndexBd { get; set; } = 0;
         public List<C_Log> logsBd { get; set; }
         #endregion Bindings
 
         #region Actions
+        public void SelectPageCmd(string cmdPara)
+        {
+            wndMainVM.SelectPage((E_Page)Enum.Parse(typeof(E_Page), cmdPara, true));
+        }
+
 
         #endregion Actions
     }

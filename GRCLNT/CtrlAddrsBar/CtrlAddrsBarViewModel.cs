@@ -13,7 +13,7 @@ namespace GRCLNT
         public CtrlAddrsBarViewModel(WndMainViewModel _wndMainVM)
         {
             wndMainVM = _wndMainVM;
-            Update(E_Page.Dashboard);
+            Update(E_Page.HomePage);
         }
         private WndMainViewModel wndMainVM { get; set; }
 
@@ -45,8 +45,12 @@ namespace GRCLNT
             itemsBd.Clear();
             switch (id)
             {
-                case E_Page.Dashboard:
-                    itemsBd.Add(new C_AddrsBarItem(E_Page.Dashboard));
+                case E_Page.HomePage:
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.HomePage));
+                    break;
+                case E_Page.HomePage_Dashboard:
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.HomePage));
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.HomePage_Dashboard));
                     break;
                 case E_Page.Well:
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Well));

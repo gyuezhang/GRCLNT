@@ -6,7 +6,8 @@ namespace GRCLNT
 {
     public enum E_Page
     {
-        Dashboard,
+        HomePage,
+            HomePage_Dashboard,
         Well,
             Well_AddMtdSel,
                 Well_AddManual,
@@ -98,7 +99,9 @@ namespace GRCLNT
         {
             switch (PageId)
             {
-                case E_Page.Dashboard:
+                case E_Page.HomePage:
+                    return "首页";
+                case E_Page.HomePage_Dashboard:
                     return "仪表板";
                 case E_Page.Well:
                     return "机井信息";
@@ -173,7 +176,9 @@ namespace GRCLNT
         {
             switch (PageId)
             {
-                case E_Page.Dashboard:
+                case E_Page.HomePage:
+                    return PackIconKind.Home;
+                case E_Page.HomePage_Dashboard:
                     return PackIconKind.ViewDashboard;
                 case E_Page.Well:
                     return PackIconKind.WaterPump;

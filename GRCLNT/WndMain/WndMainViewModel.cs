@@ -20,7 +20,7 @@ namespace GRCLNT
         {
             _windowManager = windowManager;
             addrsBarVmBd = new CtrlAddrsBarViewModel(this);
-            SelectPage(E_Page.Dashboard);
+            SelectPage(E_Page.HomePage_Dashboard);
 
             //重置最大窗口尺寸（此处避免运行过程中任务栏显隐）
             maxHeightBd = SystemParameters.WorkArea.Height + 7;
@@ -147,9 +147,14 @@ namespace GRCLNT
             addrsBarVmBd.Update(p);
             switch (p)
             {
-                case E_Page.Dashboard:
+                case E_Page.HomePage:
                     menuBtnIndexBd = 1;
-                    mainVmBd = new PageDashboardViewModel(this);
+                    mainVmBd = new PageHomePageViewModel(this);
+                    break;
+                case E_Page.HomePage_Dashboard:
+                    menuBtnIndexBd = 1;
+                    mainVmBd = new PageHomePageViewModel(this);
+                    ((PageHomePageViewModel)mainVmBd).pageIndexBd = 1;
                     break;
                 case E_Page.Well:
                     menuBtnIndexBd = 3;

@@ -257,7 +257,7 @@
                             <RowDefinition Height="5"/>
                         </Grid.RowDefinitions>
                         <Border Width="48" Height="48" Background="#FF003C78" CornerRadius="3,3,3,3" Grid.Row="{Binding menuBtnIndexBd}" Visibility="{Binding menuBtnVisibilityBd}"/>
-                        <Button Grid.Row="1"  Style="{StaticResource MenuBtn}" ToolTip="仪表板" Command="{s:Action MenuBtnCmd}" CommandParameter="Dashboard">
+                        <Button Grid.Row="1"  Style="{StaticResource MenuBtn}" ToolTip="首页" Command="{s:Action MenuBtnCmd}" CommandParameter="HomePage">
                             <materialDesign:PackIcon Kind="Home" Height="36" Width="36" Margin="-10" Foreground="White"/>
                         </Button>
                         <Button Grid.Row="3"  Style="{StaticResource MenuBtn}" ToolTip="机井信息" Command="{s:Action MenuBtnCmd}" CommandParameter="Well">

@@ -258,10 +258,13 @@
     <Compile Include="CtrlPageBar\CtrlEntWellPageBarViewModel.cs" />
     <Compile Include="CtrlPageBar\CtrlWellPageBarViewModel.cs" />
     <Compile Include="C_RT.cs" />
-    <Compile Include="PageDashboard\PageDashboardView.xaml.cs">
+    <Compile Include="PageHomePage\PageDashboardView.xaml.cs">
       <DependentUpon>PageDashboardView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageDashboard\PageDashboardViewModel.cs" />
+    <Compile Include="PageHomePage\PageHomePageView.xaml.cs">
+      <DependentUpon>PageHomePageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageHomePage\PageHomePageViewModel.cs" />
     <Compile Include="PageEntWell\PageEntWellView.xaml.cs">
       <DependentUpon>PageEntWellView.xaml</DependentUpon>
     </Compile>
@@ -421,7 +424,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PageDashboard\PageDashboardView.xaml">
+    <Page Include="PageHomePage\PageDashboardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -478,6 +481,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageGwProj\PageGwProjView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageHomePage\PageHomePageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
