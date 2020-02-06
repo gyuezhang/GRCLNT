@@ -369,7 +369,7 @@
                     <!--<ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" >-->
                     <ContentControl  s:View.Model="{Binding mainVmBd}" />
                     <!--</ScrollViewer>-->
-                    <Image Visibility="{Binding dragImgVisibilityBd}" Width="24" Height="24" Margin="0,0,5,5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/GRCLNT;component/Resource/Image/resize-bottom-right.png"/>
+                    <Image Visibility="{Binding dragImgVisibilityBd}" Width="24" Height="24" Margin="0,0,5,5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/resize-bottom-right.png"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="2" Width="400">
                         <materialDesign:Snackbar  MessageQueue="{Binding messageQueueBd}" ActionButtonStyle="{StaticResource ActionButtonStyleCust}" />
                     </StackPanel>
