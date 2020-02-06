@@ -22,6 +22,8 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
+using Mapsui.Styles.Thematics;
+using Mapsui.Desktop.Shapefile;
 
 namespace GRCLNT
 {
@@ -597,10 +599,37 @@ namespace GRCLNT
                 mapBd.Map.Layers.Add(new TileLayer(KnownTileSources.Create()));
                 mapBd.Map.Layers.Add(CreateWellLayer());
 
+                var bdarySource = new ShapeFile(System.Environment.CurrentDirectory + "\\Resource\\Shp\\Baodi District_AL6.shp", true){ CRS = "EPSG:4326" };
+                mapBd.Map.Layers.Add(new RasterizingLayer(CreateCountryLayer(bdarySource)));
+
                 var centerOfBD = new Mapsui.Geometries.Point(117.309716, 39.717173);
                 var sphericalMercatorCoordinate = SphericalMercator.FromLonLat(centerOfBD.X, centerOfBD.Y);
                 mapBd.Map.Home = n => n.NavigateTo(sphericalMercatorCoordinate, mapBd.Map.Resolutions[12]);
             }));
+        }
+        private static ILayer CreateCountryLayer(IProvider countrySource)
+        {
+            return new Layer
+            {
+                Name = "Baodi District_AL6",
+                DataSource = countrySource,
+                Style = CreateCountryTheme(),
+                CRS = "EPSG:3857",
+                Transformation = new MinimalTransformation()
+            };
+        }
+        private static IThemeStyle CreateCountryTheme()
+        {
+            //Set a gradient theme on the countries layer, based on Population density
+            //First create two styles that specify min and max styles
+            //In this case we will just use the default values and override the fill-colors
+            //using a colorblender. If different line-widths, line- and fill-colors where used
+            //in the min and max styles, these would automatically get linearly interpolated.
+            var min = new VectorStyle { Outline = new Pen { Color = Color.Black } };
+            var max = new VectorStyle { Outline = new Pen { Color = Color.Red } };
+
+            //Create theme using a density from 0 (min) to 400 (max)
+            return new GradientTheme("PopDens", 0, 400, min, max) { FillColorBlend = ColorBlend.BlueToGreen };
         }
 
         private MemoryLayer CreateWellLayer()
