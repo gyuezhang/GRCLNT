@@ -10,6 +10,8 @@
              d:DataContext="{d:DesignInstance local:PageSettingViewModel}"   
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button Command="{s:Action SelectPageCmd}" CommandParameter="Setting_VersionInfo" Style="{StaticResource MaterialDesignRaisedButton}" Width="200" Height="240" materialDesign:ButtonAssist.CornerRadius="10"/>
+        <!--<Button Command="{s:Action SelectPageCmd}" CommandParameter="Setting_VersionInfo" Style="{StaticResource MaterialDesignRaisedButton}" Width="200" Height="240" materialDesign:ButtonAssist.CornerRadius="10"/>-->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" BorderThickness="0" Margin="5,0,5,5" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+        </ScrollViewer>
     </Grid>
 </UserControl>
