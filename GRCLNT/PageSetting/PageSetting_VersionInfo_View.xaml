@@ -30,40 +30,38 @@
                 <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" BorderThickness="0" Margin="5,0,5,5" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0,5,0,10">
-                            <materialDesign:Chip  Content="1.0.0.0"  Icon="V" FontSize="18" Margin="10,0,0,8"/>
+                            <materialDesign:Chip   Content="1.2.0.0" FontSize="18" Margin="10,0,0,8">
+                                <materialDesign:Chip.Icon>
+                                    <materialDesign:PackIcon Kind="Tag" Foreground="#CCFFFFFF"/>
+                                </materialDesign:Chip.Icon>
+                            </materialDesign:Chip>
                             <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
                             <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
                             <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
                             <Border Margin="48,10,0,0" Background="#22FFFFFF" Height="1"/>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0,5,0,10">
-                            <materialDesign:Chip  Content="1.0.0.0"  Icon="V" FontSize="18" Margin="10,0,0,8"/>
+                            <materialDesign:Chip   Content="1.1.0.0" FontSize="18" Margin="10,0,0,8">
+                                <materialDesign:Chip.Icon>
+                                    <materialDesign:PackIcon Kind="Tag" Foreground="#CCFFFFFF"/>
+                                </materialDesign:Chip.Icon>
+                            </materialDesign:Chip>
                             <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
                             <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
                             <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
                             <Border Margin="48,10,0,0" Background="#22FFFFFF" Height="1"/>
-                        </StackPanel>
+                         </StackPanel>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0,5,0,10">
-                            <materialDesign:Chip  Content="1.0.0.0"  Icon="V" FontSize="18" Margin="10,0,0,8"/>
+                            <materialDesign:Chip   Content="1.0.0.0" FontSize="18" Margin="10,0,0,8">
+                                <materialDesign:Chip.Icon>
+                                    <materialDesign:PackIcon Kind="Tag" Foreground="#CCFFFFFF"/>
+                                </materialDesign:Chip.Icon>
+                            </materialDesign:Chip>
                             <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
                             <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
                             <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
                             <Border Margin="48,10,0,0" Background="#22FFFFFF" Height="1"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0,5,0,10">
-                            <materialDesign:Chip  Content="1.0.0.0"  Icon="V" FontSize="18" Margin="10,0,0,8"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
-                            <Border Margin="48,10,0,0" Background="#22FFFFFF" Height="1"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0,5,0,10">
-                            <materialDesign:Chip  Content="1.0.0.0"  Icon="V" FontSize="18" Margin="10,0,0,8"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
-                            <Border Margin="48,10,0,0" Background="#22FFFFFF" Height="1"/>
-                        </StackPanel>
+                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
             </Grid>
