@@ -320,6 +320,12 @@ namespace GRCLNT
                     mainVmBd = new PageSettingViewModel(this);
                     ((PageSettingViewModel)mainVmBd).pageIndexBd = 3;
                     break;
+                case E_Page.Setting_SysSetting:
+                    menuBtnVisibilityBd = Visibility.Hidden;
+                    settingBtnVisibilityBd = Visibility.Visible;
+                    mainVmBd = new PageSettingViewModel(this);
+                    ((PageSettingViewModel)mainVmBd).pageIndexBd = 4;
+                    break;
                 default:
                     break;
             }

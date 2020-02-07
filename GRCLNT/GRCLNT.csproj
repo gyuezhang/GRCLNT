@@ -332,6 +332,9 @@
     <Compile Include="PageSetting\PageSetting_ResetPwd_View.xaml.cs">
       <DependentUpon>PageSetting_ResetPwd_View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageSetting\PageSetting_SysSetting_View.xaml.cs">
+      <DependentUpon>PageSetting_SysSetting_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageSetting\PageSetting_UserInfo_View.xaml.cs">
       <DependentUpon>PageSetting_UserInfo_View.xaml</DependentUpon>
     </Compile>
@@ -404,6 +407,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resource\Image\BtnCard_SysSetting.png" />
     <Content Include="Resource\Shp\Baodi District_AL6.shp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -509,6 +513,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageSetting\PageSetting_ResetPwd_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageSetting\PageSetting_SysSetting_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

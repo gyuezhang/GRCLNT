@@ -184,6 +184,10 @@ namespace GRCLNT
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Setting_UserInfo));
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Setting_ResetPwd));
                     break;
+                case E_Page.Setting_SysSetting:
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.Setting));
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.Setting_SysSetting));
+                    break;
                 default:
                     break;
             }

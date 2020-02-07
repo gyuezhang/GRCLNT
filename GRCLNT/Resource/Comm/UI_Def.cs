@@ -40,6 +40,7 @@ namespace GRCLNT
             Setting_UserInfo,
                 Setting_EdtUserInfo,
                 Setting_ResetPwd,
+                Setting_SysSetting,
     }
 
     public class C_AddrsBarItem : PropertyChangedBase
@@ -167,6 +168,8 @@ namespace GRCLNT
                     return "编辑用户";
                 case E_Page.Setting_ResetPwd:
                     return "重置密码";
+                case E_Page.Setting_SysSetting:
+                    return "系统设置";
                 default:
                     return "";
             }
@@ -244,6 +247,8 @@ namespace GRCLNT
                     return PackIconKind.AccountDetails;
                 case E_Page.Setting_ResetPwd:
                     return PackIconKind.LockReset;
+                case E_Page.Setting_SysSetting:
+                    return PackIconKind.SettingsBox;
                 default:
                     return PackIconKind.Brightness1;
             }
