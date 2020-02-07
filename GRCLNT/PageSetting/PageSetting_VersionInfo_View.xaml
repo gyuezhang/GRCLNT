@@ -36,8 +36,21 @@
                                 </materialDesign:Chip.Icon>
                             </materialDesign:Chip>
                             <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="2. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="3. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="4. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="5. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="6. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="7. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="8. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="9. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="10. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="11. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="12. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="13. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="14. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="15. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="16. 机经自动导入基础功能"/>
                             <Border Margin="48,10,0,0" Background="#22FFFFFF" Height="1"/>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0,5,0,10">
@@ -46,9 +59,10 @@
                                     <materialDesign:PackIcon Kind="Tag" Foreground="#CCFFFFFF"/>
                                 </materialDesign:Chip.Icon>
                             </materialDesign:Chip>
-                            <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="1. 机井信息自动导入"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="2. 机井信息GIS查询"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="3. 机井信息统计"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="4. 机井信息报表导出"/>
                             <Border Margin="48,10,0,0" Background="#22FFFFFF" Height="1"/>
                          </StackPanel>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0,5,0,10">
@@ -57,9 +71,11 @@
                                     <materialDesign:PackIcon Kind="Tag" Foreground="#CCFFFFFF"/>
                                 </materialDesign:Chip.Icon>
                             </materialDesign:Chip>
-                            <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="1. 登录模块"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="2. 主界面框架"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="3. 机井信息手动录入功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="4. 机井信息列表查询功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="5. 机井信息列表查询功能"/>
                             <Border Margin="48,10,0,0" Background="#22FFFFFF" Height="1"/>
                          </StackPanel>
                     </StackPanel>
