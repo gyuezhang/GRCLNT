@@ -64,7 +64,7 @@
 
             <!--标题logo-->
             <Border Grid.Column="0" Background="#34000000">
-                <Image Source="/GRCLNT;component/Resource/Image/Logo.ico" Margin="11"/>
+                <Image Source="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/Logo.png" Margin="11"/>
             </Border>
 
             <!--标题文字-->
