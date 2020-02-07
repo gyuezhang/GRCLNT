@@ -35,22 +35,14 @@
                                     <materialDesign:PackIcon Kind="Tag" Foreground="#CCFFFFFF"/>
                                 </materialDesign:Chip.Icon>
                             </materialDesign:Chip>
-                            <TextBlock Style="{StaticResource ViText}" Text="1. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="2. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="3. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="4. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="5. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="6. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="7. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="8. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="9. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="10. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="11. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="12. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="13. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="14. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="15. 机经自动导入基础功能"/>
-                            <TextBlock Style="{StaticResource ViText}" Text="16. 机经自动导入基础功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="1. 企业井信息基础功能实现 "/>
+                            <TextBlock Style="{StaticResource ViText}" Text="2. 仪表板作为首页的二级菜单"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="3. 仪表板中添加公告板及活动日志功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="4. 机井信息位置查询添加搜索功能"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="5. 机井信息位置查询添加宝坻区区划边界显示"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="6. 机井信息列表查询采用分页显示"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="7. 添加默认井参数"/>
+                            <TextBlock Style="{StaticResource ViText}" Text="8. 添加设置->系统设置模块"/>
                             <Border Margin="48,10,0,0" Background="#22FFFFFF" Height="1"/>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0,5,0,10">
