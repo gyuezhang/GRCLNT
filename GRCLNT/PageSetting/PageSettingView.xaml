@@ -39,6 +39,7 @@
             <local:PageSetting_EdtUserInfo_View/>
             <local:PageSetting_ResetPwd_View/>
             <local:PageSetting_SysSetting_View/>
+            <local:PageSetting_VersionInfo_View/>
         </TabControl>
     </Grid>
 </UserControl>

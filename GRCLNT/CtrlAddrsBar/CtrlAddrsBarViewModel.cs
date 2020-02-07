@@ -188,6 +188,11 @@ namespace GRCLNT
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Setting));
                     itemsBd.Add(new C_AddrsBarItem(E_Page.Setting_SysSetting));
                     break;
+                case E_Page.Setting_VersionInfo:
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.Setting));
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.Setting_SysSetting));
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.Setting_VersionInfo));
+                    break;
                 default:
                     break;
             }

@@ -326,6 +326,12 @@ namespace GRCLNT
                     mainVmBd = new PageSettingViewModel(this);
                     ((PageSettingViewModel)mainVmBd).pageIndexBd = 4;
                     break;
+                case E_Page.Setting_VersionInfo:
+                    menuBtnVisibilityBd = Visibility.Hidden;
+                    settingBtnVisibilityBd = Visibility.Visible;
+                    mainVmBd = new PageSettingViewModel(this);
+                    ((PageSettingViewModel)mainVmBd).pageIndexBd = 5;
+                    break;
                 default:
                     break;
             }

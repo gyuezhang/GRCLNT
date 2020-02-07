@@ -338,6 +338,9 @@
     <Compile Include="PageSetting\PageSetting_UserInfo_View.xaml.cs">
       <DependentUpon>PageSetting_UserInfo_View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageSetting\PageSetting_VersionInfo_View.xaml.cs">
+      <DependentUpon>PageSetting_VersionInfo_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageWell\PageWellView.xaml.cs">
       <DependentUpon>PageWellView.xaml</DependentUpon>
     </Compile>
@@ -521,6 +524,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageSetting\PageSetting_UserInfo_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageSetting\PageSetting_VersionInfo_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
