@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace GRCLNT
 {
@@ -103,7 +105,18 @@ namespace GRCLNT
         public Screen mainVmBd { get; set; } = new Screen();
         public CtrlAddrsBarViewModel addrsBarVmBd { get; set; }
         public SnackbarMessageQueue messageQueueBd { get; set; } = new SnackbarMessageQueue(TimeSpan.FromSeconds(1.2));
-
+        public PackIconKind menuSwitchPackIconBd { get; set; } = PackIconKind.ArrowRight;
+        public int menuWidthBd { get; set; } = 72;
+        public bool is1FocusBd { get; set; } = true;
+        public bool is2FocusBd { get; set; } = false;
+        public bool is3FocusBd { get; set; } = false;
+        public bool is4FocusBd { get; set; } = false;
+        public bool is5FocusBd { get; set; } = false;
+        public bool is6FocusBd { get; set; } = false;
+        public bool is7FocusBd { get; set; } = false;
+        public bool is8FocusBd { get; set; } = false;
+        public bool is9FocusBd { get; set; } = false;
+        public bool is10FocusBd { get; set; } = false;
         #endregion Bindings
 
         #region Actions
@@ -137,6 +150,28 @@ namespace GRCLNT
             SelectPage((E_Page)Enum.Parse(typeof(E_Page), cmdPara, true));
         }
 
+        public void MenuSwitchCmd( bool bForceClose = false)
+        {
+            if (bForceClose)
+                bMenuStatus = false;
+            else
+                bMenuStatus = !bMenuStatus;
+            if (bMenuStatus)
+            {
+                menuSwitchPackIconBd = PackIconKind.ArrowLeft;
+                menuWidthBd = 210;
+            }
+            else
+            {
+                menuSwitchPackIconBd = PackIconKind.ArrowRight;
+                menuWidthBd = 72;
+            }
+        }
+
+        public void menuLostFocusCmd()
+        {
+            MenuSwitchCmd(true);
+        }
         #endregion Actions
 
         public void SelectPage(E_Page p)
@@ -336,6 +371,8 @@ namespace GRCLNT
                     break;
             }
         }
+        public bool bMenuStatus = false;
+
 
     }
 }
