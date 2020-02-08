@@ -10,8 +10,56 @@
              d:DataContext="{d:DesignInstance local:PageSettingViewModel}"   
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <!--<Button Command="{s:Action SelectPageCmd}" CommandParameter="Setting_VersionInfo" Style="{StaticResource MaterialDesignRaisedButton}" Width="200" Height="240" materialDesign:ButtonAssist.CornerRadius="10"/>-->
-        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" BorderThickness="0" Margin="5,0,5,5" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" BorderThickness="0"  PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" Margin="34,88,34,60">
+            <StackPanel Orientation="Vertical">
+                <materialDesign:Card Background="#22000000" Margin="0,0,0,10" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  Padding="0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition        Height="Auto" />
+                            <RowDefinition        Height="Auto" />
+                            <RowDefinition        Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock      Grid.Row="0"      Margin="16 14 16 2"      Style="{StaticResource MaterialDesignHeadline6TextBlock}"> 常规 </TextBlock>
+                        <Separator      Grid.Row="1"      Style="{StaticResource MaterialDesignLightSeparator}" />
+
+                    </Grid>
+                </materialDesign:Card>
+                <materialDesign:Card Background="#22000000" Margin="0,0,0,10" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  Padding="0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition        Height="Auto" />
+                            <RowDefinition        Height="Auto" />
+                            <RowDefinition        Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock      Grid.Row="0"      Margin="16 14 16 2"      Style="{StaticResource MaterialDesignHeadline6TextBlock}"> 显示 </TextBlock>
+                        <Separator      Grid.Row="1"      Style="{StaticResource MaterialDesignLightSeparator}" />
+
+                    </Grid>
+                </materialDesign:Card>
+                <materialDesign:Card Background="#22000000" Margin="0,0,0,10" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  Padding="0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition        Height="Auto" />
+                            <RowDefinition        Height="Auto" />
+                            <RowDefinition        Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock      Grid.Row="0"      Margin="16 14 16 2"      Style="{StaticResource MaterialDesignHeadline6TextBlock}"> 关于 </TextBlock>
+                        <Separator      Grid.Row="1"      Style="{StaticResource MaterialDesignLightSeparator}" />
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions> 
+                            <materialDesign:Chip   Content="1.2.0.0" FontSize="18" Margin="14,5,5,12" Grid.Column="0" VerticalAlignment="Center">
+                                <materialDesign:Chip.Icon>
+                                    <materialDesign:PackIcon Kind="Tag" Foreground="#CCFFFFFF"/>
+                                </materialDesign:Chip.Icon>
+                            </materialDesign:Chip>
+                            <Button  FontSize="16" Margin="0,0,14,7"  Style="{StaticResource MaterialDesignRaisedDarkButton}" HorizontalAlignment="Right" Content="查看历史版本信息"  Width="160" Grid.Column="1"   Command="{s:Action SelectPageCmd}" CommandParameter="Setting_VersionInfo"/>
+                        </Grid>
+                    </Grid>
+                </materialDesign:Card>
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </UserControl>
