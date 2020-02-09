@@ -126,7 +126,7 @@ namespace GRCLNT
                 case E_Page.Well_Output:
                     return "导出";
                 case E_Page.Well_Setting:
-                    return "设置";
+                    return "机井参数设置";
                 case E_Page.EntWell:
                     return "企业井管理";
                 case E_Page.EntWell_AddMtdSel:
@@ -148,7 +148,7 @@ namespace GRCLNT
                 case E_Page.EntWell_Output:
                     return "导出";
                 case E_Page.EntWell_Setting:
-                    return "设置";
+                    return "企业井参数设置";
                 case E_Page.EntWell_FetchWaterId:
                     return "取水许可";
                 case E_Page.SediCtrl:
