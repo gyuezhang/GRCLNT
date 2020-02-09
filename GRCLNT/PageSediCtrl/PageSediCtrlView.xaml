@@ -3,10 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:GRCLNT"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="PageSediCtrlView Under Construction..." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
+        <materialDesign:Card Background="#22000000" Margin="0,0,0,10" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  Padding="0" VerticalAlignment="Center" Width="450" Height="300" HorizontalAlignment="Center">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition        Height="Auto" />
+                    <RowDefinition        Height="Auto" />
+                    <RowDefinition        Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock      Grid.Row="0"      Margin="16 14 16 2"  HorizontalAlignment="Center"    Style="{StaticResource MaterialDesignHeadline6TextBlock}"> 正在建设中。。。 </TextBlock>
+                <Separator      Grid.Row="1"      Style="{StaticResource MaterialDesignLightSeparator}" />
+                <Image Grid.Row="2" Source="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/building.png"/>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </UserControl>
