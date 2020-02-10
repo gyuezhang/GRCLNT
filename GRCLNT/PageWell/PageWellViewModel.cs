@@ -236,7 +236,6 @@ namespace GRCLNT
         public static C_Well ewBd { get; set; } = new C_Well();
 
         //search
-        public string strSearchResBd { get; set; }
         public string strSearchKeywordBd { get; set; }
         public List<C_Well> curWellsBd { get; set; } = new List<C_Well>();
         public C_Well curWellIndexBd { get; set; } = new C_Well();

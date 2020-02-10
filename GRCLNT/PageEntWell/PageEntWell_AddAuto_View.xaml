@@ -28,11 +28,15 @@
                     <Button Margin="5" Height="32" Command="{s:Action inputOpenDlgCmd}" Content="浏览" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
                     <Button Margin="5" Height="32" Command="{s:Action loadWellFromExcelCmd}" Content="开始读取" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
                 </StackPanel>
-                <StackPanel Grid.Row="3" Orientation="Horizontal" Visibility="{Binding vInputingBd}" Margin="0" HorizontalAlignment="Stretch">
-                    <ProgressBar Value="{Binding vInputProgBarBd}" Minimum="0" Maximum="100" HorizontalAlignment="Stretch" Height="10" Margin="10,10,30,10" BorderThickness="0" Background="#CC000000"  Foreground="Yellow"/>
-                    <TextBlock Text="{Binding txtReadAutoInputingBd}" FontSize="18" VerticalAlignment="Center" Margin="10"/>
+                <Grid Grid.Row="3"  Visibility="{Binding vInputingBd}" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ProgressBar Value="{Binding vInputProgBarBd}" Minimum="0" Grid.Column="0" Maximum="100" HorizontalAlignment="Stretch" Height="3" Margin="10,10,30,10" BorderThickness="0" Background="#CC000000"  Foreground="Yellow"/>
+                    <TextBlock Text="{Binding txtReadAutoInputingBd}" FontSize="18" Grid.Column="1" VerticalAlignment="Center" Margin="10"/>
 
-                </StackPanel>
+                </Grid>
 
 
                 <materialDesign:ColorZone Visibility="{Binding vErrLogBd}" Grid.Row="4" Mode="Standard" Padding="8 4 8 4" Background="#11000000" CornerRadius="2" Panel.ZIndex="1" Margin="10" materialDesign:ShadowAssist.ShadowDepth="Depth1" VerticalAlignment="Center">
