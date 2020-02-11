@@ -27,6 +27,11 @@
                 </Button>
             </Grid>
         </materialDesign:ColorZone>
-
+        <Button Margin="0,0,34,34"  Command="{s:Action SwitchMapCmd}" CommandParameter="1" HorizontalAlignment="Right" Width="90" Height="63" Padding="0" Background="Transparent" VerticalAlignment="Bottom" Visibility="{Binding btnEarthVBd}"> 
+            <Image Source="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/earth.png" Width="90" Height="63"/>
+        </Button>
+        <Button Margin="0,0,34,34" Command="{s:Action SwitchMapCmd}" CommandParameter="0" HorizontalAlignment="Right" Width="90" Height="63" Padding="0" Background="Transparent" VerticalAlignment="Bottom" Visibility="{Binding btnMapVBd}">
+            <Image Source="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/map.png" Width="90" Height="63"/>
+        </Button>
     </Grid>
 </UserControl>

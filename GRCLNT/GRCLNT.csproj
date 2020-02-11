@@ -426,6 +426,8 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Resource Include="Resource\Image\building.png" />
+    <Resource Include="Resource\Image\earth.png" />
+    <Resource Include="Resource\Image\map.png" />
     <Content Include="Resource\Shp\Baodi District_AL6.cpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

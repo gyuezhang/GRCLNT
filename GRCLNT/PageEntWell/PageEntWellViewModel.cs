@@ -264,6 +264,8 @@ namespace GRCLNT
         public SeriesCollection useForSeriesBd { get; set; } = new SeriesCollection(); 
         public SeriesCollection tubeMatSeriesBd { get; set; } = new SeriesCollection();
 
+        public Visibility btnMapVBd { get; set; } = Visibility.Collapsed;
+        public Visibility btnEarthVBd { get; set; } = Visibility.Visible;
         #endregion Bindings
 
         #region Actions
@@ -455,9 +457,36 @@ namespace GRCLNT
             C_EntWellOfcOper.OutputWell(opBd, curWellsBd);
         }
 
+        public void SwitchMapCmd(string index)
+        {
+            if(index == "0")
+            {
+                if(mapBd.Map.Layers.Contains(bingMap))
+                    mapBd.Map.Layers.Remove(bingMap);
+                if(!mapBd.Map.Layers.Contains(osmMap))
+                    mapBd.Map.Layers.Add(osmMap);
+                mapBd.Map.Layers.Move(0,osmMap);
+                btnMapVBd = Visibility.Collapsed;
+                btnEarthVBd = Visibility.Visible;
+            }
+            else
+            {
+                if(mapBd.Map.Layers.Contains(osmMap))
+                    mapBd.Map.Layers.Remove(osmMap); 
+                if(!mapBd.Map.Layers.Contains(bingMap))
+                    mapBd.Map.Layers.Add(bingMap);
+                mapBd.Map.Layers.Move(0,bingMap);
+                btnMapVBd = Visibility.Visible;
+                btnEarthVBd = Visibility.Collapsed;
+            }
+        }
+
 
         #endregion Actions
         public bool isWaitingForRefreshParas { get; set; } = false;
+
+        TileLayer osmMap = new TileLayer(KnownTileSources.Create(KnownTileSource.OpenStreetMap)) { Name = "OpenStreetMap" };
+        TileLayer bingMap = new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial)) { Name = "Bing Aerial" };
         public bool CheckCreateWell(C_EntWell w)
         {
             if (w.TsOrSt == "")
@@ -595,7 +624,7 @@ namespace GRCLNT
             { 
                 mapBd = new MapControl();
                 mapBd.Map.Layers.Clear();
-                mapBd.Map.Layers.Add(new TileLayer(KnownTileSources.Create()));
+                SwitchMapCmd("0");
                 mapBd.Map.Layers.Add(CreateWellLayer());
 
                 var centerOfBD = new Mapsui.Geometries.Point(117.309716, 39.717173);
