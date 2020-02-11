@@ -22,7 +22,7 @@
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:Chip  Content="{Binding Cont}" Command="{s:Action chipCmd}" CommandParameter="{Binding StrPageId}" Foreground="White" Margin="0,0,10,0"  FontSize="18"  IconBackground="#66000000">
                             <materialDesign:Chip.Icon>
-                                <materialDesign:PackIcon Kind="{Binding IconKind}" Foreground="#CCFFFFFF"  Height="28" Width="28"/>
+                                <materialDesign:PackIcon Kind="{Binding IconKind}" Foreground="#EEFFFFFF"  Height="28" Width="28"/>
                             </materialDesign:Chip.Icon>
                         </materialDesign:Chip>
                         <materialDesign:PackIcon Kind="MenuRight" Visibility="{Binding VHasChild}" Foreground="White" VerticalAlignment="Center"  Margin="0,0,10,0" Height="32" Width="32" />

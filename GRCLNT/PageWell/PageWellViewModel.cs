@@ -463,6 +463,8 @@ namespace GRCLNT
         public bool isWaitingForRefreshParas { get; set; } = false;
         TileLayer osmMap = new TileLayer(KnownTileSources.Create(KnownTileSource.OpenStreetMap)) { Name = "OpenStreetMap" };
         TileLayer bingMap = new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial)) { Name = "Bing Aerial" };
+        public static ShapeFile bdarySource = new ShapeFile(System.Environment.CurrentDirectory + "\\Resource\\Shp\\Baodi District_AL6.shp", true){ CRS = "EPSG:4326" };
+        public RasterizingLayer boundaryLayer { get; set; } = new RasterizingLayer(CreateCountryLayer(bdarySource));
         public void SwitchMapCmd(string index)
         {
             if(index == "0")
@@ -629,13 +631,26 @@ namespace GRCLNT
                 SwitchMapCmd("0");
                 mapBd.Map.Layers.Add(CreateWellLayer());
 
-                var bdarySource = new ShapeFile(System.Environment.CurrentDirectory + "\\Resource\\Shp\\Baodi District_AL6.shp", true){ CRS = "EPSG:4326" };
-                mapBd.Map.Layers.Add(new RasterizingLayer(CreateCountryLayer(bdarySource)));
-
+                ShowBoundary();
                 var centerOfBD = new Mapsui.Geometries.Point(117.309716, 39.717173);
                 var sphericalMercatorCoordinate = SphericalMercator.FromLonLat(centerOfBD.X, centerOfBD.Y);
                 mapBd.Map.Home = n => n.NavigateTo(sphericalMercatorCoordinate, mapBd.Map.Resolutions[12]);
             }));
+        }
+
+        public void ShowBoundary(bool bShow = true)
+        {
+            if(bShow)
+            {
+                if(!mapBd.Map.Layers.Contains(boundaryLayer))
+                    mapBd.Map.Layers.Add(boundaryLayer);
+                mapBd.Map.Layers.Move(1, boundaryLayer);
+            }
+            else
+            {
+                if (mapBd.Map.Layers.Contains(boundaryLayer))
+                    mapBd.Map.Layers.Remove(boundaryLayer);
+            }
         }
         private static ILayer CreateCountryLayer(IProvider countrySource)
         {
@@ -655,11 +670,11 @@ namespace GRCLNT
             //In this case we will just use the default values and override the fill-colors
             //using a colorblender. If different line-widths, line- and fill-colors where used
             //in the min and max styles, these would automatically get linearly interpolated.
-            var min = new VectorStyle { Outline = new Pen { Color = Color.Black } };
-            var max = new VectorStyle { Outline = new Pen { Color = Color.Red } };
+            var min = new VectorStyle { Outline = new Pen { Color = Color.FromArgb(40, 0, 0, 0) } };
+            var max = new VectorStyle { Outline = new Pen { Color = Color.FromArgb(40, 0, 0, 0) } };
 
             //Create theme using a density from 0 (min) to 400 (max)
-            return new GradientTheme("PopDens", 0, 400, min, max) { FillColorBlend = ColorBlend.BlueToGreen };
+            return new GradientTheme("PopDens", 0, 400, min, max) { FillColorBlend = ColorBlend.TwoColors(Color.FromArgb(40, 0, 0, 0) ,Color.FromArgb(40, 0, 0, 0)) };
         }
 
         private MemoryLayer CreateWellLayer()
