@@ -35,8 +35,23 @@ namespace GRCLNT
             wndMainVM = _wndMainVM;
             pageBarVmBd = new CtrlWellPageBarViewModel(wndMainVM);
             wpBd = C_RT.wp;
+            wpForSearchBd = new C_WellParas(C_RT.wp.All);
+            wpForSearchBd.Loc.Add(new C_WellPara(E_WellParaType.Loc, "全部"));
+            wpForSearchBd.UnitCat.Add(new C_WellPara(E_WellParaType.UnitCat, "全部"));
+            wpForSearchBd.TubeMat.Add(new C_WellPara(E_WellParaType.TubeMat, "全部"));
+            wpForSearchBd.UseFor.Add(new C_WellPara(E_WellParaType.UseFor, "全部"));
+            wpForSearchBd.PumpModel.Add(new C_WellPara(E_WellParaType.PumpModel, "全部"));
             cbdAcBd = new C_BdAreaCode(C_RT.acs);
             ebdAcBd = new C_BdAreaCode(C_RT.acs);
+            scAcBd = new C_BdAreaCode(C_RT.acs);
+            C_AreaCode acTmp4 = new C_AreaCode();
+            acTmp4.Id = 0;acTmp4.Level = 4;acTmp4.PCode = 0;acTmp4.Code = 0;acTmp4.Name = "全区";
+            C_AreaCode acTmp5 = new C_AreaCode();
+            acTmp5.Id = 0;acTmp5.Level = 5;acTmp5.PCode = 0;acTmp5.Code = 0;acTmp5.Name = "全街道（乡镇）";
+
+            scAcBd.AllL4AreaCodes.Add(acTmp4);
+            scAcBd.AllL5AreaCodes.Add(acTmp5);
+            ClearSearchConditionsBd();
         }
         private WndMainViewModel wndMainVM { get; set; }
 
@@ -231,10 +246,13 @@ namespace GRCLNT
         public string strPsUseForBd { get; set; }
         public static C_WellParas wpBd { get; set; } = new C_WellParas();
 
+        public C_WellParas wpForSearchBd { get; set; } = new C_WellParas();
         public C_BdAreaCode cbdAcBd { get; set; } = new C_BdAreaCode();
         public C_BdAreaCode ebdAcBd { get; set; } = new C_BdAreaCode();
         public C_Well cwBd { get; set; } = new C_Well();
         public static C_Well ewBd { get; set; } = new C_Well();
+
+        public C_BdAreaCode scAcBd { get; set; } = new C_BdAreaCode();
 
         //search
         public string strSearchKeywordBd { get; set; }
@@ -267,9 +285,71 @@ namespace GRCLNT
         public PackIconKind advancedPIKindBd { get; set; } = PackIconKind.ArrowBottomDropCircleOutline;
         public Thickness mapMarginBd { get; set; } = new Thickness(34, 88, 34, 60);
         public Visibility advanceToolBarVBd { get; set; } = Visibility.Collapsed;
+        public C_SearchCondition scBd { get; set; } = new C_SearchCondition();
         #endregion Bindings
 
         #region Actions
+        public void ClearSearchConditionsBd()
+        {
+            wpForSearchBd.LocIndex = wpForSearchBd.Loc.Where(c =>
+            {
+                if (c.Type == E_WellParaType.Loc && c.Value == "全部")
+                    return true;
+                else
+                    return false;
+            }).ToList()[0];
+            wpForSearchBd.PumpModelIndex = wpForSearchBd.PumpModel.Where(c =>
+            {
+                if (c.Type == E_WellParaType.PumpModel && c.Value == "全部")
+                    return true;
+                else
+                    return false;
+            }).ToList()[0];
+           wpForSearchBd.UnitCatIndex = wpForSearchBd.UnitCat.Where(c =>
+            {
+                if (c.Type == E_WellParaType.UnitCat && c.Value == "全部")
+                    return true;
+                else
+                    return false;
+            }).ToList()[0];
+           wpForSearchBd.TubeMatIndex = wpForSearchBd.TubeMat.Where(c =>
+            {
+                if (c.Type == E_WellParaType.TubeMat && c.Value == "全部")
+                    return true;
+                else
+                    return false;
+            }).ToList()[0];
+           wpForSearchBd.UseForIndex = wpForSearchBd.UseFor.Where(c =>
+            {
+                if (c.Type == E_WellParaType.UseFor && c.Value == "全部")
+                    return true;
+                else
+                    return false;
+            }).ToList()[0];
+
+            C_AreaCode acTmp4 = new C_AreaCode();
+            acTmp4.Id = 0;acTmp4.Level = 4;acTmp4.PCode = 0;acTmp4.Code = 0;acTmp4.Name = "全区";
+            C_AreaCode acTmp5 = new C_AreaCode();
+            acTmp5.Id = 0;acTmp5.Level = 5;acTmp5.PCode = 0;acTmp5.Code = 0;acTmp5.Name = "全街道（乡镇）";
+
+
+            scAcBd.L4Index = scAcBd.AllL4AreaCodes.Where(c=>
+            {
+                if(c.Id ==0 && c.Level ==4&& c.PCode ==0&& c.Code ==0&& c.Name == "全区")
+                    return true;
+                else
+                    return false;
+            }
+            ).ToList()[0];
+            scAcBd.L5Index = scAcBd.AllL5AreaCodes.Where(c =>
+            {
+                if(c.Id ==0 && c.Level ==5&& c.PCode ==0&& c.Code ==0&& c.Name == "全街道（乡镇）")
+                    return true;
+                else
+                    return false;
+            }
+            ).ToList()[0];
+        }
         public void SelectPageCmd(string cmdPara)
         {
             wndMainVM.SelectPage((E_Page)Enum.Parse(typeof(E_Page), cmdPara, true));
@@ -364,8 +444,16 @@ namespace GRCLNT
         //search
         public void refreshCmd(string keywords)
         {
+            scBd.TsOrSt = scAcBd.L4Index.Name;
+            scBd.Village = scAcBd.L5Index.Name;
+            scBd.UnitCat = wpForSearchBd.UnitCatIndex.Value;
+            scBd.PumpMode = wpForSearchBd.PumpModelIndex.Value;
+            scBd.UseFor = wpForSearchBd.UseForIndex.Value;
+            scBd.TubeMat = wpForSearchBd.TubeMatIndex.Value;
+            scBd.Loc = wpForSearchBd.LocIndex.Value;
+            scBd.Key = keywords;
             GRSocketHandler.getWells += GRSocketHandler_getWells;
-            GRSocketAPI.GetWells(keywords);
+            GRSocketAPI.GetWells(scBd);
         }
 
         public bool CanedtWellCmd => (curWellIndexBd != null);
