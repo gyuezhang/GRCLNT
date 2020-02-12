@@ -24,6 +24,7 @@ using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using Mapsui.Styles.Thematics;
 using Mapsui.Desktop.Shapefile;
+using MaterialDesignThemes.Wpf;
 
 namespace GRCLNT
 {
@@ -263,6 +264,9 @@ namespace GRCLNT
         public Visibility btnMapVBd { get; set; } = Visibility.Collapsed;
         public Visibility btnEarthVBd { get; set; } = Visibility.Visible;
 
+        public PackIconKind advancedPIKindBd { get; set; } = PackIconKind.ArrowBottomDropCircleOutline;
+        public Thickness mapMarginBd { get; set; } = new Thickness(34, 88, 34, 60);
+        public Visibility advanceToolBarVBd { get; set; } = Visibility.Collapsed;
         #endregion Bindings
 
         #region Actions
@@ -458,6 +462,22 @@ namespace GRCLNT
             C_WellOfcOper.OutputWell(opBd, curWellsBd);
         }
 
+        public void advancedSearchCmd ()
+        {
+            isAdvancedSearching = !isAdvancedSearching;
+            if(isAdvancedSearching)
+            {
+                advancedPIKindBd = PackIconKind.ArrowTopDropCircleOutline;
+                mapMarginBd = new Thickness(34, 146, 34, 60);
+                advanceToolBarVBd = Visibility.Visible;
+            }
+            else
+            {
+                advancedPIKindBd = PackIconKind.ArrowBottomDropCircleOutline;
+                mapMarginBd = new Thickness(34, 88, 34, 60);
+                advanceToolBarVBd = Visibility.Collapsed;
+            }
+        }
         #endregion Actions
 
         public bool isWaitingForRefreshParas { get; set; } = false;
@@ -465,6 +485,7 @@ namespace GRCLNT
         TileLayer bingMap = new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial)) { Name = "Bing Aerial" };
         public static ShapeFile bdarySource = new ShapeFile(System.Environment.CurrentDirectory + "\\Resource\\Shp\\Baodi District_AL6.shp", true){ CRS = "EPSG:4326" };
         public RasterizingLayer boundaryLayer { get; set; } = new RasterizingLayer(CreateCountryLayer(bdarySource));
+        public bool isAdvancedSearching { get; set; } = false;
         public void SwitchMapCmd(string index)
         {
             if(index == "0")
