@@ -25,37 +25,6 @@
                 <TextBlock      Grid.Row="0"      Margin="16 14 16 2"      Style="{StaticResource MaterialDesignHeadline6TextBlock}">   公告                </TextBlock>
                 <Separator      Grid.Row="1"      Style="{StaticResource MaterialDesignLightSeparator}" />
                 <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" BorderThickness="0" Margin="5,5,5,5" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-                    <ListView Margin="0" Padding="0"  BorderThickness="0" ItemsSource="{Binding logsBd}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Border Padding="0" Margin="0">
-                                    <Grid >
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <materialDesign:PopupBox Width="42" Height="42" Grid.Column="0" Margin="4,4,15,4" Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
-                                            ToolTipService.Placement="Right">
-                                            <materialDesign:PopupBox.ToggleContent>
-                                                <TextBlock Text="A" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" />
-                                            </materialDesign:PopupBox.ToggleContent>
-                                        </materialDesign:PopupBox>
-                                        <Grid Grid.Column="1" VerticalAlignment="Stretch">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                            </Grid.RowDefinitions>
-                                            <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Center">
-                                                <TextBlock Text="{Binding Path=UserId}" Margin="0,0,10,0"/>
-                                                <TextBlock Text="{Binding Path=Api}"/>
-                                            </StackPanel>
-                                            <TextBlock Text="{Binding Path=Time}" Grid.Row="1" VerticalAlignment="Center"/>
-                                        </Grid>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
                 </ScrollViewer>
 
             </Grid>
@@ -87,7 +56,7 @@
                                             <materialDesign:PopupBox Width="42" Height="42" Grid.Column="0" Margin="4,4,15,4" Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
                                                 ToolTipService.Placement="Right">
                                                 <materialDesign:PopupBox.ToggleContent>
-                                                    <TextBlock Text="A" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" />
+                                                    <TextBlock Text="{Binding Path=Ava}" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" />
                                                 </materialDesign:PopupBox.ToggleContent>
                                             </materialDesign:PopupBox>
                                             <Grid Grid.Column="1" VerticalAlignment="Stretch">
@@ -96,10 +65,10 @@
                                                     <RowDefinition Height="*"/>
                                                 </Grid.RowDefinitions>
                                                 <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Center">
-                                                    <TextBlock Text="{Binding Path=UserId}" Margin="0,0,10,0"/>
-                                                    <TextBlock Text="{Binding Path=Api}"/>
+                                                    <TextBlock Text="{Binding Path=UsrName}" Margin="0,0,10,0"/>
+                                                    <TextBlock Text="{Binding Path=Oper}"/>
                                                 </StackPanel>
-                                                <TextBlock Text="{Binding Path=Time}" Grid.Row="1" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Path=RecordTime}" Grid.Row="1" VerticalAlignment="Center"/>
                                             </Grid>
                                         </Grid>
                                         <Border Grid.Row="1" Margin="58,0,0,0" Background="#22FFFFFF"/>

@@ -22,8 +22,6 @@ namespace GRCLNT
         {
             _windowManager = windowManager;
             addrsBarVmBd = new CtrlAddrsBarViewModel(this);
-            SelectPage(E_Page.HomePage_Dashboard);
-
             //重置最大窗口尺寸（此处避免运行过程中任务栏显隐）
             maxHeightBd = SystemParameters.WorkArea.Height + 7;
             maxWidthBd = SystemParameters.WorkArea.Width + 7;
@@ -36,7 +34,10 @@ namespace GRCLNT
             GRSocketAPI.GetWellParas();
             GRSocketHandler.getEntWellParas += GRSocketHandler_getEntWellParas;
             GRSocketAPI.GetEntWellParas();
+            GRSocketHandler.getUsers += GRSocketHandler_getUsers;
+            GRSocketAPI.GetUsers();
         }
+
 
         #region SocketHandler
 
@@ -82,6 +83,22 @@ namespace GRCLNT
                     break;
                 case E_ResState.FAILED:
                     messageQueueBd.Enqueue("获取企业井参数失败");
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void GRSocketHandler_getUsers(E_ResState state, List<C_User> users)
+        {
+            GRSocketHandler.getUsers -= GRSocketHandler_getUsers;
+            switch (state)
+            {
+                case E_ResState.OK:
+                    C_RT.users = users;
+                    SelectPage(E_Page.HomePage_Dashboard);
+                    break;
+                case E_ResState.FAILED:
+                    messageQueueBd.Enqueue("获取用户失败");
                     break;
                 default:
                     break;

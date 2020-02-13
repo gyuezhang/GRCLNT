@@ -1,5 +1,6 @@
 ﻿using GRModel;
 using GRSocket;
+using GRUtil;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace GRCLNT
 
             GRSocketHandler.getLogs += GRSocketHandler_getLogs;
             GRSocketAPI.GetLogs();
-            logsBd = new List<C_Log>();
+            logsBd = new List<C_ShowLog>();
         }
 
 
@@ -30,7 +31,7 @@ namespace GRCLNT
             switch (state)
             {
                 case E_ResState.OK:
-                    logsBd = logs.Take(20).ToList();
+                    logsBd = GetShowLogs(logs.Take(20).ToList());
                     wndMainVM.messageQueueBd.Enqueue("获取日志信息成功");
                     break;                            
                 case E_ResState.FAILED:                
@@ -45,7 +46,7 @@ namespace GRCLNT
 
         #region Bindings
         public int pageIndexBd { get; set; } = 0;
-        public List<C_Log> logsBd { get; set; }
+        public List<C_ShowLog> logsBd { get; set; }
         #endregion Bindings
 
         #region Actions
@@ -56,5 +57,32 @@ namespace GRCLNT
 
 
         #endregion Actions
+
+        public List<C_ShowLog> GetShowLogs(List<C_Log> logs)
+        {
+            List<C_ShowLog> res = new List<C_ShowLog>();
+
+            foreach(C_Log l in logs)
+            {
+                C_ShowLog sl = new C_ShowLog();
+                sl.UsrName = GetUserNameById(l.UserId);
+                sl.Ava = sl.UsrName.Substring(sl.UsrName.Length-1,1);
+                sl.Oper = C_Str.GetOperByApiId(l.Api);
+                sl.RecordTime = l.Time.ToString("f");
+                res.Add(sl);
+            }
+
+            return res;
+        }
+
+        public string GetUserNameById(int id)
+        {
+            foreach(C_User u in C_RT.users)
+            {
+                if (id == u.Id)
+                    return u.Name;
+            }
+            return "X";
+        }
     }
 }
