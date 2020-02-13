@@ -44,6 +44,12 @@ namespace GRCLNT
             cbdAcBd = new C_BdAreaCode(C_RT.acs);
             ebdAcBd = new C_BdAreaCode(C_RT.acs);
             scAcBd = new C_BdAreaCode(C_RT.acs);
+            foreach (C_AreaCode ac in scAcBd.AllL4AreaCodes)
+            {
+                C_AreaCode t = new C_AreaCode();
+                t.Id = -1;t.Level = 5;t.PCode = ac.Code;t.Code = -1;t.Name = "全街道（乡镇）";
+                scAcBd.AllL5AreaCodes.Add(t);
+            }
             C_AreaCode acTmp4 = new C_AreaCode();
             acTmp4.Id = 0;acTmp4.Level = 4;acTmp4.PCode = 0;acTmp4.Code = 0;acTmp4.Name = "全区";
             C_AreaCode acTmp5 = new C_AreaCode();
@@ -564,6 +570,8 @@ namespace GRCLNT
                 advancedPIKindBd = PackIconKind.ArrowBottomDropCircleOutline;
                 mapMarginBd = new Thickness(34, 88, 34, 60);
                 advanceToolBarVBd = Visibility.Collapsed;
+                ClearSearchConditionsBd();
+                refreshCmd("");
             }
         }
         #endregion Actions
