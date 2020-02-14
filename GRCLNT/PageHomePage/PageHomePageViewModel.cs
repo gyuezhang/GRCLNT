@@ -18,6 +18,8 @@ namespace GRCLNT
 
             GRSocketHandler.getLogs += GRSocketHandler_getLogs;
             GRSocketAPI.GetLogs();
+            GRSocketHandler.getAnms += GRSocketHandler_getAnms;
+            GRSocketAPI.GetAnms();
             logsBd = new List<C_ShowLog>();
         }
 
@@ -41,12 +43,29 @@ namespace GRCLNT
                     break;
             }
         }
+        private void GRSocketHandler_getAnms(E_ResState state, List<C_Anm> anms)
+        {
+            GRSocketHandler.getAnms -= GRSocketHandler_getAnms;
+            switch (state)
+            {
+                case E_ResState.OK:
+                    anmsBd = anms;
+                    wndMainVM.messageQueueBd.Enqueue("获取公告成功");
+                    break;                            
+                case E_ResState.FAILED:                
+                    wndMainVM.messageQueueBd.Enqueue("获取公告失败");
+                    break;
+                default:
+                    break;
+            }
+        }
 
         #endregion SocketHandler
 
         #region Bindings
         public int pageIndexBd { get; set; } = 0;
         public List<C_ShowLog> logsBd { get; set; }
+        public List<C_Anm> anmsBd { get; set; } = new List<C_Anm>();
         #endregion Bindings
 
         #region Actions

@@ -24,7 +24,45 @@
                 </Grid.RowDefinitions>
                 <TextBlock      Grid.Row="0"      Margin="16 14 16 2"      Style="{StaticResource MaterialDesignHeadline6TextBlock}">   公告                </TextBlock>
                 <Separator      Grid.Row="1"      Style="{StaticResource MaterialDesignLightSeparator}" />
-                <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" BorderThickness="0" Margin="5,5,5,5" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+                <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" BorderThickness="0" Margin="5,5,5,5"  HorizontalAlignment="Stretch"  PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+                    <ListView Margin="0" Padding="0"  BorderThickness="0" ItemsSource="{Binding anmsBd}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate >
+                                <Border Padding="0" Margin="0,-5,-6,-2" HorizontalAlignment="Stretch" >
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="1"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0" Margin="0,8,0,5">
+                                            <Grid  VerticalAlignment="Stretch">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0" HorizontalAlignment="Stretch" Margin="5,5,0,10">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="{Binding Path=Title}" HorizontalAlignment="Left" Margin="0,0,10,0" FontSize="18"/>
+                                                    <TextBlock  Grid.Column="1" Text="{Binding Path=CTime}" VerticalAlignment="Center"/>
+                                                </Grid>
+                                                <TextBlock Text="{Binding Path=Content}" Grid.Row="1" VerticalAlignment="Bottom" FontFamily="16" Margin="5" Foreground="#FFEEEEEE"  TextWrapping="Wrap"/>
+                                            </Grid>
+                                        </Grid>
+                                        <Border Grid.Row="1" Margin="0,0,0,0" Background="#22FFFFFF"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+
                 </ScrollViewer>
 
             </Grid>
