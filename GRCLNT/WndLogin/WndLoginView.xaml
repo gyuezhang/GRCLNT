@@ -29,9 +29,9 @@
         <!--左侧信息框-->
         <StackPanel Grid.Column="0" Orientation="Vertical" >
             <StackPanel.Background>
-                <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/bgleft.png"/>
+                <ImageBrush ImageSource="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/bgleft.png"/>
             </StackPanel.Background>
-            <Image Source="/GRCLNT;component/Resource/Image/Logo.ico" Width="100" Margin="0,55,0,0"/>
+            <Image Source="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/Logo.ico" Width="100" Margin="0,55,0,0"/>
             <TextBlock Text="宝坻区地下水资源" FontSize="24" HorizontalAlignment="Center" Margin="0,25,0,0" />
             <TextBlock Text="信息管理系统" FontSize="24" HorizontalAlignment="Center" Margin="0,5,0,0"/>
             <TextBlock Text="Baodi District Groundwater Resources " FontSize="12" HorizontalAlignment="Center" Margin="0,8,0,0"/>
@@ -157,8 +157,8 @@
         </StackPanel>
 
         <!--底部普通消息提示-->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="2" Width="300">
-            <materialDesign:Snackbar  MessageQueue="{Binding messageQueueBd}" ActionButtonStyle="{StaticResource ActionButtonStyleCust}" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="2" Width="Auto">
+            <materialDesign:Snackbar  MessageQueue="{Binding messageQueueBd}" ActionButtonStyle="{StaticResource ActionButtonStyleCust}"  Height="55" Background="#44000000" />
         </StackPanel>
 
     </Grid>

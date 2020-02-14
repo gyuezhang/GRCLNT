@@ -49,33 +49,73 @@
             <Setter Property="GaugeBackground" Value="#30ffffff"></Setter>
         </Style>
     </UserControl.Resources>
-    <ScrollViewer HorizontalAlignment="Stretch" x:Name="sv"  PreviewMouseWheel="sv_PreviewMouseWheel" Margin="20,100,10,20"  VerticalScrollBarVisibility="Auto"  Background="Transparent" >
-        <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch"> 
-                <lvc:CartesianChart  Margin="10" MinHeight="300" MinWidth="1200" HorizontalAlignment="Stretch">
-                    <lvc:CartesianChart.Series>
-                        <lvc:LineSeries Fill="#30ffffff" Values="{Binding tsWellCntBd}"></lvc:LineSeries>
-                    </lvc:CartesianChart.Series>
-                    <lvc:CartesianChart.AxisX>
-                        <lvc:Axis ShowLabels="True" Labels="{Binding tsWellCntLabelBd}"></lvc:Axis>
-                    </lvc:CartesianChart.AxisX>
-                </lvc:CartesianChart>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,60" Width="1100" Height="400" >
-                <lvc:PieChart Margin="60,10,10,10" HorizontalAlignment="Left" HorizontalContentAlignment="Left" LegendLocation="Right" InnerRadius="60" Height="360" Width="420" DataTooltip="{x:Null}" Hoverable="True" Series="{Binding useForSeriesBd}">
-                    <lvc:PieChart.ChartLegend>
-                        <lvc:DefaultLegend Foreground="White" ></lvc:DefaultLegend>
-                    </lvc:PieChart.ChartLegend>
-                </lvc:PieChart>
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="32,88,34,60"  >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+                <materialDesign:ColorZone VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Margin="0,0,0,14" Mode="Standard"  Background="#11000000" CornerRadius="2" Panel.ZIndex="1"  materialDesign:ShadowAssist.ShadowDepth="Depth1" HorizontalAlignment="Stretch">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition        Height="Auto" />
+                            <RowDefinition        Height="Auto" />
+                            <RowDefinition        Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock      Grid.Row="0"      Margin="16 14 16 2" Foreground="White"     Style="{StaticResource MaterialDesignHeadline6TextBlock}"> 机井数量各街道（乡镇）统计</TextBlock>
+                        <Separator      Grid.Row="1"      Style="{StaticResource MaterialDesignLightSeparator}" />
 
-                <lvc:PieChart Margin="60,10,10,10" HorizontalAlignment="Center" HorizontalContentAlignment="Left" LegendLocation="Right" InnerRadius="60" Height="360" Width="420" DataTooltip="{x:Null}" Hoverable="True" Series="{Binding tubeMatSeriesBd}">
+
+                        <lvc:CartesianChart  Grid.Row="2" Margin="0,0,0,15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                            <lvc:CartesianChart.Series>
+                                <lvc:LineSeries Fill="#30ffffff" Values="{Binding tsWellCntBd}"></lvc:LineSeries>
+                            </lvc:CartesianChart.Series>
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis ShowLabels="True" Labels="{Binding tsWellCntLabelBd}"></lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                        </lvc:CartesianChart>
+                    </Grid>
+                </materialDesign:ColorZone>
+        <materialDesign:ColorZone  Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch"   Margin="0,17,17,0" Mode="Standard"  Background="#11000000" CornerRadius="2" Panel.ZIndex="1"  materialDesign:ShadowAssist.ShadowDepth="Depth1" HorizontalAlignment="Stretch">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition        Height="Auto" />
+                    <RowDefinition        Height="Auto" />
+                    <RowDefinition        Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock      Grid.Row="0"      Margin="16 14 16 2" Foreground="White"     Style="{StaticResource MaterialDesignHeadline6TextBlock}"> 机井用途统计</TextBlock>
+                <Separator      Grid.Row="1"      Style="{StaticResource MaterialDesignLightSeparator}" />
+
+
+
+                <lvc:PieChart Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LegendLocation="Right" InnerRadius="60"  DataTooltip="{x:Null}" Hoverable="True" Series="{Binding useForSeriesBd}" >
                     <lvc:PieChart.ChartLegend>
                         <lvc:DefaultLegend Foreground="White" ></lvc:DefaultLegend>
                     </lvc:PieChart.ChartLegend>
                 </lvc:PieChart>
-                
-            </StackPanel>
-        </StackPanel>
-    </ScrollViewer>
+            </Grid>
+        </materialDesign:ColorZone>
+        <materialDesign:ColorZone  Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch"   Margin="17,17,0,0" Mode="Standard"  Background="#11000000" CornerRadius="2" Panel.ZIndex="1"  materialDesign:ShadowAssist.ShadowDepth="Depth1" HorizontalAlignment="Stretch">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition        Height="Auto" />
+                    <RowDefinition        Height="Auto" />
+                    <RowDefinition        Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock      Grid.Row="0"      Margin="16 14 16 2" Foreground="White"     Style="{StaticResource MaterialDesignHeadline6TextBlock}"> 机井管材统计</TextBlock>
+                <Separator      Grid.Row="1"      Style="{StaticResource MaterialDesignLightSeparator}" />
+
+
+                <lvc:PieChart  Grid.Row="2"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  LegendLocation="Right" InnerRadius="60"   DataTooltip="{x:Null}" Hoverable="True" Series="{Binding tubeMatSeriesBd}" >
+                    <lvc:PieChart.ChartLegend>
+                        <lvc:DefaultLegend Foreground="White" ></lvc:DefaultLegend>
+                    </lvc:PieChart.ChartLegend>
+                </lvc:PieChart>
+            </Grid>
+        </materialDesign:ColorZone>
+    </Grid>
 </UserControl>
     

@@ -6,7 +6,8 @@ namespace GRCLNT
 {
     public enum E_Page
     {
-        Dashboard,
+        HomePage,
+            HomePage_Dashboard,
         Well,
             Well_AddMtdSel,
                 Well_AddManual,
@@ -39,6 +40,8 @@ namespace GRCLNT
             Setting_UserInfo,
                 Setting_EdtUserInfo,
                 Setting_ResetPwd,
+            Setting_SysSetting,
+                Setting_VersionInfo,
     }
 
     public class C_AddrsBarItem : PropertyChangedBase
@@ -98,7 +101,9 @@ namespace GRCLNT
         {
             switch (PageId)
             {
-                case E_Page.Dashboard:
+                case E_Page.HomePage:
+                    return "首页";
+                case E_Page.HomePage_Dashboard:
                     return "仪表板";
                 case E_Page.Well:
                     return "机井信息";
@@ -121,7 +126,7 @@ namespace GRCLNT
                 case E_Page.Well_Output:
                     return "导出";
                 case E_Page.Well_Setting:
-                    return "设置";
+                    return "机井参数设置";
                 case E_Page.EntWell:
                     return "企业井管理";
                 case E_Page.EntWell_AddMtdSel:
@@ -143,7 +148,7 @@ namespace GRCLNT
                 case E_Page.EntWell_Output:
                     return "导出";
                 case E_Page.EntWell_Setting:
-                    return "设置";
+                    return "企业井参数设置";
                 case E_Page.EntWell_FetchWaterId:
                     return "取水许可";
                 case E_Page.SediCtrl:
@@ -164,6 +169,10 @@ namespace GRCLNT
                     return "编辑用户";
                 case E_Page.Setting_ResetPwd:
                     return "重置密码";
+                case E_Page.Setting_SysSetting:
+                    return "系统设置";
+                case E_Page.Setting_VersionInfo:
+                    return "版本信息";
                 default:
                     return "";
             }
@@ -173,7 +182,9 @@ namespace GRCLNT
         {
             switch (PageId)
             {
-                case E_Page.Dashboard:
+                case E_Page.HomePage:
+                    return PackIconKind.Home;
+                case E_Page.HomePage_Dashboard:
                     return PackIconKind.ViewDashboard;
                 case E_Page.Well:
                     return PackIconKind.WaterPump;
@@ -239,6 +250,10 @@ namespace GRCLNT
                     return PackIconKind.AccountDetails;
                 case E_Page.Setting_ResetPwd:
                     return PackIconKind.LockReset;
+                case E_Page.Setting_SysSetting:
+                    return PackIconKind.SettingsTransfer;
+                case E_Page.Setting_VersionInfo:
+                    return PackIconKind.Tags;
                 default:
                     return PackIconKind.Brightness1;
             }

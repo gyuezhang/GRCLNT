@@ -22,17 +22,17 @@ namespace GRCLNT
 
         #region SocketHandler
 
-        private void GRSocketHandler_edtUser(RES_STATE state, C_User user)
+        private void GRSocketHandler_edtUser(E_ResState state, C_User user)
         {
             GRSocketHandler.edtUser -= GRSocketHandler_edtUser;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     C_RT.user = user;
                     wndMainVM.messageQueueBd.Enqueue("修改用户信息成功"); 
                     SelectPageCmd("Setting_UserInfo");
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     wndMainVM.messageQueueBd.Enqueue("修改用户信息失败");
                     break;
                 default:
@@ -41,16 +41,16 @@ namespace GRCLNT
             userBd = C_RT.user;
         }
 
-        private void GRSocketHandler_resetPwd(RES_STATE state)
+        private void GRSocketHandler_resetPwd(E_ResState state)
         {
             GRSocketHandler.resetPwd -= GRSocketHandler_resetPwd;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     wndMainVM.messageQueueBd.Enqueue("重置密码成功，请尽快重新登录");
                     SelectPageCmd("Setting_UserInfo");
                     break;                            
-                case RES_STATE.FAILED:                
+                case E_ResState.FAILED:                
                     wndMainVM.messageQueueBd.Enqueue("重置密码失败");
                     break;
                 default:

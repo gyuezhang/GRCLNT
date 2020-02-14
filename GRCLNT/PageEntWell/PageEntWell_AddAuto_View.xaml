@@ -9,43 +9,50 @@
              xmlns:s="https://github.com/canton7/Stylet"
              d:DataContext="{d:DesignInstance local:PageEntWellViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Margin="10,64,10,10">
-            <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}" Foreground="White" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,20">机井信息导入</TextBlock>
-        </StackPanel>
+    <Grid>
+        <materialDesign:ColorZone VerticalAlignment="Stretch"  Grid.Column="0" Grid.Row="0" MinWidth="300" Margin="32,88,34,60" Mode="Standard"  Background="#11000000" CornerRadius="2" Panel.ZIndex="1"  materialDesign:ShadowAssist.ShadowDepth="Depth1" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition        Height="Auto" />
+                    <RowDefinition        Height="Auto" />
+                    <RowDefinition        Height="Auto" />
+                    <RowDefinition        Height="Auto" />
+                    <RowDefinition        Height="*" />
+                    <RowDefinition        Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock      Grid.Row="0"      Margin="16 14 16 2" Foreground="White"     Style="{StaticResource MaterialDesignHeadline6TextBlock}"> 数据文件读取</TextBlock>
+                <Separator      Grid.Row="1"      Style="{StaticResource MaterialDesignLightSeparator}" />
+                <StackPanel Grid.Row="2"  Margin="10" Orientation="Horizontal" HorizontalAlignment="Center" >
+                    <TextBox MinWidth="550" Text="{Binding inputFilePathBd,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,20,0" Foreground="White" FontSize="18"  Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" 
+                     VerticalAlignment="Center" TextWrapping="Wrap" materialDesign:HintAssist.Hint="文件路径" IsEnabled="False"/>
+                    <Button Margin="5" Height="32" Command="{s:Action inputOpenDlgCmd}" Content="浏览" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
+                    <Button Margin="5" Height="32" Command="{s:Action loadWellFromExcelCmd}" Content="开始读取" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
+                </StackPanel>
+                <Grid Grid.Row="3"  Visibility="{Binding vInputingBd}" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ProgressBar Value="{Binding vInputProgBarBd}" Minimum="0" Grid.Column="0" Maximum="100" HorizontalAlignment="Stretch" Height="3" Margin="10,10,30,10" BorderThickness="0" Background="#CC000000"  Foreground="Yellow"/>
+                    <TextBlock Text="{Binding txtReadAutoInputingBd}" FontSize="18" Grid.Column="1" VerticalAlignment="Center" Margin="10"/>
 
-        <StackPanel Grid.Row="1"  Margin="10" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" >
-            <TextBox Width="550" Text="{Binding inputFilePath,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,20,0" Foreground="White" FontSize="18"  Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" 
-                     VerticalAlignment="Center" TextWrapping="Wrap" MaxWidth="1000" materialDesign:HintAssist.Hint="文件路径" IsEnabled="False"/>
-            <Button Margin="5" Height="40" Command="{s:Action OnOpenDlgToAutoInput}" Content="浏览" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
-            <Button Margin="5" Height="40" Command="{s:Action OnStartAutoInput}" Content="开始导入" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
-        </StackPanel>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" Visibility="{Binding vInputing}" Margin="10" HorizontalAlignment="Center">
-            <ProgressBar Value="{Binding valueInputing}" Minimum="0" Maximum="100" HorizontalAlignment="Stretch" Width="450" Height="10" Margin="10,10,30,10" BorderThickness="0" Background="#CC000000"  Foreground="Yellow"/>
-            <TextBlock Text="{Binding txtReadAutoInputing}" FontSize="18" VerticalAlignment="Center" Margin="10"/>
-            <Button Margin="5" Height="40" Command="{s:Action OnStartUploadAutoWell}" Content="开始上传" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
-
-        </StackPanel>
+                </Grid>
 
 
-        <materialDesign:ColorZone Visibility="{Binding vErrLog}" Grid.Row="3" Mode="Standard" Padding="8 4 8 4" Background="#11000000" CornerRadius="2" Panel.ZIndex="1" Margin="10" materialDesign:ShadowAssist.ShadowDepth="Depth1" VerticalAlignment="Center">
+                <materialDesign:ColorZone Visibility="{Binding vErrLogBd}" Grid.Row="4" Mode="Standard" Padding="8 4 8 4" Background="#11000000" CornerRadius="2" Panel.ZIndex="1" Margin="10" materialDesign:ShadowAssist.ShadowDepth="Depth1" VerticalAlignment="Center">
 
-            <ScrollViewer HorizontalAlignment="Stretch" x:Name="sv" VerticalScrollBarVisibility="Auto"  Background="Transparent" MinHeight="200" MaxHeight="300">
+                    <ScrollViewer HorizontalAlignment="Stretch" x:Name="sv"  PreviewMouseWheel="sv_PreviewMouseWheel"  VerticalScrollBarVisibility="Auto"  Background="Transparent" MinHeight="200"  VerticalAlignment="Stretch">
 
-                <ListView  ItemsSource="{Binding AutoLoadLog}" x:Name="lv" />
-            </ScrollViewer>
+                        <ListView  ItemsSource="{Binding autoAddLogBd}" x:Name="lv" SizeChanged="lv_SizeChanged"/>
+                    </ScrollViewer>
+                </materialDesign:ColorZone>
+
+                <StackPanel Grid.Row="5" Margin="10,10,10,10" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                    <TextBlock Margin="5,8,17,5" Text="※ 导入的表格文件需要遵循指定格式" FontSize="18" VerticalAlignment="Center" Foreground="#ffBBBBBB"/>
+                    <Button Margin="5" Height="32" Command="{s:Action openTemplateCmd}" Content="查看模板" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
         </materialDesign:ColorZone>
-
-        <StackPanel Grid.Row="4" Margin="10,10,10,32" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" >
-            <TextBlock Margin="5,8,17,5" Text="※ 导入的表格文件需要遵循指定格式" FontSize="18" VerticalAlignment="Center" Foreground="#ffBBBBBB"/>
-            <Button Margin="5" Height="40" Command="{s:Action OnOpenAutoInputTemplate}" Content="查看模板" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
-        </StackPanel>-->
+                    <Button Margin="5,30,37,5" Height="32" Command="{s:Action loadWellToSvrCmd}" Content="开始上传" FontSize="18" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="{Binding vErrLogBd}"/>
     </Grid>
 </UserControl>

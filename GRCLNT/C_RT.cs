@@ -13,5 +13,6 @@ namespace GRCLNT
         public static List<C_AreaCode> acs { get; set; } = new List<C_AreaCode>();
         public static C_WellParas wp { get; set; } = new C_WellParas();
         public static C_WellParas ewp { get; set; } = new C_WellParas();
+        public static List<C_User> users { get; set; } = new List<C_User>();
     }
 }

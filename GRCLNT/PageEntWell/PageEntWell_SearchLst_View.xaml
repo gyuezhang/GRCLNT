@@ -10,6 +10,124 @@
              d:DataContext="{d:DesignInstance local:PageEntWellViewModel}" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="PageEntWell_SearchLst_View Under Construction..." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
+        <materialDesign:ColorZone Grid.Column="3" Mode="Standard" Padding="0" Background="#22000000" CornerRadius="2" Panel.ZIndex="1" Margin="0 18 34 0" materialDesign:ShadowAssist.ShadowDepth="Depth1" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Grid Width="550">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button  BorderThickness="0" Grid.Column="0" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="36" Height="36" Background="#11000000"  Margin="10,10,10,10" Command="{s:Action edtWellCmd}">
+                    <materialDesign:PackIcon Kind="Edit" Foreground="White" Width="24" Height="24"/>
+                </Button>
+                <Button  BorderThickness="0" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="36" Height="36" Background="#11000000"  Margin="5,10,15,10" Command="{s:Action delWellCmd}">
+                    <materialDesign:PackIcon Kind="Delete" Foreground="White" Width="24" Height="24"/>
+                </Button>
+                <TextBox Grid.Column="2" Foreground="White" Text="{Binding strSearchKeywordBd,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="3" FontSize="18" materialDesign:HintAssist.Hint="搜索">
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{s:Action refreshCmd}" CommandParameter="{Binding strSearchKeywordBd}" Key="Enter" />
+                    </TextBox.InputBindings>
+                </TextBox>
+                <Button Foreground="White" Grid.Column="3" Margin="0,0,0,0" Command="{s:Action refreshCmd}" CommandParameter="{Binding strSearchKeywordBd}" Background="Transparent" BorderThickness="0">
+                    <materialDesign:PackIcon Kind="Magnify" Width="24" Height="24"/>
+                </Button>
+                <Border Grid.Column="4" Background="#22FFFFFF"/>
+                <Button Foreground="White" Margin="5" Grid.Column="5" Background="Transparent" BorderThickness="0" Command="{s:Action advancedSearchCmd}" Padding="0">
+                    <Grid VerticalAlignment="Stretch"  Margin="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="78"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text=" 高级搜索" Foreground="#CCFFFFFF" Grid.Column="0" FontSize="18" VerticalAlignment="Center"/>
+                        <materialDesign:PackIcon Kind="{Binding advancedPIKindBd}" Foreground="#ccFFFFFF" Width="24" Height="24" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    </Grid>
+                </Button>
+            </Grid>
+        </materialDesign:ColorZone>
+        <materialDesign:ColorZone Mode="Standard" Padding="0" Height="60" Grid.Row="0" Visibility="{Binding advanceToolBarVBd}" Background="#22000000" CornerRadius="2,2,0,0" materialDesign:ShadowAssist.ShadowDepth="Depth1" Panel.ZIndex="1" Margin="34 84 34 0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                 <ComboBox FontSize="18" materialDesign:HintAssist.Hint="街道乡镇" ItemsSource="{Binding Path=scAcBd.AllL4AreaCodes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="."
+                     Margin="15,0,20,0" HorizontalAlignment="Left" SelectedItem="{Binding Path=scAcBd.L4Index,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                 <ComboBox FontSize="18" Visibility="Collapsed" materialDesign:HintAssist.Hint="所属村" ItemsSource="{Binding Path=scAcBd.CurL5AreaCodes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="." 
+                     Margin="15 0 15 0" HorizontalAlignment="Left" SelectedItem="{Binding Path=scAcBd.L5Index,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                            <ComboBox FontSize="18" materialDesign:HintAssist.Hint="权属单位" SelectedItem="{Binding wpForSearchBd.UnitCatIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                 Margin="15 8 15 8" HorizontalAlignment="Left" ItemsSource="{Binding wpForSearchBd.UnitCat}" DisplayMemberPath="Value" >
+                            </ComboBox>
+                            <!--位置-->
+                            <ComboBox FontSize="18" materialDesign:HintAssist.Hint="位置" SelectedItem="{Binding wpForSearchBd.LocIndex,UpdateSourceTrigger=PropertyChanged}"
+                 Margin="15 8 15 8" HorizontalAlignment="Left" ItemsSource="{Binding wpForSearchBd.Loc}" DisplayMemberPath="Value" >
+                            </ComboBox>
+                            <ComboBox FontSize="18" materialDesign:HintAssist.Hint="用途" SelectedItem="{Binding wpForSearchBd.UseForIndex,UpdateSourceTrigger=PropertyChanged}"
+                 Margin="15 8 15 8" HorizontalAlignment="Left" ItemsSource="{Binding wpForSearchBd.UseFor}" DisplayMemberPath="Value" >
+                            </ComboBox>
+                    <ComboBox FontSize="18" materialDesign:HintAssist.Hint="管材" SelectedItem="{Binding wpForSearchBd.TubeMatIndex,UpdateSourceTrigger=PropertyChanged}"
+                 Margin="15 0 15 0" HorizontalAlignment="Left"  ItemsSource="{Binding wpForSearchBd.TubeMat}" DisplayMemberPath="Value"/>
+                    <ComboBox FontSize="18" materialDesign:HintAssist.Hint="水泵型号"  SelectedItem="{Binding wpForSearchBd.PumpModelIndex,UpdateSourceTrigger=PropertyChanged}"
+                 Margin="15 8 15 8" HorizontalAlignment="Left"  ItemsSource="{Binding wpForSearchBd.PumpModel}" DisplayMemberPath="Value">
+                            </ComboBox>
+
+
+
+            </StackPanel>
+                <Border Grid.Column="2" Background="#22FFFFFF"/>
+                <Button Grid.Column="3" Background="Transparent" BorderThickness="0" Margin="5" Padding="0" Command="{s:Action ClearSearchConditionsBd}">
+                    <Grid VerticalAlignment="Stretch"  Margin="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="78"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text=" 清空条件" Foreground="#CCFFFFFF" Grid.Column="0" FontSize="18" VerticalAlignment="Center"/>
+                        <materialDesign:PackIcon Kind="Clear" Foreground="#ccFFFFFF" Width="24" Height="24" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    </Grid>
+                </Button>
+            </Grid>
+        </materialDesign:ColorZone>
+
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="{Binding mapMarginBd}" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <DataGrid   Grid.Row="1" ItemsSource="{Binding pageBarVmBd.curItemsBd}" HorizontalAlignment="Center"  VerticalAlignment="Top" AutoGenerateColumns="False"  Background="Transparent"
+                    materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2" FontSize="16" Foreground="White" CanUserAddRows="False" SelectedItem="{Binding curWellIndexBd,UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="  所属乡镇（街道）" Binding="{Binding TsOrSt}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  所属企业" Binding="{Binding EntName}"  IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  位置" Binding="{Binding Loc}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  东经" Binding="{Binding Lng}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  北纬" Binding="{Binding Lat}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  权属单位" Binding="{Binding UnitCat}"  IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  用途" Binding="{Binding Usefor}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  成井时间" Binding="{Binding DigTime, StringFormat=d}" IsReadOnly="True"/>
+                    <DataGridCheckBoxColumn Header="是否正常缴费" Binding="{Binding IsPaid}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  取水证号" Binding="{Binding FetchWaterId}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  井深（m）" Binding="{Binding WellDepth}"  IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  管材" Binding="{Binding TubeMat}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="  井管内径（mm）" Binding="{Binding TubeIr}"  IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  止水深度（m）" Binding="{Binding StanWaterDepth}"  IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  咸水底板深度（m）" Binding="{Binding SaltWaterFloorDepth}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="  过滤器位置低（m）" Binding="{Binding FilterLocLow}"  IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  过滤器位置高（m）" Binding="{Binding FilterLocHigh}"  IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  静水位（m）" Binding="{Binding StillWaterLoc}"  IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  水泵型号" Binding="{Binding PumpMode}"  IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  水泵动力（kw）" Binding="{Binding PumpPower}"  IsReadOnly="True"/>
+                    <DataGridCheckBoxColumn Header="是否水位观测点" Binding="{Binding IsWaterLevelOp}"  IsReadOnly="True"/>
+                    <DataGridCheckBoxColumn Header="是否安装计量设施" Binding="{Binding IsMfInstalled}"  IsReadOnly="True"/>
+                    <DataGridTextColumn Header="  备注" Binding="{Binding Remark}"  IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <ContentControl Grid.Row="2" s:View.Model="{Binding pageBarVmBd}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0" Height="60"/>
+        </Grid>
     </Grid>
 </UserControl>

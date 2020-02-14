@@ -20,77 +20,77 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid >
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Foreground="White" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,20">机井信息年鉴导出</TextBlock>
+    <Grid>
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="34,88,34,60">
+            <materialDesign:ColorZone  Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch"   Margin="0,0,0,0" Mode="Standard"  Background="#11000000" CornerRadius="2" Panel.ZIndex="1"  materialDesign:ShadowAssist.ShadowDepth="Depth1" HorizontalAlignment="Stretch">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition        Height="Auto" />
+                        <RowDefinition        Height="Auto" />
+                        <RowDefinition        Height="Auto" />
+                        <RowDefinition        Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock      Grid.Row="0"      Margin="16 14 16 2" Foreground="White"     Style="{StaticResource MaterialDesignHeadline6TextBlock}"> 机井年鉴报表导出</TextBlock>
+                    <Separator      Grid.Row="1"      Style="{StaticResource MaterialDesignLightSeparator}" />
 
 
-            <Grid Grid.Row="1" MinWidth="660">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <DatePicker  Grid.Column="0" HorizontalAlignment="Left" SelectedDate="{Binding Path=opBd.Year, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" Margin="15,8,15,8" materialDesign:HintAssist.Hint="导出年份" FontSize="18" Foreground="White" />
-                <TextBox Width="450" Grid.Column="1" Margin="0,0,20,0" Foreground="White" FontSize="18"  Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"  Text="{Binding opBd.OpPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                     VerticalAlignment="Center" TextWrapping="Wrap" MaxWidth="1000" materialDesign:HintAssist.Hint="导出位置" IsEnabled="False"/>
-                <Button Grid.Column="2" Margin="5" Height="32" Command="{s:Action selectOutPutDirCmd}" Content="浏览" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
 
-                <Button Margin="5" Grid.Column="3" Height="32" Command="{s:Action StartOutPutCmd}" Content="开始导出" FontSize="18" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Right"/>
+                    <StackPanel Orientation="Horizontal" Grid.Row="2"  HorizontalAlignment="Center">
+                        <DatePicker  Grid.Column="0" HorizontalAlignment="Left" SelectedDate="{Binding Path=opBd.Year, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" Margin="15,8,15,8" materialDesign:HintAssist.Hint="导出年份" FontSize="18" Foreground="White" />
+                        <TextBox MinWidth="400" Grid.Column="1" Margin="0,0,20,0" Foreground="White" FontSize="18"  Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"  Text="{Binding opBd.OpPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                     VerticalAlignment="Center" TextWrapping="Wrap"  materialDesign:HintAssist.Hint="导出位置" IsEnabled="False"/>
+                        <Button Grid.Column="2" Margin="5" Height="32" Command="{s:Action selectOutPutDirCmd}" Content="浏览" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
 
-            </Grid>
-            <Grid Grid.Row="2" Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <CheckBox IsChecked="{Binding opBd.BAll,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="全选" Grid.Row="0" Grid.ColumnSpan="3"/>
-                <CheckBox IsChecked="{Binding opBd.B1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="1.封皮" Grid.Row="1" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding opBd.B2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="2.编制单位" Grid.Row="1" Grid.Column="1"/>
-                <CheckBox IsChecked="{Binding opBd.B3,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="3.目录" Grid.Row="1" Grid.Column="2"/>
-                <CheckBox IsChecked="{Binding opBd.B4,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="4.观测井分布图" Grid.Row="2" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding opBd.B5,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="5.监测井情况表" Grid.Row="2" Grid.Column="1"/>
-                <CheckBox IsChecked="{Binding opBd.B6,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="6.整编" Grid.Row="2" Grid.Column="2"/>
-                <CheckBox IsChecked="{Binding opBd.B7,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="7.监测井情况表" Grid.Row="3" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding opBd.B8,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="8.水位分布图" Grid.Row="3" Grid.Column="1"/>
-                <CheckBox IsChecked="{Binding opBd.B9,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="9.宝坻自动监测井" Grid.Row="3" Grid.Column="2"/>
-                <CheckBox IsChecked="{Binding opBd.B10,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="10.年特征统计表" Grid.Row="4" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding opBd.B11,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="11.平均水位表" Grid.Row="4" Grid.Column="1"/>
-                <CheckBox IsChecked="{Binding opBd.B12,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="12.统测" Grid.Row="4" Grid.Column="2"/>
-                <CheckBox IsChecked="{Binding opBd.B13,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="13.检测情况表" Grid.Row="5" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding opBd.B14,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="14.灌溉井开采量表" Grid.Row="5" Grid.Column="1"/>
-                <CheckBox IsChecked="{Binding opBd.B15,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="15.实开农业机井" Grid.Row="5" Grid.Column="2"/>
-                <CheckBox IsChecked="{Binding opBd.B16,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="16.灌溉井开采量表" Grid.Row="6" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding opBd.B17,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="17.灌溉井开采量总表" Grid.Row="6" Grid.Column="1"/>
-                <CheckBox IsChecked="{Binding opBd.B18,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="18.去年总开采量" Grid.Row="6" Grid.Column="2"/>
-                <CheckBox IsChecked="{Binding opBd.B19,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="19.生活农业开采量表" Grid.Row="7" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding opBd.B20,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="20.城镇机井开采量调查表" Grid.Row="7" Grid.Column="1"/>
-                <CheckBox IsChecked="{Binding opBd.B21,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="21.开采量总表" Grid.Row="7" Grid.Column="2"/>
-                <CheckBox IsChecked="{Binding opBd.B22,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="22.镇街开采量" Grid.Row="8" Grid.Column="0"/>
-                <CheckBox IsChecked="{Binding opBd.B23,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="23.气象资料" Grid.Row="8" Grid.Column="1"/>
-                <CheckBox IsChecked="{Binding opBd.B24,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="24.动态曲线图" Grid.Row="8" Grid.Column="2"/>
-                <CheckBox IsChecked="{Binding opBd.B25,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="25.开采量统计图" Grid.Row="9" Grid.Column="0"/>
-            </Grid>
+                        <Button Margin="5" Grid.Column="3" Height="32" Command="{s:Action StartOutPutCmd}" Content="开始导出" FontSize="18" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Right"/>
+
+                    </StackPanel>
+                    <Grid Grid.Row="3" Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <CheckBox IsChecked="{Binding opBd.BAll,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="全选" Grid.Row="0" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding opBd.B1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="1.封皮" Grid.Row="1" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding opBd.B2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="2.编制单位" Grid.Row="1" Grid.Column="1"/>
+                        <CheckBox IsChecked="{Binding opBd.B3,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="3.目录" Grid.Row="1" Grid.Column="2"/>
+                        <CheckBox IsChecked="{Binding opBd.B4,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="4.观测井分布图" Grid.Row="2" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding opBd.B5,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="5.监测井情况表" Grid.Row="2" Grid.Column="1"/>
+                        <CheckBox IsChecked="{Binding opBd.B6,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="6.整编" Grid.Row="2" Grid.Column="2"/>
+                        <CheckBox IsChecked="{Binding opBd.B7,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="7.监测井情况表" Grid.Row="3" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding opBd.B8,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="8.水位分布图" Grid.Row="3" Grid.Column="1"/>
+                        <CheckBox IsChecked="{Binding opBd.B9,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="9.宝坻自动监测井" Grid.Row="3" Grid.Column="2"/>
+                        <CheckBox IsChecked="{Binding opBd.B10,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="10.年特征统计表" Grid.Row="4" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding opBd.B11,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="11.平均水位表" Grid.Row="4" Grid.Column="1"/>
+                        <CheckBox IsChecked="{Binding opBd.B12,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="12.统测" Grid.Row="4" Grid.Column="2"/>
+                        <CheckBox IsChecked="{Binding opBd.B13,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="13.检测情况表" Grid.Row="5" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding opBd.B14,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="14.灌溉井开采量表" Grid.Row="5" Grid.Column="1"/>
+                        <CheckBox IsChecked="{Binding opBd.B15,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="15.实开农业机井" Grid.Row="5" Grid.Column="2"/>
+                        <CheckBox IsChecked="{Binding opBd.B16,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="16.灌溉井开采量表" Grid.Row="6" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding opBd.B17,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="17.灌溉井开采量总表" Grid.Row="6" Grid.Column="1"/>
+                        <CheckBox IsChecked="{Binding opBd.B18,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="18.去年总开采量" Grid.Row="6" Grid.Column="2"/>
+                        <CheckBox IsChecked="{Binding opBd.B19,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="19.生活农业开采量表" Grid.Row="7" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding opBd.B20,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="20.城镇机井开采量调查表" Grid.Row="7" Grid.Column="1"/>
+                        <CheckBox IsChecked="{Binding opBd.B21,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="21.开采量总表" Grid.Row="7" Grid.Column="2"/>
+                        <CheckBox IsChecked="{Binding opBd.B22,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="22.镇街开采量" Grid.Row="8" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding opBd.B23,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="23.气象资料" Grid.Row="8" Grid.Column="1"/>
+                        <CheckBox IsChecked="{Binding opBd.B24,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="24.动态曲线图" Grid.Row="8" Grid.Column="2"/>
+                        <CheckBox IsChecked="{Binding opBd.B25,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="25.开采量统计图" Grid.Row="9" Grid.Column="0"/>
+                    </Grid>
+                </Grid>
+            </materialDesign:ColorZone>
         </Grid>
-
     </Grid>
 </UserControl>

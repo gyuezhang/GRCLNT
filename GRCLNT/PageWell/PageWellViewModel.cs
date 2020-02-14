@@ -22,6 +22,9 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
+using Mapsui.Styles.Thematics;
+using Mapsui.Desktop.Shapefile;
+using MaterialDesignThemes.Wpf;
 
 namespace GRCLNT
 {
@@ -30,26 +33,48 @@ namespace GRCLNT
         public PageWellViewModel(WndMainViewModel _wndMainVM)
         {
             wndMainVM = _wndMainVM;
+            pageBarVmBd = new CtrlWellPageBarViewModel(wndMainVM);
             wpBd = C_RT.wp;
+            wpForSearchBd = new C_WellParas(C_RT.wp.All);
+            wpForSearchBd.Loc.Add(new C_WellPara(E_WellParaType.Loc, "全部"));
+            wpForSearchBd.UnitCat.Add(new C_WellPara(E_WellParaType.UnitCat, "全部"));
+            wpForSearchBd.TubeMat.Add(new C_WellPara(E_WellParaType.TubeMat, "全部"));
+            wpForSearchBd.UseFor.Add(new C_WellPara(E_WellParaType.UseFor, "全部"));
+            wpForSearchBd.PumpModel.Add(new C_WellPara(E_WellParaType.PumpModel, "全部"));
             cbdAcBd = new C_BdAreaCode(C_RT.acs);
             ebdAcBd = new C_BdAreaCode(C_RT.acs);
+            scAcBd = new C_BdAreaCode(C_RT.acs);
+            foreach (C_AreaCode ac in scAcBd.AllL4AreaCodes)
+            {
+                C_AreaCode t = new C_AreaCode();
+                t.Id = -1;t.Level = 5;t.PCode = ac.Code;t.Code = -1;t.Name = "全街道（乡镇）";
+                scAcBd.AllL5AreaCodes.Add(t);
+            }
+            C_AreaCode acTmp4 = new C_AreaCode();
+            acTmp4.Id = 0;acTmp4.Level = 4;acTmp4.PCode = 0;acTmp4.Code = 0;acTmp4.Name = "全区";
+            C_AreaCode acTmp5 = new C_AreaCode();
+            acTmp5.Id = 0;acTmp5.Level = 5;acTmp5.PCode = 0;acTmp5.Code = 0;acTmp5.Name = "全街道（乡镇）";
+
+            scAcBd.AllL4AreaCodes.Add(acTmp4);
+            scAcBd.AllL5AreaCodes.Add(acTmp5);
+            ClearSearchConditionsBd();
         }
         private WndMainViewModel wndMainVM { get; set; }
 
         #region SocketHandler
 
-        private void GRSocketHandler_addWellPara(RES_STATE state)
+        private void GRSocketHandler_addWellPara(E_ResState state)
         {
             GRSocketHandler.addWellPara -= GRSocketHandler_addWellPara;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     wndMainVM.messageQueueBd.Enqueue("添加机井参数成功");
                     GRSocketHandler.getWellParas += GRSocketHandler_getWellParas;
                     isWaitingForRefreshParas = true;
                     GRSocketAPI.GetWellParas();
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     wndMainVM.messageQueueBd.Enqueue("添加机井参数失败");
                     break;
                 default:
@@ -57,18 +82,18 @@ namespace GRCLNT
             }
         }
 
-        private void GRSocketHandler_delWellPara(RES_STATE state)
+        private void GRSocketHandler_delWellPara(E_ResState state)
         {
             GRSocketHandler.delWellPara -= GRSocketHandler_delWellPara;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     wndMainVM.messageQueueBd.Enqueue("删除机井参数成功");
                     GRSocketHandler.getWellParas += GRSocketHandler_getWellParas;
                     isWaitingForRefreshParas = true;
                     GRSocketAPI.GetWellParas();
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     wndMainVM.messageQueueBd.Enqueue("删除机井参数失败");
                     break;
                 default:
@@ -76,16 +101,16 @@ namespace GRCLNT
             }
         }
 
-        private void GRSocketHandler_getWellParas(RES_STATE state, C_WellParas wps)
+        private void GRSocketHandler_getWellParas(E_ResState state, C_WellParas wps)
         {
             GRSocketHandler.getWellParas -= GRSocketHandler_getWellParas;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     C_RT.wp = new C_WellParas(wps.All);
                     wpBd = new C_WellParas(wps.All);
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     wndMainVM.messageQueueBd.Enqueue("获取机井参数失败");
                     break;
                 default:
@@ -94,15 +119,15 @@ namespace GRCLNT
             isWaitingForRefreshParas = false;
         }
 
-        private void GRSocketHandler_addWell(RES_STATE state)
+        private void GRSocketHandler_addWell(E_ResState state)
         {
             GRSocketHandler.addWell -= GRSocketHandler_addWell;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     wndMainVM.messageQueueBd.Enqueue("添加机井信息成功");
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     wndMainVM.messageQueueBd.Enqueue("添加机井信息失败");
                     break;
                 default:
@@ -110,18 +135,19 @@ namespace GRCLNT
             }
         }
 
-        private void GRSocketHandler_getWells(RES_STATE state, List<C_Well> wells)
+        private void GRSocketHandler_getWells(E_ResState state, List<C_Well> wells)
         {
             GRSocketHandler.getWells -= GRSocketHandler_getWells;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     curWellsBd = wells;
                     GetStateDataByWells();
                     InitMap();
+                    pageBarVmBd.Init(wells);
                     wndMainVM.messageQueueBd.Enqueue("获取机井信息成功");
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     wndMainVM.messageQueueBd.Enqueue("获取机井信息失败");
                     break;
                 default:
@@ -129,16 +155,16 @@ namespace GRCLNT
             }
         }
 
-        private void GRSocketHandler_delWell(RES_STATE state)
+        private void GRSocketHandler_delWell(E_ResState state)
         {
             GRSocketHandler.delWell -= GRSocketHandler_delWell;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     refreshCmd(strSearchKeywordBd);
                     wndMainVM.messageQueueBd.Enqueue("删除机井信息成功");
                     break;                            
-                case RES_STATE.FAILED:                
+                case E_ResState.FAILED:                
                     wndMainVM.messageQueueBd.Enqueue("删除机井信息失败");
                     break;
                 default:
@@ -146,16 +172,16 @@ namespace GRCLNT
             }
         }
 
-        private void GRSocketHandler_edtWell(RES_STATE state)
+        private void GRSocketHandler_edtWell(E_ResState state)
         {
             GRSocketHandler.edtWell -= GRSocketHandler_edtWell;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     wndMainVM.SelectPage(E_Page.Well_Search_Lst);
                     wndMainVM.messageQueueBd.Enqueue("编辑机井信息成功");
                     break;                            
-                case RES_STATE.FAILED:                
+                case E_ResState.FAILED:                
                     wndMainVM.messageQueueBd.Enqueue("编辑机井信息失败");
                     break;
                 default:
@@ -224,18 +250,22 @@ namespace GRCLNT
         public string strPsTubeMatBd { get; set; }
         public string strPsPumpModelBd { get; set; }
         public string strPsUseForBd { get; set; }
-        public C_WellParas wpBd { get; set; } = new C_WellParas();
+        public static C_WellParas wpBd { get; set; } = new C_WellParas();
 
+        public C_WellParas wpForSearchBd { get; set; } = new C_WellParas();
         public C_BdAreaCode cbdAcBd { get; set; } = new C_BdAreaCode();
         public C_BdAreaCode ebdAcBd { get; set; } = new C_BdAreaCode();
         public C_Well cwBd { get; set; } = new C_Well();
         public static C_Well ewBd { get; set; } = new C_Well();
 
+        public C_BdAreaCode scAcBd { get; set; } = new C_BdAreaCode();
+
         //search
-        public string strSearchResBd { get; set; }
         public string strSearchKeywordBd { get; set; }
         public List<C_Well> curWellsBd { get; set; } = new List<C_Well>();
         public C_Well curWellIndexBd { get; set; } = new C_Well();
+
+        public CtrlWellPageBarViewModel pageBarVmBd { get; set; }
         //loc
         public MapControl mapBd { get; set; } = null;
 
@@ -248,16 +278,84 @@ namespace GRCLNT
         public string txtReadAutoInputingBd { get; set; } = "";
 
         //output
-        public C_Output opBd { get; set; } = new C_Output();
+        public C_WellOutput opBd { get; set; } = new C_WellOutput();
 
         //state
         public List<string> tsWellCntLabelBd { get; set; } = new List<string>();
         public ChartValues<ObservableValue> tsWellCntBd { get; set; } = new ChartValues<ObservableValue>();
         public SeriesCollection useForSeriesBd { get; set; } = new SeriesCollection(); 
         public SeriesCollection tubeMatSeriesBd { get; set; } = new SeriesCollection();
+        public Visibility btnMapVBd { get; set; } = Visibility.Collapsed;
+        public Visibility btnEarthVBd { get; set; } = Visibility.Visible;
+
+        public PackIconKind advancedPIKindBd { get; set; } = PackIconKind.ArrowBottomDropCircleOutline;
+        public Thickness mapMarginBd { get; set; } = new Thickness(34, 88, 34, 60);
+        public Visibility advanceToolBarVBd { get; set; } = Visibility.Collapsed;
+        public C_SearchCondition scBd { get; set; } = new C_SearchCondition();
         #endregion Bindings
 
         #region Actions
+        public void ClearSearchConditionsBd()
+        {
+            wpForSearchBd.LocIndex = wpForSearchBd.Loc.Where(c =>
+            {
+                if (c.Type == E_WellParaType.Loc && c.Value == "全部")
+                    return true;
+                else
+                    return false;
+            }).ToList()[0];
+            wpForSearchBd.PumpModelIndex = wpForSearchBd.PumpModel.Where(c =>
+            {
+                if (c.Type == E_WellParaType.PumpModel && c.Value == "全部")
+                    return true;
+                else
+                    return false;
+            }).ToList()[0];
+           wpForSearchBd.UnitCatIndex = wpForSearchBd.UnitCat.Where(c =>
+            {
+                if (c.Type == E_WellParaType.UnitCat && c.Value == "全部")
+                    return true;
+                else
+                    return false;
+            }).ToList()[0];
+           wpForSearchBd.TubeMatIndex = wpForSearchBd.TubeMat.Where(c =>
+            {
+                if (c.Type == E_WellParaType.TubeMat && c.Value == "全部")
+                    return true;
+                else
+                    return false;
+            }).ToList()[0];
+           wpForSearchBd.UseForIndex = wpForSearchBd.UseFor.Where(c =>
+            {
+                if (c.Type == E_WellParaType.UseFor && c.Value == "全部")
+                    return true;
+                else
+                    return false;
+            }).ToList()[0];
+
+            C_AreaCode acTmp4 = new C_AreaCode();
+            acTmp4.Id = 0;acTmp4.Level = 4;acTmp4.PCode = 0;acTmp4.Code = 0;acTmp4.Name = "全区";
+            C_AreaCode acTmp5 = new C_AreaCode();
+            acTmp5.Id = 0;acTmp5.Level = 5;acTmp5.PCode = 0;acTmp5.Code = 0;acTmp5.Name = "全街道（乡镇）";
+
+
+            scAcBd.L4Index = scAcBd.AllL4AreaCodes.Where(c=>
+            {
+                if(c.Id ==0 && c.Level ==4&& c.PCode ==0&& c.Code ==0&& c.Name == "全区")
+                    return true;
+                else
+                    return false;
+            }
+            ).ToList()[0];
+            scAcBd.L5Index = scAcBd.AllL5AreaCodes.Where(c =>
+            {
+                if(c.Id ==0 && c.Level ==5&& c.PCode ==0&& c.Code ==0&& c.Name == "全街道（乡镇）")
+                    return true;
+                else
+                    return false;
+            }
+            ).ToList()[0];
+        }
         public void SelectPageCmd(string cmdPara)
         {
             wndMainVM.SelectPage((E_Page)Enum.Parse(typeof(E_Page), cmdPara, true));
@@ -352,8 +450,16 @@ namespace GRCLNT
         //search
         public void refreshCmd(string keywords)
         {
+            scBd.TsOrSt = scAcBd.L4Index.Name;
+            scBd.Village = scAcBd.L5Index.Name;
+            scBd.UnitCat = wpForSearchBd.UnitCatIndex.Value;
+            scBd.PumpMode = wpForSearchBd.PumpModelIndex.Value;
+            scBd.UseFor = wpForSearchBd.UseForIndex.Value;
+            scBd.TubeMat = wpForSearchBd.TubeMatIndex.Value;
+            scBd.Loc = wpForSearchBd.LocIndex.Value;
+            scBd.Key = keywords;
             GRSocketHandler.getWells += GRSocketHandler_getWells;
-            GRSocketAPI.GetWells(keywords);
+            GRSocketAPI.GetWells(scBd);
         }
 
         public bool CanedtWellCmd => (curWellIndexBd != null);
@@ -406,8 +512,8 @@ namespace GRCLNT
             iErrCount = 0;
             autoAddLogBd = new ObservableCollection<string>();
             vErrLogBd = Visibility.Collapsed;
-            C_ExcelOper.readWell += C_ExcelOper_readWell;
-            C_ExcelOper.ReadWellsFromFile(inputFilePathBd);
+            C_WellOfcOper.readWell += C_ExcelOper_readWell;
+            C_WellOfcOper.ReadWellsFromFile(inputFilePathBd);
         }
 
         public void loadWellToSvrCmd()
@@ -418,7 +524,7 @@ namespace GRCLNT
 
         public void openTemplateCmd()
         {
-            C_ExcelOper.OpenInputTemplete();
+            C_WellOfcOper.OpenInputTemplete();
         }
 
         //output
@@ -447,12 +553,61 @@ namespace GRCLNT
 
         public void StartOutPutCmd()
         {
-            C_ExcelOper.OutputWell(opBd, curWellsBd);
+            C_WellOfcOper.OutputWell(opBd, curWellsBd);
         }
 
+        public void advancedSearchCmd ()
+        {
+            isAdvancedSearching = !isAdvancedSearching;
+            if(isAdvancedSearching)
+            {
+                advancedPIKindBd = PackIconKind.ArrowTopDropCircleOutline;
+                mapMarginBd = new Thickness(34, 146, 34, 60);
+                advanceToolBarVBd = Visibility.Visible;
+            }
+            else
+            {
+                advancedPIKindBd = PackIconKind.ArrowBottomDropCircleOutline;
+                mapMarginBd = new Thickness(34, 88, 34, 60);
+                advanceToolBarVBd = Visibility.Collapsed;
+                ClearSearchConditionsBd();
+                refreshCmd("");
+            }
+        }
         #endregion Actions
 
         public bool isWaitingForRefreshParas { get; set; } = false;
+        TileLayer osmMap = new TileLayer(KnownTileSources.Create(KnownTileSource.OpenStreetMap)) { Name = "OpenStreetMap" };
+        TileLayer bingMap = new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial)) { Name = "Bing Aerial" };
+        public static ShapeFile bdarySource = new ShapeFile(System.Environment.CurrentDirectory + "\\Resource\\Shp\\Baodi District_AL6.shp", true){ CRS = "EPSG:4326" };
+        public RasterizingLayer boundaryLayer { get; set; } = new RasterizingLayer(CreateCountryLayer(bdarySource));
+        public bool isAdvancedSearching { get; set; } = false;
+        public void SwitchMapCmd(string index)
+        {
+            if(index == "0")
+            {
+                if(mapBd.Map.Layers.Contains(bingMap))
+                    mapBd.Map.Layers.Remove(bingMap);
+                if(!mapBd.Map.Layers.Contains(osmMap))
+                    mapBd.Map.Layers.Add(osmMap);
+                mapBd.Map.Layers.Move(0,osmMap);
+                btnMapVBd = Visibility.Collapsed;
+                btnEarthVBd = Visibility.Visible;
+            }
+            else
+            {
+                if(mapBd.Map.Layers.Contains(osmMap))
+                    mapBd.Map.Layers.Remove(osmMap); 
+                if(!mapBd.Map.Layers.Contains(bingMap))
+                    mapBd.Map.Layers.Add(bingMap);
+                mapBd.Map.Layers.Move(0,bingMap);
+                btnMapVBd = Visibility.Visible;
+                btnEarthVBd = Visibility.Collapsed;
+            }
+        }
+
+
+
         public bool CheckCreateWell(C_Well w)
         {
             if (w.TsOrSt == "")
@@ -590,13 +745,53 @@ namespace GRCLNT
             { 
                 mapBd = new MapControl();
                 mapBd.Map.Layers.Clear();
-                mapBd.Map.Layers.Add(new TileLayer(KnownTileSources.Create()));
+                SwitchMapCmd("0");
                 mapBd.Map.Layers.Add(CreateWellLayer());
 
+                ShowBoundary();
                 var centerOfBD = new Mapsui.Geometries.Point(117.309716, 39.717173);
                 var sphericalMercatorCoordinate = SphericalMercator.FromLonLat(centerOfBD.X, centerOfBD.Y);
                 mapBd.Map.Home = n => n.NavigateTo(sphericalMercatorCoordinate, mapBd.Map.Resolutions[12]);
             }));
+        }
+
+        public void ShowBoundary(bool bShow = true)
+        {
+            if(bShow)
+            {
+                if(!mapBd.Map.Layers.Contains(boundaryLayer))
+                    mapBd.Map.Layers.Add(boundaryLayer);
+                mapBd.Map.Layers.Move(1, boundaryLayer);
+            }
+            else
+            {
+                if (mapBd.Map.Layers.Contains(boundaryLayer))
+                    mapBd.Map.Layers.Remove(boundaryLayer);
+            }
+        }
+        private static ILayer CreateCountryLayer(IProvider countrySource)
+        {
+            return new Layer
+            {
+                Name = "Baodi District_AL6",
+                DataSource = countrySource,
+                Style = CreateCountryTheme(),
+                CRS = "EPSG:3857",
+                Transformation = new MinimalTransformation()
+            };
+        }
+        private static IThemeStyle CreateCountryTheme()
+        {
+            //Set a gradient theme on the countries layer, based on Population density
+            //First create two styles that specify min and max styles
+            //In this case we will just use the default values and override the fill-colors
+            //using a colorblender. If different line-widths, line- and fill-colors where used
+            //in the min and max styles, these would automatically get linearly interpolated.
+            var min = new VectorStyle { Outline = new Pen { Color = Color.FromArgb(40, 0, 0, 0) } };
+            var max = new VectorStyle { Outline = new Pen { Color = Color.FromArgb(40, 0, 0, 0) } };
+
+            //Create theme using a density from 0 (min) to 400 (max)
+            return new GradientTheme("PopDens", 0, 400, min, max) { FillColorBlend = ColorBlend.TwoColors(Color.FromArgb(40, 0, 0, 0) ,Color.FromArgb(40, 0, 0, 0)) };
         }
 
         private MemoryLayer CreateWellLayer()
@@ -652,6 +847,9 @@ namespace GRCLNT
 
         public void GetStateDataByWells()
         {
+            if (pageIndexBd != 8)
+                return;
+
             //tsorst
             var tsOrStState = from w in curWellsBd
                                orderby w.TsOrSt
@@ -704,6 +902,16 @@ namespace GRCLNT
                     tubeMatSeriesBd.Add(p);
                 }));
             }
+        }
+
+        public void UpdateEdtParas()
+        {
+            wpBd.LocIndex = new C_WellPara(E_WellParaType.Loc, ewBd.Loc);
+            wpBd.UnitCatIndex = new C_WellPara(E_WellParaType.UnitCat, ewBd.UnitCat);
+            wpBd.TubeMatIndex = new C_WellPara(E_WellParaType.TubeMat, ewBd.TubeMat);
+            wpBd.UseForIndex = new C_WellPara(E_WellParaType.UseFor, ewBd.Usefor);
+            wpBd.PumpModelIndex = new C_WellPara(E_WellParaType.PumpModel, ewBd.PumpMode);
+
         }
     }
 

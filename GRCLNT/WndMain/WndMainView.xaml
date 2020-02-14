@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf" 
         xmlns:s="https://github.com/canton7/Stylet"
         xmlns:local="clr-namespace:GRCLNT"
         mc:Ignorable="d"
@@ -23,13 +24,14 @@
     <!--自定义样式-->
     <Window.Resources>
         <ResourceDictionary>
-            <Style x:Key="MenuBtn" TargetType="Button" BasedOn="{StaticResource MaterialDesignToolForegroundButton}">
+            <Style x:Key="MenuBtn" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
                 <Setter Property="ToolTipService.Placement" Value="Right"/>
                 <Setter Property="ToolTipService.HorizontalOffset" Value="30"/>
                 <Setter Property="ToolTipService.VerticalOffset" Value="12"/>
-                <Setter Property="Width" Value="48"/>
+                <Setter Property="Width" Value="Auto"/>
                 <Setter Property="Height" Value="48"/>
-                <Setter Property="Margin" Value="2,0,0,0"/>
+                <Setter Property="Margin" Value="3,0,3,0"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
             </Style>
         </ResourceDictionary>
     </Window.Resources>
@@ -64,7 +66,7 @@
 
             <!--标题logo-->
             <Border Grid.Column="0" Background="#34000000">
-                <Image Source="/GRCLNT;component/Resource/Image/Logo.ico" Margin="11"/>
+                <Image Source="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/Logo.png" Margin="11"/>
             </Border>
 
             <!--标题文字-->
@@ -175,7 +177,9 @@
             </Grid.ColumnDefinitions>
 
             <!--菜单栏-->
-            <Grid Grid.Column="0" Background="#44000000" Width="72">
+            <Grid Grid.Column="0" Background="#44000000" Width="{Binding menuWidthBd}">
+            <!--<Grid Grid.Column="0" Background="#44000000" Width="250">-->
+
                 <!--菜单栏/布局-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1"/>
@@ -221,7 +225,7 @@
                         <RowDefinition Height="5"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="2"/>
-                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="2"/>
                     </Grid.RowDefinitions>
                     <!--菜单栏/中部/顶部阴影-->
@@ -256,30 +260,54 @@
                             <RowDefinition Height="64"/>
                             <RowDefinition Height="5"/>
                         </Grid.RowDefinitions>
-                        <Border Width="48" Height="48" Background="#FF003C78" CornerRadius="3,3,3,3" Grid.Row="{Binding menuBtnIndexBd}" Visibility="{Binding menuBtnVisibilityBd}"/>
-                        <Button Grid.Row="1"  Style="{StaticResource MenuBtn}" ToolTip="仪表板" Command="{s:Action MenuBtnCmd}" CommandParameter="Dashboard">
-                            <materialDesign:PackIcon Kind="Home" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        <Border Width="Auto" Margin="3 0" Height="48" Background="#FF003C78" CornerRadius="3,3,3,3" Grid.Row="{Binding menuBtnIndexBd}" Visibility="{Binding menuBtnVisibilityBd}"/>
+                        <Button Grid.Row="1"     Style="{StaticResource MenuBtn}" ToolTip="首页" Command="{s:Action MenuBtnCmd}" CommandParameter="HomePage" >
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Home" Height="36" Width="36" Foreground="White" Margin="-4,0,0,0" Grid.Column="0"/>
+                                <TextBlock Text="首 页" Grid.Column="1" Width="215" Margin="15,0" VerticalAlignment="Center" Foreground="White"  Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                            </StackPanel>
                         </Button>
-                        <Button Grid.Row="3"  Style="{StaticResource MenuBtn}" ToolTip="机井信息" Command="{s:Action MenuBtnCmd}" CommandParameter="Well">
-                            <materialDesign:PackIcon Kind="WaterPump" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        <Button Grid.Row="3" Style="{StaticResource MenuBtn}" ToolTip="机井信息" Command="{s:Action MenuBtnCmd}" CommandParameter="Well">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="WaterPump" Height="36" Width="36" Foreground="White"  Margin="-4,0,0,0" Grid.Column="0"/>
+                                <TextBlock Text="机井信息" Grid.Column="1" Width="215" Margin="15,0" VerticalAlignment="Center" Foreground="White"  Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                            </StackPanel>
                         </Button>
-                        <Button Grid.Row="5"  Style="{StaticResource MenuBtn}" ToolTip="企业井管理" Command="{s:Action MenuBtnCmd}" CommandParameter="EntWell">
-                            <materialDesign:PackIcon Kind="Factory" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        <Button Grid.Row="5"  Style="{StaticResource MenuBtn}" ToolTip="企业井管理" Command="{s:Action MenuBtnCmd}" CommandParameter="EntWell" >
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Factory" Height="36" Width="36" Foreground="White"   Margin="-4,0,0,0" Grid.Column="0"/>
+                                <TextBlock Text="企业井管理" Grid.Column="1" Width="215" Margin="15,0" VerticalAlignment="Center" Foreground="White"  Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                            </StackPanel>
                         </Button>
-                        <Button Grid.Row="7"  Style="{StaticResource MenuBtn}" ToolTip="控沉工作" Command="{s:Action MenuBtnCmd}" CommandParameter="SediCtrl">
-                            <materialDesign:PackIcon Kind="Layers" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        <Button Grid.Row="7" Style="{StaticResource MenuBtn}" ToolTip="控沉工作" Command="{s:Action MenuBtnCmd}" CommandParameter="SediCtrl">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Layers" Height="36" Width="36" Foreground="White"  Margin="-4,0,0,0" Grid.Column="0"/>
+                                <TextBlock Text="控沉工作" Grid.Column="1" Width="215" Margin="15,0" VerticalAlignment="Center" Foreground="White"  Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                            </StackPanel>
                         </Button>
                         <Button Grid.Row="9"  Style="{StaticResource MenuBtn}" ToolTip="地下水动态" Command="{s:Action MenuBtnCmd}" CommandParameter="GwDyna">
-                            <materialDesign:PackIcon Kind="Water" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Water" Height="36" Width="36" Foreground="White"  Margin="-4,0,0,0" Grid.Column="0"/>
+                                <TextBlock Text="地下水动态" Grid.Column="1" Width="215" Margin="15,0" VerticalAlignment="Center" Foreground="White"  Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                            </StackPanel>
                         </Button>
-                        <Button Grid.Row="11"  Style="{StaticResource MenuBtn}" ToolTip="地下水工程" Command="{s:Action MenuBtnCmd}" CommandParameter="GwProj">
-                            <materialDesign:PackIcon Kind="Worker" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        <Button Grid.Row="11"  Style="{StaticResource MenuBtn}" ToolTip="地下水工程" Command="{s:Action MenuBtnCmd}" CommandParameter="GwProj" >
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Worker" Height="36" Width="36" Foreground="White"  Margin="-4,0,0,0" Grid.Column="0"/>
+                                <TextBlock Text="地下水工程" Grid.Column="1" Width="215" Margin="15,0" VerticalAlignment="Center" Foreground="White"  Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                            </StackPanel>
                         </Button>
-                        <Button Grid.Row="13"  Style="{StaticResource MenuBtn}" ToolTip="水文地质" Command="{s:Action MenuBtnCmd}" CommandParameter="Hydro">
-                            <materialDesign:PackIcon Kind="Map" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        <Button Grid.Row="13" Style="{StaticResource MenuBtn}" ToolTip="水文地质" Command="{s:Action MenuBtnCmd}" CommandParameter="Hydro" >
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Map" Height="36" Width="36" Foreground="White"  Margin="-4,0,0,0" Grid.Column="0"/>
+                                <TextBlock Text="水文地质" Grid.Column="1" Width="215" Margin="15,0" VerticalAlignment="Center" Foreground="White"  Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                            </StackPanel>
                         </Button>
-                        <Button Grid.Row="15"  Style="{StaticResource MenuBtn}" ToolTip="法律法规" Command="{s:Action MenuBtnCmd}" CommandParameter="Law">
-                            <materialDesign:PackIcon Kind="ScaleBalance" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        <Button Grid.Row="15" Style="{StaticResource MenuBtn}" ToolTip="法律法规" Command="{s:Action MenuBtnCmd}" CommandParameter="Law" >
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="ScaleBalance" Height="36" Width="36" Foreground="White"  Margin="-4,0,0,0" Grid.Column="0"/>
+                                <TextBlock Text="法律法规" Grid.Column="1" Width="215" Margin="15,0" VerticalAlignment="Center" Foreground="White"  Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                            </StackPanel>
                         </Button>
                         <Border Grid.Row="2" Margin="14,0,12,0" Background="#22FFFFFF" Height="1"/>
                         <Border Grid.Row="4" Margin="14,0,12,0" Background="#22FFFFFF" Height="1"/>
@@ -296,11 +324,23 @@
                     <!--菜单栏/中部/底部按钮-->
                     <Grid Grid.Row="3">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="58"/>
+                            <RowDefinition Height="58"/>
                         </Grid.RowDefinitions>
-                        <Border  Width="48" Height="48" Background="#FF003C78" CornerRadius="3,3,3,3" Grid.Row="1" Visibility="{Binding settingBtnVisibilityBd}"/>
-                        <Button  Grid.Row="1"  Style="{StaticResource MenuBtn}" ToolTip="设置" Command="{s:Action MenuBtnCmd}" CommandParameter="Setting">
-                            <materialDesign:PackIcon Kind="Settings" Height="36" Width="36" Margin="-10" Foreground="White"/>
+                        <Border  Width="Auto" Margin="8 0" Height="48" Background="#FF003C78" CornerRadius="3,3,3,3" Grid.Row="1" Visibility="{Binding settingBtnVisibilityBd}"/>
+                        <Button  Grid.Row="1"   Margin="0,5,0,3"  Style="{StaticResource MenuBtn}" ToolTip="设置" Command="{s:Action MenuBtnCmd}" CommandParameter="Setting" >
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Settings" Height="36" Width="36" Foreground="White"  Grid.Column="0"/>
+                                <TextBlock Text="设置" Grid.Column="1" Width="215" Margin="15,0,15,3" VerticalAlignment="Center" Foreground="White"  Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                            </StackPanel>
+                        </Button>
+                        <Button  Grid.Row="2" Margin="0,4,0,4" Style="{StaticResource MenuBtn}" Command="{s:Action MenuSwitchCmd}"   >
+                            <StackPanel Orientation="Horizontal">
+
+                                <materialDesign:PackIcon Kind="{Binding menuSwitchPackIconBd}" Height="36" Width="36"  Foreground="White"/>
+                                <TextBlock Text="" Grid.Column="1" Width="215" Margin="15,0,15,3" VerticalAlignment="Center" Foreground="White"  Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                            </StackPanel>
                         </Button>
                     </Grid>
 
@@ -369,9 +409,9 @@
                     <!--<ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" >-->
                     <ContentControl  s:View.Model="{Binding mainVmBd}" />
                     <!--</ScrollViewer>-->
-                    <Image Visibility="{Binding dragImgVisibilityBd}" Width="24" Height="24" Margin="0,0,5,5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/GRCLNT;component/Resource/Image/resize-bottom-right.png"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="2" Width="400">
-                        <materialDesign:Snackbar  MessageQueue="{Binding messageQueueBd}" ActionButtonStyle="{StaticResource ActionButtonStyleCust}" />
+                    <Image Visibility="{Binding dragImgVisibilityBd}" Width="24" Height="24" Margin="0,0,5,5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/resize-bottom-right.png"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="2" Width="Auto">
+                        <materialDesign:Snackbar  MessageQueue="{Binding messageQueueBd}" ActionButtonStyle="{StaticResource ActionButtonStyleCust}" Height="55" Background="#44000000" />
                     </StackPanel>
                     <ContentControl   s:View.Model="{Binding addrsBarVmBd}"  HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="32"/>
                 </Grid>

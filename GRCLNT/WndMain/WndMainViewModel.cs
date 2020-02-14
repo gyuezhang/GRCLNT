@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace GRCLNT
 {
@@ -19,15 +21,12 @@ namespace GRCLNT
         public WndMainViewModel(IWindowManager windowManager)
         {
             _windowManager = windowManager;
-            SelectPage(E_Page.Dashboard);
-
+            addrsBarVmBd = new CtrlAddrsBarViewModel(this);
             //重置最大窗口尺寸（此处避免运行过程中任务栏显隐）
             maxHeightBd = SystemParameters.WorkArea.Height + 7;
             maxWidthBd = SystemParameters.WorkArea.Width + 7;
 
 
-            mainVmBd = new PageDashboardViewModel(this);
-            addrsBarVmBd = new CtrlAddrsBarViewModel(this);
 
             GRSocketHandler.getAreaCodes += GRSocketHandler_getAreaCodes;
             GRSocketAPI.GetAreaCodes();
@@ -35,19 +34,22 @@ namespace GRCLNT
             GRSocketAPI.GetWellParas();
             GRSocketHandler.getEntWellParas += GRSocketHandler_getEntWellParas;
             GRSocketAPI.GetEntWellParas();
+            GRSocketHandler.getUsers += GRSocketHandler_getUsers;
+            GRSocketAPI.GetUsers();
         }
+
 
         #region SocketHandler
 
-        private void GRSocketHandler_getAreaCodes(RES_STATE state, List<C_AreaCode> acs)
+        private void GRSocketHandler_getAreaCodes(E_ResState state, List<C_AreaCode> acs)
         {
             GRSocketHandler.getAreaCodes -= GRSocketHandler_getAreaCodes;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     C_RT.acs = acs;
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     messageQueueBd.Enqueue("获取区划信息失败");
                     break;
                 default:
@@ -55,15 +57,15 @@ namespace GRCLNT
             }
         }
 
-        private void GRSocketHandler_getWellParas(RES_STATE state, C_WellParas wps)
+        private void GRSocketHandler_getWellParas(E_ResState state, C_WellParas wps)
         {
             GRSocketHandler.getWellParas -= GRSocketHandler_getWellParas;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     C_RT.wp = new C_WellParas(wps.All);
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     messageQueueBd.Enqueue("获取机井参数失败");
                     break;
                 default:
@@ -71,16 +73,32 @@ namespace GRCLNT
             }
         }
 
-        private void GRSocketHandler_getEntWellParas(RES_STATE state, C_WellParas wps)
+        private void GRSocketHandler_getEntWellParas(E_ResState state, C_WellParas wps)
         {
             GRSocketHandler.getEntWellParas -= GRSocketHandler_getEntWellParas;
             switch (state)
             {
-                case RES_STATE.OK:
+                case E_ResState.OK:
                     C_RT.ewp = new C_WellParas(wps.All);
                     break;
-                case RES_STATE.FAILED:
+                case E_ResState.FAILED:
                     messageQueueBd.Enqueue("获取企业井参数失败");
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void GRSocketHandler_getUsers(E_ResState state, List<C_User> users)
+        {
+            GRSocketHandler.getUsers -= GRSocketHandler_getUsers;
+            switch (state)
+            {
+                case E_ResState.OK:
+                    C_RT.users = users;
+                    SelectPage(E_Page.HomePage_Dashboard);
+                    break;
+                case E_ResState.FAILED:
+                    messageQueueBd.Enqueue("获取用户失败");
                     break;
                 default:
                     break;
@@ -101,10 +119,21 @@ namespace GRCLNT
         public Visibility menuBtnVisibilityBd { get; set; } = Visibility.Visible;
         public int menuBtnIndexBd { get; set; } = 1;
         public Visibility settingBtnVisibilityBd { get; set; } = Visibility.Hidden;
-        public Screen mainVmBd { get; set; }
+        public Screen mainVmBd { get; set; } = new Screen();
         public CtrlAddrsBarViewModel addrsBarVmBd { get; set; }
         public SnackbarMessageQueue messageQueueBd { get; set; } = new SnackbarMessageQueue(TimeSpan.FromSeconds(1.2));
-
+        public PackIconKind menuSwitchPackIconBd { get; set; } = PackIconKind.ArrowRight;
+        public int menuWidthBd { get; set; } = 72;
+        public bool is1FocusBd { get; set; } = true;
+        public bool is2FocusBd { get; set; } = false;
+        public bool is3FocusBd { get; set; } = false;
+        public bool is4FocusBd { get; set; } = false;
+        public bool is5FocusBd { get; set; } = false;
+        public bool is6FocusBd { get; set; } = false;
+        public bool is7FocusBd { get; set; } = false;
+        public bool is8FocusBd { get; set; } = false;
+        public bool is9FocusBd { get; set; } = false;
+        public bool is10FocusBd { get; set; } = false;
         #endregion Bindings
 
         #region Actions
@@ -138,6 +167,28 @@ namespace GRCLNT
             SelectPage((E_Page)Enum.Parse(typeof(E_Page), cmdPara, true));
         }
 
+        public void MenuSwitchCmd( bool bForceClose = false)
+        {
+            if (bForceClose)
+                bMenuStatus = false;
+            else
+                bMenuStatus = !bMenuStatus;
+            if (bMenuStatus)
+            {
+                menuSwitchPackIconBd = PackIconKind.ArrowLeft;
+                menuWidthBd = 210;
+            }
+            else
+            {
+                menuSwitchPackIconBd = PackIconKind.ArrowRight;
+                menuWidthBd = 72;
+            }
+        }
+
+        public void menuLostFocusCmd()
+        {
+            MenuSwitchCmd(true);
+        }
         #endregion Actions
 
         public void SelectPage(E_Page p)
@@ -148,9 +199,14 @@ namespace GRCLNT
             addrsBarVmBd.Update(p);
             switch (p)
             {
-                case E_Page.Dashboard:
+                case E_Page.HomePage:
                     menuBtnIndexBd = 1;
-                    mainVmBd = new PageDashboardViewModel(this);
+                    mainVmBd = new PageHomePageViewModel(this);
+                    break;
+                case E_Page.HomePage_Dashboard:
+                    menuBtnIndexBd = 1;
+                    mainVmBd = new PageHomePageViewModel(this);
+                    ((PageHomePageViewModel)mainVmBd).pageIndexBd = 1;
                     break;
                 case E_Page.Well:
                     menuBtnIndexBd = 3;
@@ -192,6 +248,7 @@ namespace GRCLNT
                     menuBtnIndexBd = 3;
                     mainVmBd = new PageWellViewModel(this);
                     ((PageWellViewModel)mainVmBd).pageIndexBd = 7;
+                    ((PageWellViewModel)mainVmBd).UpdateEdtParas();
                     break;
                 case E_Page.Well_State:
                     menuBtnIndexBd = 3;
@@ -238,11 +295,13 @@ namespace GRCLNT
                     menuBtnIndexBd = 5;
                     mainVmBd = new PageEntWellViewModel(this);
                     ((PageEntWellViewModel)mainVmBd).pageIndexBd = 5;
+                    ((PageEntWellViewModel)mainVmBd).refreshCmd("");
                     break;
                 case E_Page.EntWell_Search_Lst:
                     menuBtnIndexBd = 5;
                     mainVmBd = new PageEntWellViewModel(this);
                     ((PageEntWellViewModel)mainVmBd).pageIndexBd = 6;
+                    ((PageEntWellViewModel)mainVmBd).refreshCmd("");
                     break;
                 case E_Page.EntWell_Edit:
                     menuBtnIndexBd = 5;
@@ -253,6 +312,7 @@ namespace GRCLNT
                     menuBtnIndexBd = 5;
                     mainVmBd = new PageEntWellViewModel(this);
                     ((PageEntWellViewModel)mainVmBd).pageIndexBd = 8;
+                    ((PageEntWellViewModel)mainVmBd).refreshCmd("");
                     break;
                 case E_Page.EntWell_Output:
                     menuBtnIndexBd = 5;
@@ -312,10 +372,24 @@ namespace GRCLNT
                     mainVmBd = new PageSettingViewModel(this);
                     ((PageSettingViewModel)mainVmBd).pageIndexBd = 3;
                     break;
+                case E_Page.Setting_SysSetting:
+                    menuBtnVisibilityBd = Visibility.Hidden;
+                    settingBtnVisibilityBd = Visibility.Visible;
+                    mainVmBd = new PageSettingViewModel(this);
+                    ((PageSettingViewModel)mainVmBd).pageIndexBd = 4;
+                    break;
+                case E_Page.Setting_VersionInfo:
+                    menuBtnVisibilityBd = Visibility.Hidden;
+                    settingBtnVisibilityBd = Visibility.Visible;
+                    mainVmBd = new PageSettingViewModel(this);
+                    ((PageSettingViewModel)mainVmBd).pageIndexBd = 5;
+                    break;
                 default:
                     break;
             }
         }
+        public bool bMenuStatus = false;
+
 
     }
 }

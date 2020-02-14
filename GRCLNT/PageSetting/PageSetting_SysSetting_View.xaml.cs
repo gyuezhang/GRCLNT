@@ -16,13 +16,21 @@ using System.Windows.Shapes;
 namespace GRCLNT
 {
     /// <summary>
-    /// PageDashboardView.xaml 的交互逻辑
+    /// PageSetting_SysSetting_View.xaml 的交互逻辑
     /// </summary>
-    public partial class PageDashboardView : UserControl
+    public partial class PageSetting_SysSetting_View : UserControl
     {
-        public PageDashboardView()
+        public PageSetting_SysSetting_View()
         {
             InitializeComponent();
         }
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scv = (ScrollViewer)sender;
+            scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
+            e.Handled = true;
+        }
+
+
     }
 }

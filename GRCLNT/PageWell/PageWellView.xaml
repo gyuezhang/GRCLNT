@@ -21,21 +21,21 @@
                     <Button Command="{s:Action SelectPageCmd}" CommandParameter="Well_AddMtdSel" Style="{StaticResource MaterialDesignRaisedButton}" Width="200" Height="240" materialDesign:ButtonAssist.CornerRadius="10"
                     Margin="40" BorderThickness="0">
                         <Button.Background>
-                            <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/BtnCard_EntWellAdd.png"/>
+                            <ImageBrush ImageSource="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/BtnCard_EntWellAdd.png"/>
                         </Button.Background>
                         <TextBlock Text="信息采集" FontSize="24" Margin="0,200,0,0"/>
                     </Button>
                     <Button Command="{s:Action SelectPageCmd}" CommandParameter="Well_Search" Style="{StaticResource MaterialDesignRaisedButton}" Width="200" Height="240" materialDesign:ButtonAssist.CornerRadius="10"
                     Margin="40" BorderThickness="0">
                         <Button.Background>
-                            <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/BtnCard_EntWellSearch.png"/>
+                            <ImageBrush ImageSource="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/BtnCard_EntWellSearch.png"/>
                         </Button.Background>
                         <TextBlock Text="查询" FontSize="24" Margin="0,200,0,0"/>
                     </Button>
                     <Button Command="{s:Action SelectPageCmd}" CommandParameter="Well_State" Style="{StaticResource MaterialDesignRaisedButton}" Width="200" Height="240" materialDesign:ButtonAssist.CornerRadius="10"
                     Margin="40" BorderThickness="0">
                         <Button.Background>
-                            <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/BtnCard_EntWellStat.png"/>
+                            <ImageBrush ImageSource="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/BtnCard_EntWellStat.png"/>
                         </Button.Background>
                         <TextBlock Text="统计" FontSize="24" Margin="0,200,0,0"/>
                     </Button>
@@ -44,21 +44,21 @@
                     <Button Command="{s:Action SelectPageCmd}" CommandParameter="Well_Output" Style="{StaticResource MaterialDesignRaisedButton}" Width="200" Height="240" materialDesign:ButtonAssist.CornerRadius="10"
                     Margin="40" BorderThickness="0">
                         <Button.Background>
-                            <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/BtnCard_EntWellOutput.png"/>
+                            <ImageBrush ImageSource="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/BtnCard_EntWellOutput.png"/>
                         </Button.Background>
                         <TextBlock Text="导出" FontSize="24" Margin="0,200,0,0"/>
                     </Button>
                     <Button Command="{s:Action SelectPageCmd}" CommandParameter="Well_Setting" Style="{StaticResource MaterialDesignRaisedButton}" Width="200" Height="240" materialDesign:ButtonAssist.CornerRadius="10"
                     Margin="40" BorderThickness="0">
                         <Button.Background>
-                            <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/BtnCard_EntWellSetting.png"/>
+                            <ImageBrush ImageSource="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/BtnCard_EntWellSetting.png"/>
                         </Button.Background>
-                        <TextBlock Text="设置" FontSize="24" Margin="0,200,0,0"/>
+                        <TextBlock Text="机井参数设置" FontSize="24" Margin="0,200,0,0"/>
                     </Button>
                     <Button Visibility="Hidden" Command="{s:Action SelectPageCmd}" CommandParameter="Setting_UserInfo" Style="{StaticResource MaterialDesignRaisedButton}" Width="200" Height="240" materialDesign:ButtonAssist.CornerRadius="10"
                     Margin="40" BorderThickness="0">
                         <Button.Background>
-                            <ImageBrush ImageSource="/GRCLNT;component/Resource/Image/bc_usermng.png"/>
+                            <ImageBrush ImageSource="/宝坻区地下水资源信息管理系统 - 客户端;component/Resource/Image/bc_usermng.png"/>
                         </Button.Background>
                         <TextBlock Text="用户信息" FontSize="24" Margin="0,200,0,0"/>
                     </Button>
