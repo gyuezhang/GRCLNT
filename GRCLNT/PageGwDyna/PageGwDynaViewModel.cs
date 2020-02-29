@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Xps.Packaging;
 
 namespace GRCLNT
 {
@@ -20,7 +21,6 @@ namespace GRCLNT
 
         #region Bindings
         public int pageIndexBd { get; set; } = 0;
-
         #endregion Bindings
 
         #region Actions

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Xps.Packaging;
 
 namespace GRCLNT
 {
@@ -23,6 +24,8 @@ namespace GRCLNT
         public PageGwDyna_DataManual_View()
         {
             InitializeComponent();
+
+            dv.Document = new XpsDocument(  System.Environment.CurrentDirectory + "\\Resource\\Docs\\DataManual.xps", System.IO.FileAccess.Read).GetFixedDocumentSequence();
         }
     }
 }
