@@ -158,6 +158,10 @@ namespace GRCLNT
                 case E_Page.GwDyna:
                     itemsBd.Add(new C_AddrsBarItem(E_Page.GwDyna));
                     break;
+                case E_Page.GwDyna_DataManual:
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.GwDyna));
+                    itemsBd.Add(new C_AddrsBarItem(E_Page.GwDyna_DataManual));
+                    break;
                 case E_Page.GwProj:
                     itemsBd.Add(new C_AddrsBarItem(E_Page.GwProj));
                     break;

@@ -337,6 +337,11 @@ namespace GRCLNT
                     menuBtnIndexBd = 9;
                     mainVmBd = new PageGwDynaViewModel(this);
                     break;
+                case E_Page.GwDyna_DataManual:
+                    menuBtnIndexBd = 9;
+                    mainVmBd = new PageGwDynaViewModel(this);
+                    ((PageGwDynaViewModel)mainVmBd).pageIndexBd = 1;
+                    break;
                 case E_Page.GwProj:
                     menuBtnIndexBd = 11;
                     mainVmBd = new PageGwProjViewModel(this);

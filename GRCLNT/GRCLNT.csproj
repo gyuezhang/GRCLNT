@@ -273,6 +273,9 @@
     <Compile Include="CtrlPageBar\CtrlEntWellPageBarViewModel.cs" />
     <Compile Include="CtrlPageBar\CtrlWellPageBarViewModel.cs" />
     <Compile Include="C_RT.cs" />
+    <Compile Include="PageGwDyna\PageGwDyna_DataManual_View.xaml.cs">
+      <DependentUpon>PageGwDyna_DataManual_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageHomePage\PageDashboardView.xaml.cs">
       <DependentUpon>PageDashboardView.xaml</DependentUpon>
     </Compile>
@@ -463,6 +466,10 @@
     <Page Include="CtrlPageBar\CtrlWellPageBarView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageGwDyna\PageGwDyna_DataManual_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageHomePage\PageDashboardView.xaml">
       <SubType>Designer</SubType>

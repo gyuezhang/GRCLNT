@@ -33,6 +33,7 @@ namespace GRCLNT
             EntWell_FetchWaterId,
         SediCtrl,
         GwDyna,
+            GwDyna_DataManual,
         GwProj,
         Hydro,
         Law,
@@ -155,6 +156,8 @@ namespace GRCLNT
                     return "控沉工作";
                 case E_Page.GwDyna:
                     return "地下水动态";
+                case E_Page.GwDyna_DataManual:
+                    return "监测数据查询手册";
                 case E_Page.GwProj:
                     return "地下水工程";
                 case E_Page.Hydro:
@@ -236,6 +239,8 @@ namespace GRCLNT
                     return PackIconKind.Layers;
                 case E_Page.GwDyna:
                     return PackIconKind.Water;
+                case E_Page.GwDyna_DataManual:
+                    return PackIconKind.FileWord;
                 case E_Page.GwProj:
                     return PackIconKind.Worker;
                 case E_Page.Hydro:
